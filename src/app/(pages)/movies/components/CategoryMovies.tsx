@@ -9,7 +9,7 @@ interface CategoryMoviesProps {
 
 const CategoryMovies = ({ genreId, title }: CategoryMoviesProps) => {
   return (
-    <section className="my-10 px-5 text-white overflow-hidden">
+    <section className="my-10  text-white overflow-hidden">
       
   
       <div className="flex items-center justify-between mb-6">

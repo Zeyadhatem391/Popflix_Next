@@ -53,7 +53,7 @@ const CardsMovies = async ({ genreId }: CardsMoviesProps) => {
             "
           >
             <Link
-              href={`/movie/${movie.id}`}
+              href={`/movies/${movie.id}`}
               className="relative w-full h-full block"
             >
               <Image

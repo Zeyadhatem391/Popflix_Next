@@ -1,0 +1,76 @@
+import { useQuery } from "@tanstack/react-query";
+
+/* ========= TYPES ========= */
+
+export type Cast = {
+  id: number;
+  name: string;
+  original_name: string;
+  profile_path: string | null;
+};
+
+export type Crew = {
+  id: number;
+  name: string;
+  job: string;
+};
+
+export type Genre = {
+  id: number;
+  name: string;
+};
+
+export type Video = {
+  key: string;
+  site: string;
+  type: string;
+};
+
+export type Movie = {
+  id: number;
+  title: string;
+  overview: string;
+  release_date: string;
+  backdrop_path: string | null;
+  poster_path: string | null;
+  vote_average: number;
+
+  genres: Genre[];
+
+  credits: {
+    cast: Cast[];
+    crew: Crew[];
+  };
+
+  videos: {
+    results: Video[];
+  };
+};
+
+/* ========= FETCH ========= */
+
+const GetDetailsMovies = async (
+  id: string
+): Promise<Movie> => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=7b8da597ddda3922e0a74cec92c25b67&append_to_response=credits,videos`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch movie");
+  }
+
+  return response.json();
+};
+
+/* ========= HOOK ========= */
+
+const useGetDetailsMovies = (id: string) => {
+  return useQuery<Movie>({
+    queryKey: ["movie-details", id],
+    queryFn: () => GetDetailsMovies(id),
+    enabled: !!id,
+  });
+};
+
+export default useGetDetailsMovies;

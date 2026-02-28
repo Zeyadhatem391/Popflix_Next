@@ -1,4 +1,5 @@
 import DefaultImage from "@/assets/images/default.png";
+import Link from "next/link";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
@@ -20,8 +21,8 @@ async function getMovies(): Promise<Movie[]> {
   const res = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&page=${randomPage}`,
     {
-      next: { revalidate: 30 }, 
-    }
+      next: { revalidate: 30 },
+    },
   );
 
   const data = await res.json();
@@ -47,7 +48,7 @@ const HeroMovies = async () => {
 
   return (
     <section className="py-6">
-      <div className="max-w-7xl mx-auto px-4 space-y-0">
+      <div className=" space-y-0">
         {rows.map((row, index) => (
           <div
             key={index}
@@ -70,10 +71,9 @@ export default HeroMovies;
 /* ================= BIG CARD ================= */
 
 const BigCard = ({ movie }: { movie: Movie }) => {
-  const image =
-    movie.backdrop_path
-      ? IMAGE_BASE + movie.backdrop_path
-      : DefaultImage.src;
+  const image = movie.backdrop_path
+    ? IMAGE_BASE + movie.backdrop_path
+    : DefaultImage.src;
 
   return (
     <div className="relative flex-1 group overflow-hidden">
@@ -84,17 +84,16 @@ const BigCard = ({ movie }: { movie: Movie }) => {
       />
 
       <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-center items-center text-center p-6">
-        <h3 className="text-2xl font-bold text-white">
-          {movie.title}
-        </h3>
+        <h3 className="text-2xl font-bold text-white">{movie.title}</h3>
 
         <p className="text-lg text-gray-200 mt-3 max-w-lg">
           {movie.overview?.slice(0, 120)}
         </p>
-
-        <button className="mt-5 bg-red-600 px-5 py-2 text-lg rounded cursor-pointer">
-          View Movie
-        </button>
+        <Link href={`/movies/${movie.id}`}>
+          <button className="mt-5 bg-red-600 px-5 py-2 text-lg rounded-md cursor-pointer text-white">
+            View Movie
+          </button>
+        </Link>
       </div>
     </div>
   );
@@ -106,16 +105,12 @@ const SmallGrid = ({ movies }: { movies: Movie[] }) => {
   return (
     <div className="flex-1 grid grid-cols-2 grid-rows-2">
       {movies.map((movie) => {
-        const image =
-          movie.poster_path
-            ? IMAGE_BASE + movie.poster_path
-            : DefaultImage.src;
+        const image = movie.poster_path
+          ? IMAGE_BASE + movie.poster_path
+          : DefaultImage.src;
 
         return (
-          <div
-            key={movie.id}
-            className="relative group overflow-hidden"
-          >
+          <div key={movie.id} className="relative group overflow-hidden">
             <img
               src={image}
               alt={movie.title}
@@ -127,9 +122,11 @@ const SmallGrid = ({ movies }: { movies: Movie[] }) => {
                 {movie.title}
               </h5>
 
-              <button className="mt-3 bg-red-600 text-lg px-4 py-1 rounded cursor-pointer">
-                View Movie
-              </button>
+              <Link href={`/movies/${movie.id}`}>
+                <button className="mt-3 bg-red-600 text-lg px-4 py-1 rounded-md cursor-pointer text-white">
+                  View Movie
+                </button>
+              </Link>
             </div>
           </div>
         );
