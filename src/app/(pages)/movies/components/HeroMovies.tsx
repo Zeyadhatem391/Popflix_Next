@@ -19,7 +19,7 @@ async function getMovies(): Promise<Movie[]> {
   const randomPage = Math.floor(Math.random() * 5 + 1);
 
   const res = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&page=${randomPage}`,
+    `https://api.themoviedb.org/3/discover/movie?api_key=7b8da597ddda3922e0a74cec92c25b67&page=${randomPage}`,
     {
       next: { revalidate: 30 },
     },
