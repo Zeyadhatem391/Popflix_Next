@@ -1,5 +1,4 @@
 import CardsMovies from "./CardsMovies";
-import MoviesSlider from "./MoviesSlider";
 import Link from "next/link";
 
 interface CategoryMoviesProps {
@@ -26,9 +25,8 @@ const CategoryMovies = ({ genreId, title }: CategoryMoviesProps) => {
       </div>
 
     
-      <MoviesSlider>
         <CardsMovies genreId={genreId} />
-      </MoviesSlider>
+
 
     </section>
   );

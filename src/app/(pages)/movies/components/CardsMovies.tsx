@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import DefaultImage from "@/assets/images/default.png";
+import { useEffect, useRef, useState } from "react";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
@@ -16,60 +19,108 @@ interface CardsMoviesProps {
   genreId: number;
 }
 
-const CardsMovies = async ({ genreId }: CardsMoviesProps) => {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=7b8da597ddda3922e0a74cec92c25b67&with_genres=${genreId}`,
-    { next: { revalidate: 60 } },
-  );
+const CardsMovies = ({ genreId }: CardsMoviesProps) => {
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [movies, setMovies] = useState<Movie[]>([]);
 
-  if (!response.ok) {
-    return <div>Failed to load movies</div>;
-  }
+  useEffect(() => {
+    const getMovies = async () => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=7b8da597ddda3922e0a74cec92c25b67&with_genres=${genreId}`
+      );
 
-  const data = await response.json();
-  const movies: Movie[] = data?.results?.slice(0, 20) ?? [];
+      const data = await res.json();
+      setMovies(data?.results?.slice(0, 20) || []);
+    };
+
+    getMovies();
+  }, [genreId]);
+
+  /* ================= AUTO SCROLL ================= */
+  useEffect(() => {
+    let frameId: number;
+
+    const scroll = () => {
+      const slider = sliderRef.current;
+      if (!slider) return;
+
+      slider.scrollLeft += 2.2;
+
+   
+      if (slider.scrollLeft >= slider.scrollWidth / 2) {
+        slider.scrollLeft -= slider.scrollWidth / 2;
+      }
+
+      frameId = requestAnimationFrame(scroll);
+    };
+
+    frameId = requestAnimationFrame(scroll);
+
+    return () => cancelAnimationFrame(frameId);
+  }, []);
+
+  const loopMovies = [...movies, ...movies];
+
   return (
-    <div className="flex gap-2.5 overflow-hidden">
-      {[...movies].map((movie) => {
-        const image = movie.backdrop_path
-          ? IMAGE_BASE + movie.backdrop_path
-          : movie.poster_path
+    <div className="w-full overflow-hidden">
+      <div
+        ref={sliderRef}
+        className="
+          flex
+          gap-2.5
+          overflow-x-hidden
+          overflow-y-hidden
+          w-full
+          no-scrollbar
+        "
+      >
+        {loopMovies.map((movie, index) => {
+          const image = movie.backdrop_path
+            ? IMAGE_BASE + movie.backdrop_path
+            : movie.poster_path
             ? IMAGE_BASE + movie.poster_path
             : DefaultImage.src;
 
-        return (
-          <div
-            key={movie.id}
-            className="
-              relative
-              min-w-[50%]   
-              sm:min-w-[45%] 
-              md:min-w-50
-              h-68
-              rounded-xl
-              overflow-hidden
-              transition-transform
-              hover:scale-105
-            "
-          >
-            <Link
-              href={`/movies/${movie.id}`}
-              className="relative w-full h-full block"
+          return (
+            <div
+              key={`${movie.id}-${index}`}
+              className="
+                relative
+                min-w-[49%]
+                sm:min-w-[45%]
+                md:min-w-50
+                h-68
+                rounded-xl
+                overflow-hidden
+                transition-transform
+                md:hover:scale-105
+                shrink-0
+              "
             >
-              <Image
-                src={image}
-                alt={movie.title}
-                fill
-                sizes="(max-width: 640px) 50vw, (max-width: 768px) 45vw, 200px"
-                className="object-cover"
-              />
-              <div className="absolute bottom-0 w-full bg-linear-to-t from-black/80 to-transparent p-2 text-center">
-                <h5 className="text-lg font-medium">{movie.title}</h5>
-              </div>
-            </Link>
-          </div>
-        );
-      })}
+              <Link
+                href={`/movies/${movie.id}`}
+                className="relative w-full h-full block"
+              >
+                <Image
+                  src={image}
+                  alt={movie.title}
+                  fill
+                  sizes="(max-width:640px) 50vw,
+                         (max-width:768px) 45vw,
+                         200px"
+                  className="object-cover"
+                />
+
+                <div className="absolute bottom-0 w-full bg-linear-to-t from-black/80 to-transparent p-2 text-center">
+                  <h5 className="text-lg font-medium">
+                    {movie.title}
+                  </h5>
+                </div>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
