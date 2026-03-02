@@ -1,14 +1,8 @@
 "use client";
 
+import { Movie } from "@/lib/types/Movie";
 import { useQuery } from "@tanstack/react-query";
 
-export type Movie = {
-  id: number;
-  title: string;
-  overview: string;
-  backdrop_path: string | null;
-  poster_path: string | null;
-};
 
 const GetHeroMovies = async (): Promise<Movie[]> => {
   const randomPage = Math.floor(Math.random() * 5 + 1);

@@ -3,17 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import DefaultImage from "@/assets/images/default.png";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import useMovies from "@/hooks/useGetMovies";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
-
-type Movie = {
-  id: number;
-  title: string;
-  overview: string;
-  backdrop_path: string | null;
-  poster_path: string | null;
-};
 
 interface CardsMoviesProps {
   genreId: number;
@@ -21,34 +14,24 @@ interface CardsMoviesProps {
 
 const CardsMovies = ({ genreId }: CardsMoviesProps) => {
   const sliderRef = useRef<HTMLDivElement>(null);
-  const [movies, setMovies] = useState<Movie[]>([]);
 
-  useEffect(() => {
-    const getMovies = async () => {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=7b8da597ddda3922e0a74cec92c25b67&with_genres=${genreId}`
-      );
-
-      const data = await res.json();
-      setMovies(data?.results?.slice(0, 20) || []);
-    };
-
-    getMovies();
-  }, [genreId]);
+  const { data: movies = [], isLoading } = useMovies(genreId);
 
   /* ================= AUTO SCROLL ================= */
   useEffect(() => {
+    if (!movies.length) return;
+
     let frameId: number;
 
     const scroll = () => {
       const slider = sliderRef.current;
       if (!slider) return;
 
-      slider.scrollLeft += 2.2;
+      slider.scrollLeft += 0.7;
 
-   
+      /* infinite loop */
       if (slider.scrollLeft >= slider.scrollWidth / 2) {
-        slider.scrollLeft -= slider.scrollWidth / 2;
+        slider.scrollLeft = 0;
       }
 
       frameId = requestAnimationFrame(scroll);
@@ -57,9 +40,14 @@ const CardsMovies = ({ genreId }: CardsMoviesProps) => {
     frameId = requestAnimationFrame(scroll);
 
     return () => cancelAnimationFrame(frameId);
-  }, []);
+  }, [movies]);
 
+  /* duplicate movies for infinite scroll */
   const loopMovies = [...movies, ...movies];
+
+  if (isLoading) {
+    return <div className="h-68 w-full" />;
+  }
 
   return (
     <div className="w-full overflow-hidden">
@@ -92,27 +80,29 @@ const CardsMovies = ({ genreId }: CardsMoviesProps) => {
                 h-68
                 rounded-xl
                 overflow-hidden
+                shrink-0
                 transition-transform
                 md:hover:scale-105
-                shrink-0
               "
             >
               <Link
                 href={`/movies/${movie.id}`}
-                className="relative w-full h-full block"
+                className="relative block w-full h-full"
               >
                 <Image
                   src={image}
                   alt={movie.title}
                   fill
-                  sizes="(max-width:640px) 50vw,
-                         (max-width:768px) 45vw,
-                         200px"
+                  sizes="
+                    (max-width:640px) 50vw,
+                    (max-width:768px) 45vw,
+                    200px
+                  "
                   className="object-cover"
                 />
 
                 <div className="absolute bottom-0 w-full bg-linear-to-t from-black/80 to-transparent p-2 text-center">
-                  <h5 className="text-lg font-medium">
+                  <h5 className="text-sm md:text-lg font-medium">
                     {movie.title}
                   </h5>
                 </div>
