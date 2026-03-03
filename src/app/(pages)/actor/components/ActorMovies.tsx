@@ -42,7 +42,7 @@ const ActorMovies = ({ moviesId }: ActorMoviesProps) => {
                 <div className="relative w-full h-[320px]">
                   <Image
                     src={movieImage}
-                    alt={movie.title}
+                    alt={movie.title || "Movie Poster"}
                     fill
                     sizes="(max-width:768px) 50vw, 25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
