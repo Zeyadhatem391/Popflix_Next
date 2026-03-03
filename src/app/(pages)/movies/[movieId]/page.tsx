@@ -2,19 +2,20 @@
 
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default.png";
-import useGetDetailsMovies from "@/hooks/useGetDetilsMovies";
+import useGetDetailsMovies from "@/hooks/useGetDetailsMovies";
 import MovieDetailsSkeleton from "@/components/skeletons/MovieDetailsSkeleton";
 
 import { useParams } from "next/navigation";
+import Link from "next/link";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
 const MovieDetails = () => {
   const params = useParams();
 
-  const id = params.id as string;
+  const movieId = params.movieId as string;
 
-  const { data, isLoading } = useGetDetailsMovies(id);
+  const { data, isLoading } = useGetDetailsMovies(movieId);
 
   if (isLoading || !data) {
     return <MovieDetailsSkeleton />;
@@ -110,23 +111,28 @@ const MovieDetails = () => {
           return (
             <div
               key={cast.id}
-              className="bg-zinc-800 rounded-lg flex items-center p-3 hover:bg-zinc-700 transition"
+              className="bg-zinc-800 rounded-lg  p-3 hover:bg-zinc-700 transition"
             >
-              <div className="relative w-15 h-22.5 mr-3 shrink-0">
-                <Image
-                  src={actorImage}
-                  alt={cast.original_name}
-                  fill
-                  sizes="60px"
-                  className="object-cover rounded"
-                />
-              </div>
+              <Link
+                href={`/actor/${cast.id}`}
+                className="w-full h-full flex items-center"
+              >
+                <div className="relative w-15 h-22.5 mr-3 shrink-0">
+                  <Image
+                    src={actorImage}
+                    alt={cast.original_name}
+                    fill
+                    sizes="60px"
+                    className="object-cover rounded"
+                  />
+                </div>
 
-              <div>
-                <p className="font-semibold">{cast.original_name}</p>
+                <div>
+                  <p className="font-semibold">{cast.original_name}</p>
 
-                <p className="text-sm text-gray-300">{cast.name}</p>
-              </div>
+                  <p className="text-sm text-gray-300">{cast.character}</p>
+                </div>
+              </Link>
             </div>
           );
         })}

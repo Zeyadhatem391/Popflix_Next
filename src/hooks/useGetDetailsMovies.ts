@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export type Cast = {
   id: number;
-  name: string;
+  character: string;
   original_name: string;
   profile_path: string | null;
 };
@@ -50,10 +50,10 @@ export type Movie = {
 /* ========= FETCH ========= */
 
 const GetDetailsMovies = async (
-  id: string
+  movieId: string
 ): Promise<Movie> => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=7b8da597ddda3922e0a74cec92c25b67&append_to_response=credits,videos`
+    `https://api.themoviedb.org/3/movie/${movieId}?api_key=7b8da597ddda3922e0a74cec92c25b67&append_to_response=credits,videos`
   );
 
   if (!response.ok) {
@@ -65,11 +65,11 @@ const GetDetailsMovies = async (
 
 /* ========= HOOK ========= */
 
-const useGetDetailsMovies = (id: string) => {
+const useGetDetailsMovies = (movieId: string) => {
   return useQuery<Movie>({
-    queryKey: ["movie-details", id],
-    queryFn: () => GetDetailsMovies(id),
-    enabled: !!id,
+    queryKey: ["movie-details", movieId],
+    queryFn: () => GetDetailsMovies(movieId),
+    enabled: !!movieId,
   });
 };
 

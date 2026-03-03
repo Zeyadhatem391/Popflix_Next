@@ -1,12 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-
-export type Movie = {
-  id: number;
-  title: string;
-  overview: string;
-  backdrop_path: string | null;
-  poster_path: string | null;
-};
+import { Movie } from "@/lib/types/Movie";
 
 const GetMovies = async (genreId: number): Promise<Movie[]> => {
   const res = await fetch(
