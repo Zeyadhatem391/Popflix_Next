@@ -50,7 +50,7 @@ const CardsMovies = ({ genreId }: CardsMoviesProps) => {
   }
 
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full overflow-x-auto no-scrollbar">
       <div
         ref={sliderRef}
         className="
@@ -66,8 +66,8 @@ const CardsMovies = ({ genreId }: CardsMoviesProps) => {
           const image = movie.backdrop_path
             ? IMAGE_BASE + movie.backdrop_path
             : movie.poster_path
-            ? IMAGE_BASE + movie.poster_path
-            : DefaultImage.src;
+              ? IMAGE_BASE + movie.poster_path
+              : DefaultImage.src;
 
           return (
             <div
