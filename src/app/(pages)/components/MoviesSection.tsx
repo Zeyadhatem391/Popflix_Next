@@ -25,7 +25,7 @@ const getMovies = async (categories: string): Promise<Movie[]> => {
   }
 
   const data = await res.json();
-  return data.results.slice(0, 6);
+  return data.results.slice(0, 5);
 };
 
 const MoviesSection = async ({ title, categories }: MoviesSectionPropes) => {
@@ -47,7 +47,7 @@ const MoviesSection = async ({ title, categories }: MoviesSectionPropes) => {
       </div>
 
       {/* Movies Row */}
-      <div className="flex  gap-5 overflow-x-auto no-scrollbar pb-2">
+      <div className="flex lg:justify-center gap-5 overflow-x-auto no-scrollbar pb-2">
         {movies.map((movie) => {
           const movieImage = movie.poster_path
             ? IMAGE_BASE + movie.poster_path
@@ -56,7 +56,7 @@ const MoviesSection = async ({ title, categories }: MoviesSectionPropes) => {
           return (
             <div
               key={movie.id}
-              className="relative min-w-[160px] md:min-w-[225px] h-[260px] md:h-[300px]
+              className="relative min-w-[160px] md:min-w-[230px] h-[260px] md:h-[300px]
               rounded-xl overflow-hidden group
               transition-transform duration-300 hover:scale-105"
             >

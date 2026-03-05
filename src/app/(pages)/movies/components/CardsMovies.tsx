@@ -56,10 +56,9 @@ const CardsMovies = ({ genreId }: CardsMoviesProps) => {
         className="
           flex
           gap-2.5
-          overflow-x-hidden
-          overflow-y-hidden
+          overflow-x-auto no-scrollbar
           w-full
-          no-scrollbar
+         
         "
       >
         {loopMovies.map((movie, index) => {
@@ -79,7 +78,7 @@ const CardsMovies = ({ genreId }: CardsMoviesProps) => {
                 md:min-w-50
                 h-68
                 rounded-xl
-                overflow-hidden
+                overflow-hidden group
                 shrink-0
                 transition-transform
                 md:hover:scale-105

@@ -15,13 +15,13 @@ const ActorPopular = () => {
 
   if (isLoading) return <ActorPopularSkeleton />;
 
-  const actors = data?.results.slice(0, 15);
+  const actors = data?.results.slice(0, 9);
 
   return (
     <section className="my-10 mx-7">
       <h2 className="text-2xl font-semibold mb-6 ">The Most Famous Actors</h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6  gap-5 justify-items-center">
+      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5  gap-5 justify-items-center">
         {actors?.map((actor) => {
           const actorImage = actor.profile_path
             ? IMAGE_BASE + actor.profile_path
@@ -33,13 +33,13 @@ const ActorPopular = () => {
               className="flex flex-col items-center group cursor-pointer"
             >
               <Link href={`/actor/${actor.id}`}>
-                <div className="relative w-36 h-36 rounded-full overflow-hidden border-2 border-zinc-700 group-hover:border-yellow-400 transition duration-300">
+                <div className="relative w-36 h-36  md:w-40 md:h-40  rounded-full overflow-hidden border-2 border-zinc-700 group-hover:border-yellow-400 transition duration-300">
                   <Image
                     src={actorImage}
                     alt={actor.name}
                     fill
                     sizes="144px"
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="object-center group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
               </Link>
