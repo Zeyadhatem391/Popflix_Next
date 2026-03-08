@@ -1,23 +1,3 @@
-
-// import MobileButtonNav from "../common/(NavBar)/MobileNav";
-// import DesktopNav from "../common/(NavBar)/DesktopNav";
-// import NavBar from "../common/(NavBar)/NavBar";
-
-// export default function Navbar() {
-//   return (
-//     <>
-//       <nav className="sticky top-0 z-50 bg-black  md:px-20">
-//         {/* Desktop */}
-//         {/* <DesktopNav /> */}
-//         <NavBar />
-
-//         {/* Mobile */}
-//         {/* <MobileButtonNav /> */}
-//       </nav>
-//     </>
-//   );
-// }
-
 "use client";
 
 import Link from "next/link";
@@ -28,7 +8,7 @@ import UserImage from "../common/(NavBar)/UserImage";
 
 const Navbar = () => {
   return (
-    <div className="px-6 py-4 flex items-center justify-between text-white">
+    <div className="sticky top-0 z-50 bg-black px-6 py-4 flex items-center justify-between text-white  md:px-24">
       {/* Logo */}
       <div className="flex items-center">
         <Logo />
@@ -54,4 +34,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
