@@ -20,8 +20,8 @@ const GenreCards = ({ id }: GenreCardspropes) => {
   }
 
   return (
-    <section className="my-10 mx-7">
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 pb-2">
+    <section>
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 pb-2">
         {movies.map((movie) => {
           const movieImage = movie.poster_path
             ? IMAGE_BASE + movie.poster_path
@@ -30,7 +30,7 @@ const GenreCards = ({ id }: GenreCardspropes) => {
           return (
             <div
               key={movie.id}
-              className="relative w-full h-[260px] md:h-[300px] rounded-xl group transition-transform duration-300 hover:scale-105"
+              className="relative w-full h-[320px] rounded-xl group transition-transform duration-300 hover:scale-105"
             >
               <Link
                 href={`/movies/${movie.id}`}
@@ -41,7 +41,7 @@ const GenreCards = ({ id }: GenreCardspropes) => {
                   alt={movie.title}
                   fill
                   sizes="(max-width:768px) 50vw, 200px"
-                  className="object-cover"
+                  className="object-cover" 
                 />
 
                 <span className="absolute top-2 left-2 bg-black/70 text-yellow-400 text-xs font-semibold px-2 py-1 rounded-md">

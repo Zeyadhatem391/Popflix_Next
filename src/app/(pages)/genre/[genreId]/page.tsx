@@ -30,7 +30,7 @@ const GenrePage = () => {
   const GenreSection = genres[id] || "Movies";
 
   return (
-    <div className="mx-7">
+    <div className="max-w-6xl mx-auto px-4 ">
       <div className="flex items-center gap-3 w-full my-3">
         <Back />
         <InputSearch />
@@ -45,7 +45,7 @@ const GenrePage = () => {
         </div>
       </div>
 
-      <div className="my-5">
+      <div className="my-10">
         <GenreCards id={id} />
       </div>
 
