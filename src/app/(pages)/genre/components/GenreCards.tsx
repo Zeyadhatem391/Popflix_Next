@@ -16,12 +16,12 @@ const GenreCards = ({ id }: GenreCardspropes) => {
   const { data: movies = [], isLoading } = useGetGenreMovies(id);
 
   if (isLoading) {
-    return <GenreCardsSkeleton/>;
+    return <GenreCardsSkeleton />;
   }
 
   return (
     <section className="my-10 mx-7">
-      <div className="flex flex-wrap lg:justify-center gap-5  pb-2">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 pb-2">
         {movies.map((movie) => {
           const movieImage = movie.poster_path
             ? IMAGE_BASE + movie.poster_path
@@ -30,9 +30,7 @@ const GenreCards = ({ id }: GenreCardspropes) => {
           return (
             <div
               key={movie.id}
-              className="relative min-w-[160px] md:min-w-[230px] h-[260px] md:h-[300px]
-              rounded-xl  group
-              transition-transform duration-300 hover:scale-105"
+              className="relative w-full h-[260px] md:h-[300px] rounded-xl group transition-transform duration-300 hover:scale-105"
             >
               <Link
                 href={`/movies/${movie.id}`}
