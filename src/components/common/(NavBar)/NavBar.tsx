@@ -1,32 +1,12 @@
-
-// import MobileButtonNav from "../common/(NavBar)/MobileNav";
-// import DesktopNav from "../common/(NavBar)/DesktopNav";
-// import NavBar from "../common/(NavBar)/NavBar";
-
-// export default function Navbar() {
-//   return (
-//     <>
-//       <nav className="sticky top-0 z-50 bg-black  md:px-20">
-//         {/* Desktop */}
-//         {/* <DesktopNav /> */}
-//         <NavBar />
-
-//         {/* Mobile */}
-//         {/* <MobileButtonNav /> */}
-//       </nav>
-//     </>
-//   );
-// }
-
 "use client";
 
 import Link from "next/link";
+import Logo from "./Logo";
+import UserImage from "./UserImage";
 import { FaRegHeart, FaSearch } from "react-icons/fa";
-import SearchNavBar from "../common/(NavBar)/SearchNavBar";
-import Logo from "../common/(NavBar)/Logo";
-import UserImage from "../common/(NavBar)/UserImage";
+import SearchNavBar from "./SearchNavBar";
 
-const Navbar = () => {
+const NavBar = () => {
   return (
     <div className="px-6 py-4 flex items-center justify-between text-white">
       {/* Logo */}
@@ -53,5 +33,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
-
+export default NavBar;

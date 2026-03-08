@@ -36,14 +36,6 @@ const MoviesSection = async ({ title, categories }: MoviesSectionPropes) => {
       {/* Title */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl md:text-2xl font-semibold">{title}</h2>
-        {categories !== "upcoming" &&  (
-          <Link
-            href={`/genre/`}
-            className="border border-white px-3 py-1.5 rounded-md text-sm hover:bg-white hover:text-black transition"
-          >
-            View More
-          </Link>
-        )}
       </div>
 
       {/* Movies Row */}
