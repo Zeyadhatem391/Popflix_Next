@@ -69,7 +69,7 @@ const useGetDetailsMovies = (movieId: string) => {
   return useQuery<Movie>({
     queryKey: ["movie-details", movieId],
     queryFn: () => GetDetailsMovies(movieId),
-     staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60 * 5,
     enabled: !!movieId,
   });
 };

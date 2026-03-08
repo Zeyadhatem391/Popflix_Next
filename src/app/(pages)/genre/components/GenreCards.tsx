@@ -8,12 +8,13 @@ import Link from "next/link";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
-type GenreCardspropes = {
+type GenreCardsProps = {
   id: number;
+  page: number;
 };
 
-const GenreCards = ({ id }: GenreCardspropes) => {
-  const { data: movies = [], isLoading } = useGetGenreMovies(id);
+const GenreCards = ({ id, page }: GenreCardsProps) => {
+  const { data: movies = [], isLoading } = useGetGenreMovies(id, page);
 
   if (isLoading) {
     return <GenreCardsSkeleton />;
@@ -41,7 +42,7 @@ const GenreCards = ({ id }: GenreCardspropes) => {
                   alt={movie.title}
                   fill
                   sizes="(max-width:768px) 50vw, 200px"
-                  className="object-cover" 
+                  className="object-cover"
                 />
 
                 <span className="absolute top-2 left-2 bg-black/70 text-yellow-400 text-xs font-semibold px-2 py-1 rounded-md">

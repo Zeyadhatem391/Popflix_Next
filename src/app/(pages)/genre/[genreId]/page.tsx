@@ -7,6 +7,7 @@ import FilterButton from "../components/FilterButton";
 import GenreCards from "../components/GenreCards";
 import { useParams } from "next/navigation";
 import { PaginationDemo } from "../components/PaginationGenre";
+import { useState } from "react";
 
 const genres: Record<number, string> = {
   28: "Action",
@@ -27,6 +28,8 @@ const GenrePage = () => {
   const params = useParams();
   const id = Number(params.genreId);
 
+  const [page, setPage] = useState(1);
+
   const GenreSection = genres[id] || "Movies";
 
   return (
@@ -46,11 +49,11 @@ const GenrePage = () => {
       </div>
 
       <div className="my-10">
-        <GenreCards id={id} />
+        <GenreCards id={id} page={page} />
       </div>
 
       <div className="flex items-center justify-center gap-4 mt-6">
-        <PaginationDemo />
+        <PaginationDemo page={page} setPage={setPage} />
       </div>
     </div>
   );
