@@ -2,44 +2,20 @@
 
 import Back from "@/components/common/Back";
 import InputSearch from "@/components/common/InputSearsh";
-import SortButton from "../components/SortButton";
-import FilterButton from "../components/FilterButton";
-import GenreCards from "../components/GenreCards";
-import {
-  useParams,
-  useSearchParams,
-  useRouter,
-  usePathname,
-} from "next/navigation";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { GetGenreMovies } from "@/hooks/useGetGenreMovies";
+import SortButton from "../../genre/components/SortButton";
+import FilterButton from "../../genre/components/FilterButton";
+import ActorsCards from "./components/ActorsCards";
+import { GetActors } from "@/hooks/useGetAllActors";
 import { PaginationDemo } from "../../components/PaginationGenre";
 
-const genres: Record<string, number> = {
-  Action: 28,
-  Adventure: 12,
-  Animation: 16,
-  Comedy: 35,
-  Crime: 80,
-  Drama: 18,
-  Fantasy: 14,
-  Horror: 27,
-  Mystery: 9648,
-  Romance: 10749,
-  ScienceFiction: 878,
-  Thriller: 53,
-};
-
-const GenrePage = () => {
-  const params = useParams();
+const ActorsPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
   const queryClient = useQueryClient();
-
-  const genreName = params.genreId as string;
-  const id = genres[genreName];
 
   const page = Number(searchParams.get("page")) || 1;
 
@@ -51,25 +27,23 @@ const GenrePage = () => {
 
   useEffect(() => {
     const nextPage = page + 1;
-
     if (nextPage > 500) return;
 
     queryClient.prefetchQuery({
-      queryKey: ["genreMovies", id, nextPage],
-      queryFn: () => GetGenreMovies(id, nextPage),
+      queryKey: ["actors", nextPage],
+      queryFn: () => GetActors(nextPage),
     });
-  }, [page, id, queryClient]);
+  }, [page, queryClient]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 ">
+    <div className="max-w-6xl mx-auto px-4">
       <div className="flex items-center gap-3 w-full my-3">
         <Back />
         <InputSearch />
       </div>
 
       <div className="flex flex-col items-center justify-center gap-4 mt-6">
-        <h2 className="text-3xl font-bold text-center">{genreName} Movies</h2>
-
+        <h2 className="text-3xl font-bold text-center">Actors</h2>
         <div className="flex items-center gap-3">
           <SortButton />
           <FilterButton />
@@ -77,7 +51,7 @@ const GenrePage = () => {
       </div>
 
       <div className="my-10">
-        <GenreCards id={id} page={page} />
+        <ActorsCards page={page} />
       </div>
 
       <div className="flex items-center justify-center gap-4 mt-6">
@@ -87,4 +61,4 @@ const GenrePage = () => {
   );
 };
 
-export default GenrePage;
+export default ActorsPage;

@@ -52,6 +52,7 @@ const ActorPopular = () => {
         })}
 
         {/* MORE BUTTON */}
+       <Link href="actors">
         <div className="flex flex-col items-center group cursor-pointer">
           <div
             className="w-36 h-36 rounded-full flex items-center justify-center
@@ -73,6 +74,7 @@ const ActorPopular = () => {
             View More
           </p>
         </div>
+       </Link>
       </div>
     </section>
   );

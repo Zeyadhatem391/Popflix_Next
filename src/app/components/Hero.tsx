@@ -77,7 +77,7 @@ const Hero = () => {
             />
           </h2>
           <Link href="/movies">
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300">
+            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 cursor-pointer">
               Start Watching
             </button>
           </Link>

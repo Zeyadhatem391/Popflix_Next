@@ -45,7 +45,7 @@ const ActorMovies = ({ moviesId }: ActorMoviesProps) => {
                     alt={movie.title || "Movie Poster"}
                     fill
                     sizes="(max-width:768px) 50vw, 25vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-fill group-hover:scale-105 transition-transform duration-300"
                   />
 
                   {/* Rating */}
