@@ -5,11 +5,11 @@ import InputSearch from "@/components/common/InputSearsh";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import SortButton from "../../genre/components/SortButton";
-import FilterButton from "../../genre/components/FilterButton";
+import SortButton from "../genre/components/SortButton";
+import FilterButton from "../genre/components/FilterButton";
 import ActorsCards from "./components/ActorsCards";
 import { GetActors } from "@/hooks/useGetAllActors";
-import { PaginationDemo } from "../../components/PaginationGenre";
+import { PaginationDemo } from "../components/PaginationGenre";
 
 const ActorsPage = () => {
   const searchParams = useSearchParams();
