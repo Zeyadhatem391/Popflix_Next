@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-dynamic";
 import Back from "@/components/common/Back";
 import FilterButton from "../genre/components/FilterButton";
 import SortButton from "../genre/components/SortButton";
