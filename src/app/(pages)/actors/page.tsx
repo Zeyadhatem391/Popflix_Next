@@ -1,16 +1,18 @@
-"use client";
-export const dynamic = "force-dynamic";
+// "use client";
+// export const dynamic = "force-dynamic";
 import Back from "@/components/common/Back";
 import FilterButton from "../genre/components/FilterButton";
 import SortButton from "../genre/components/SortButton";
 import InputSearch from "@/components/common/InputSearsh";
 import ActorsCards from "./components/ActorsCards";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 
 const ActorsPage = () => {
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
-  const page = Number(searchParams.get("page")) || 1;
+  // const page = Number(searchParams.get("page")) || 1;
+
+  const page = 1;
 
   return (
     <div className="max-w-6xl mx-auto px-4">
