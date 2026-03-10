@@ -23,7 +23,7 @@ const useGetAllActors = (page: number) => {
   return useQuery<Actor[]>({
     queryKey: ["actors", page],
     queryFn: () => GetActors(page),
-    staleTime: 1000 * 60 * 5, // 5 دقائق
+    staleTime: 1000 * 60 * 5, 
     refetchOnWindowFocus: false,
   });
 };

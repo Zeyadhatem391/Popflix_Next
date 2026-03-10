@@ -1,5 +1,5 @@
 "use client";
-
+export const dynamic = "force-dynamic";
 import Back from "@/components/common/Back";
 import InputSearch from "@/components/common/InputSearsh";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
