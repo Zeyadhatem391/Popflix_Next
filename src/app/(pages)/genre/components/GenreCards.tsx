@@ -11,10 +11,11 @@ const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 type GenreCardsProps = {
   id: number;
   page: number;
+  rating: number;
 };
 
-const GenreCards = ({ id, page }: GenreCardsProps) => {
-  const { data: movies = [], isLoading } = useGetGenreMovies(id, page);
+const GenreCards = ({ id, page, rating }: GenreCardsProps) => {
+  const { data: movies = [], isLoading } = useGetGenreMovies(id, page, rating);
 
   if (isLoading) {
     return <GenreCardsSkeleton />;

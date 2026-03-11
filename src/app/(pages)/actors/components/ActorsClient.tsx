@@ -7,9 +7,10 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import ActorsCards from "../components/ActorsCards";
 import { GetActors } from "@/hooks/useGetAllActors";
-import SortButton from "../../genre/components/SortButton";
-import FilterButton from "../../genre/components/FilterButton";
+
 import { PaginationDemo } from "../../components/PaginationGenre";
+import SortButton from "./SortButton";
+import FilterButton from "./FilterButton";
 
 type Props = {
   page: number;
