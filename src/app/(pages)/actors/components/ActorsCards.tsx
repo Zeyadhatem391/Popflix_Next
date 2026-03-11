@@ -16,7 +16,7 @@ const ActorsCards = ({ page }: ActorsCardsProps) => {
   const { data: actors = [], isLoading, isError } = useGetAllActors(page);
 
   if (isError) return <div>Failed to load actors.</div>;
-  if (isLoading) return <ActorCardSkeleton count={10} />; 
+  if (isLoading) return <ActorCardSkeleton count={10} />;
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
@@ -28,15 +28,18 @@ const ActorsCards = ({ page }: ActorsCardsProps) => {
         >
           <div className="w-32 h-40 relative rounded-xl overflow-hidden bg-gray-200 shadow-md">
             <Image
-              src={actor.profile_path ? `${IMAGE_BASE}${actor.profile_path}` : DefaultImage}
+              src={
+                actor.profile_path
+                  ? `${IMAGE_BASE}${actor.profile_path}`
+                  : DefaultImage
+              }
               alt={actor.name}
               fill
+              sizes="128px"
               className="object-cover"
             />
           </div>
-          <h3 className="text-center text-lg font-semibold ">
-            {actor.name}
-          </h3>
+          <h3 className="text-center text-lg font-semibold ">{actor.name}</h3>
         </Link>
       ))}
     </div>

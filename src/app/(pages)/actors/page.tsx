@@ -1,11 +1,13 @@
 import ActorsClient from "./components/ActorsClient";
 
 type Props = {
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>;
 };
 
-export default function ActorsPage({ searchParams }: Props) {
-  const page = Number(searchParams.page ?? "1");
+export default async function ActorsPage({ searchParams }: Props) {
+  const params = await searchParams;
+
+  const page = Number(params.page ?? "1");
 
   return <ActorsClient page={page} />;
 }

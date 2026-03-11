@@ -23,8 +23,9 @@ const ActorsClient = ({ page }: Props) => {
   const changePage = (newPage: number) => {
     if (newPage < 1 || newPage > 500) return;
 
-    router.push(`${pathname}?page=${newPage}`);
+    router.replace(`${pathname}?page=${newPage}`);
   };
+
 
   useEffect(() => {
     const nextPage = page + 1;

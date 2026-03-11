@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Typewriter as SimpleTypewriter } from "react-simple-typewriter";
 import Head from "next/head";
 
-// استخدم w1280 لتصغير حجم الصور
 const backgroundImages = [
   "https://image.tmdb.org/t/p/w1280/6ELJEzQJ3Y45HczvreC3dg0GV5R.jpg",
   "https://image.tmdb.org/t/p/w1280/xRI636TOdS1K1GBqIBRSmfZ1T5x.jpg",
@@ -17,7 +16,6 @@ const backgroundImages = [
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // تغيير الخلفية كل 5 ثواني
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
@@ -27,17 +25,11 @@ const Hero = () => {
 
   return (
     <>
-      {/* Preload أول صورة لتحسين LCP */}
       <Head>
-        <link
-          rel="preload"
-          as="image"
-          href={backgroundImages[0]}
-        />
+        <link rel="preload" as="image" href={backgroundImages[0]} />
       </Head>
 
       <div className="relative w-full h-screen overflow-hidden">
-        {/* الخلفيات */}
         {backgroundImages.map((img, idx) => (
           <div
             key={idx}
@@ -48,14 +40,11 @@ const Hero = () => {
           />
         ))}
 
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black/40 z-20" />
 
-        {/* Gradients */}
         <div className="absolute top-0 left-0 right-0 h-32 bg-linear-to-b from-black/80 to-transparent z-30" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-black/80 to-transparent z-30" />
 
-        {/* المحتوى */}
         <div className="relative z-40 flex flex-col items-center justify-center text-center h-full px-4">
           <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
             Welcome to PopFlix
