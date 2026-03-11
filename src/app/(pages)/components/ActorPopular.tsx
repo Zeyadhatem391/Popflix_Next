@@ -18,7 +18,9 @@ const ActorPopular = () => {
   return (
     <section className="my-10 mx-7">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl md:text-2xl font-semibold  ml-0 lg:ml-10">The Most Famous Actors</h2>
+        <h2 className="text-xl md:text-2xl font-semibold  ml-0 lg:ml-10">
+          The Most Famous Actors
+        </h2>
 
         <Link
           href="actors"
@@ -45,7 +47,7 @@ const ActorPopular = () => {
                     src={actorImage}
                     alt={actor.name}
                     fill
-                    sizes="144px"
+                    sizes="(max-width: 768px) 10vw, (max-width: 1024px) 12vw, 6vw"
                     className="object-center group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
@@ -57,7 +59,6 @@ const ActorPopular = () => {
             </div>
           );
         })}
-
       </div>
     </section>
   );

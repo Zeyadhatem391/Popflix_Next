@@ -1,62 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import CategoriesMoviesSkeleton from "@/components/skeletons/CategoriesMoviesSkeleton";
+import { useGetCategoriesMovies } from "@/hooks/useGetCategoriesMovies";
 import Image from "next/image";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 
-const API_KEY = "7b8da597ddda3922e0a74cec92c25b67";
-const IMG_URL = "https://image.tmdb.org/t/p/w500";
-
-type Genre = {
-  id: number;
-  name: string;
-};
-
-type Category = {
-  id: number;
-  name: string;
-  image: string | null;
-};
-
 const CategoriesMovies = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const { data: categories, isLoading, isError } = useGetCategoriesMovies();
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`
-        );
-
-        const data: { genres: Genre[] } = await res.json();
-
-        const categoriesWithImages: Category[] = await Promise.all(
-          data.genres.slice(0, 8).map(async (genre: Genre) => {
-            const movieRes = await fetch(
-              `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genre.id}`
-            );
-
-            const movieData = await movieRes.json();
-
-            return {
-              id: genre.id,
-              name: genre.name,
-              image: movieData.results?.[0]?.poster_path
-                ? IMG_URL + movieData.results[0].poster_path
-                : null,
-            };
-          })
-        );
-
-        setCategories(categoriesWithImages);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
+  if (isLoading) return <CategoriesMoviesSkeleton />;
+  if (isError || !categories) return <p>error</p>;
 
   return (
     <section className="my-10 mx-7">
