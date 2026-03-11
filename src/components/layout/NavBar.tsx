@@ -8,7 +8,7 @@ import UserImage from "../common/(NavBar)/UserImage";
 
 const Navbar = () => {
   return (
-    <div className="sticky top-0 z-50 bg-black px-6 py-4 flex items-center justify-between text-white  md:px-24">
+    <div className="sticky top-0 z-50 bg-black px-6 md:px-10 lg:px-24 py-4 flex items-center justify-between text-white  ">
       {/* Logo */}
       <div className="flex items-center">
         <Logo />

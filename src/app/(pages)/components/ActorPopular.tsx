@@ -21,7 +21,7 @@ const ActorPopular = () => {
     <section className="my-10 mx-7">
       <h2 className="text-2xl font-semibold mb-6 ">The Most Famous Actors</h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5  gap-5 justify-items-center">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5  gap-5 justify-items-center">
         {actors?.map((actor) => {
           const actorImage = actor.profile_path
             ? IMAGE_BASE + actor.profile_path

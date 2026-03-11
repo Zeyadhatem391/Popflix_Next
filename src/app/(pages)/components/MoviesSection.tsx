@@ -35,7 +35,7 @@ const MoviesSection = async ({ title, categories }: MoviesSectionPropes) => {
     <section className="my-10 mx-7">
       {/* Title */}
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl md:text-2xl font-semibold">{title}</h2>
+        <h2 className="text-xl md:text-2xl font-semibold ml-0 lg:ml-10">{title}</h2>
       </div>
 
       {/* Movies Row */}
