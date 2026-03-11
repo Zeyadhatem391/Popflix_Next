@@ -19,6 +19,8 @@ const genres: Record<number, string> = {
   10749: "Romance",
   878: "Science Fiction",
   53: "Thriller",
+  99:"Documentary",
+  10751:"Family",
 };
 
 

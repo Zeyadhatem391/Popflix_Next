@@ -12,6 +12,7 @@ const MoviesPage = () => {
       <CategoryMovies genreId={27} title="Horror" />
       <CategoryMovies genreId={14} title="Fantasy" />
       <CategoryMovies genreId={9648} title="Mystery" />
+      <CategoryMovies genreId={99} title="Documentary" />
     </div>
   );
 };

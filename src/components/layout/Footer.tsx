@@ -6,7 +6,7 @@ export default async function Footer() {
   const session = await getServerSession(authOptions);
 
   return (
-    <footer className="bg-[#111] text-white px-5 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 border-t border-[#333] mt-5">
+    <footer className="bg-black text-white px-5 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 border-t border-[#333] mt-5">
       {/* Navigation */}
       <div className="flex gap-3 flex-wrap">
         <Link href="/about">

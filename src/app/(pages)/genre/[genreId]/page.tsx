@@ -29,6 +29,8 @@ const genres: Record<string, number> = {
   Romance: 10749,
   ScienceFiction: 878,
   Thriller: 53,
+  Documentary:99,
+  Family:10751,
 };
 
 const GenrePage = () => {

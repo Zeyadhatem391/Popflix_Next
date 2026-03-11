@@ -11,7 +11,7 @@ const Back = () => {
     <Button
       onClick={() => router.back()}
       variant="outline"
-      className="rounded-full size-14 my-2 bg-black border-black "
+      className="rounded-full size-14 my-2 bg-[#111] border-black hover:bg-black/10"
     >
       <ChevronLeft className="size-7 text-white " />
     </Button>
