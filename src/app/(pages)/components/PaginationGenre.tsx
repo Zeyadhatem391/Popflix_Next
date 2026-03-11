@@ -15,12 +15,19 @@ type Props = {
 export function PaginationDemo({ page, setPage }: Props) {
 
   const startPage = Math.max(page - 2, 1);
-  const pages = Array.from({ length: 5 }, (_, i) => startPage + i);
+  const endPage = Math.min(startPage + 4, 500);
+
+  const pages = [];
+
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
 
   return (
     <Pagination className="mt-8">
       <PaginationContent>
 
+        {/* Previous */}
         <PaginationItem>
           <PaginationPrevious
             onClick={() => page > 1 && setPage(page - 1)}
@@ -28,6 +35,7 @@ export function PaginationDemo({ page, setPage }: Props) {
           />
         </PaginationItem>
 
+        {/* Pages */}
         {pages.map((p) => (
           <PaginationItem key={p}>
             <PaginationLink
@@ -44,9 +52,10 @@ export function PaginationDemo({ page, setPage }: Props) {
           </PaginationItem>
         ))}
 
+        {/* Next */}
         <PaginationItem>
           <PaginationNext
-            onClick={() => setPage(page + 1)}
+            onClick={() => page < 500 && setPage(page + 1)}
             className="cursor-pointer text-gray-300 hover:bg-gray-800 hover:text-white"
           />
         </PaginationItem>
