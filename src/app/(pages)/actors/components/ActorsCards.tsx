@@ -1,21 +1,22 @@
 "use client";
 
-import useGetAllActors, { Actor } from "@/hooks/useGetAllActors";
 import Image from "next/image";
 import Link from "next/link";
 import DefaultImage from "@/assets/images/default.png";
 import ActorCardSkeleton from "@/components/skeletons/ActorCardSkeleton";
+import { Actor } from "@/lib/types/Actor";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/w200";
 
+
+
 type ActorsCardsProps = {
-  page: number;
+  actors: Actor[];
+  isLoading: boolean;
 };
+const ActorsCards = ({ actors, isLoading }: ActorsCardsProps) => {
 
-const ActorsCards = ({ page }: ActorsCardsProps) => {
-  const { data: actors = [], isLoading, isError } = useGetAllActors(page);
 
-  if (isError) return <div>Failed to load actors.</div>;
   if (isLoading) return <ActorCardSkeleton count={10} />;
 
   return (

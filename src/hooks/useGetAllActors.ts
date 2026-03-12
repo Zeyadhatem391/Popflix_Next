@@ -1,12 +1,14 @@
+import { Actor } from "@/lib/types/Actor";
 import { useQuery } from "@tanstack/react-query";
 
-export type Actor = {
-  id: number;
-  name: string;
-  profile_path: string | null;
+
+
+type ActorResponse = {
+  results: Actor[];
+  total_pages: number;
 };
 
-export const GetActors = async (page: number): Promise<Actor[]> => {
+export const GetActors = async (page: number): Promise<ActorResponse> => {
   const res = await fetch(
     `https://api.themoviedb.org/3/person/popular?api_key=7b8da597ddda3922e0a74cec92c25b67&page=${page}`
   );
@@ -16,14 +18,18 @@ export const GetActors = async (page: number): Promise<Actor[]> => {
   }
 
   const data = await res.json();
-  return data.results;
+
+  return {
+    results: data.results,
+    total_pages: Math.min(data.total_pages, 500),
+  };
 };
 
 const useGetAllActors = (page: number) => {
-  return useQuery<Actor[]>({
+  return useQuery<ActorResponse>({
     queryKey: ["actors", page],
     queryFn: () => GetActors(page),
-    staleTime: 1000 * 60 * 5, 
+    staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
   });
 };
