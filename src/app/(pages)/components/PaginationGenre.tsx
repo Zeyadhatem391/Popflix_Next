@@ -9,13 +9,16 @@ import {
 
 type Props = {
   page: number;
+  totalPages: number;
   setPage: (page: number) => void;
 };
 
-export function PaginationDemo({ page, setPage }: Props) {
+export function PaginationDemo({ page, totalPages, setPage }: Props) {
+
+  if (totalPages <= 1) return null;
 
   const startPage = Math.max(page - 2, 1);
-  const endPage = Math.min(startPage + 4, 500);
+  const endPage = Math.min(startPage + 4, totalPages);
 
   const pages = [];
 
@@ -27,15 +30,15 @@ export function PaginationDemo({ page, setPage }: Props) {
     <Pagination className="mt-8">
       <PaginationContent>
 
-        {/* Previous */}
-        <PaginationItem>
-          <PaginationPrevious
-            onClick={() => page > 1 && setPage(page - 1)}
-            className="cursor-pointer text-gray-300 hover:bg-gray-800 hover:text-white"
-          />
-        </PaginationItem>
+        {page > 1 && (
+          <PaginationItem>
+            <PaginationPrevious
+              onClick={() => setPage(page - 1)}
+              className="cursor-pointer text-gray-300 hover:bg-gray-800 hover:text-white"
+            />
+          </PaginationItem>
+        )}
 
-        {/* Pages */}
         {pages.map((p) => (
           <PaginationItem key={p}>
             <PaginationLink
@@ -52,13 +55,14 @@ export function PaginationDemo({ page, setPage }: Props) {
           </PaginationItem>
         ))}
 
-        {/* Next */}
-        <PaginationItem>
-          <PaginationNext
-            onClick={() => page < 500 && setPage(page + 1)}
-            className="cursor-pointer text-gray-300 hover:bg-gray-800 hover:text-white"
-          />
-        </PaginationItem>
+        {page < totalPages && (
+          <PaginationItem>
+            <PaginationNext
+              onClick={() => setPage(page + 1)}
+              className="cursor-pointer text-gray-300 hover:bg-gray-800 hover:text-white"
+            />
+          </PaginationItem>
+        )}
 
       </PaginationContent>
     </Pagination>

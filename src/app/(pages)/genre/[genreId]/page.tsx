@@ -6,17 +6,13 @@ import SortButtonGenre from "../components/SortButtonGenre";
 import FilterButtonGenre from "../components/FilterButtonGenre";
 import GenreCards from "../components/GenreCards";
 
-import {
-  useParams,
-  useSearchParams,
-  useRouter,
-  usePathname,
-} from "next/navigation";
+import { useParams } from "next/navigation";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { GetGenreMovies } from "@/hooks/useGetGenreMovies";
+import useGetGenreMovies, { GetGenreMovies } from "@/hooks/useGetGenreMovies";
 import { PaginationDemo } from "../../components/PaginationGenre";
+import { useGenreFilters } from "@/hooks/useGenreFilters";
 
 const genres: Record<string, number> = {
   Action: 28,
@@ -37,23 +33,30 @@ const genres: Record<string, number> = {
 
 const GenrePage = () => {
   const params = useParams();
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
   const queryClient = useQueryClient();
 
   const genreName = params.genreId as string;
   const id = genres[genreName];
 
-  const page = Number(searchParams.get("page")) || 1;
-  const rating = Number(searchParams.get("rating")) || 0;
+  const {
+    rating,
+    decade,
+    language,
+    page,
+    changePage,
+  } = useGenreFilters();
 
-  const changePage = (newPage: number) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("page", newPage.toString());
+  // الآن بعد تعريف كل المتغيرات
+  const { data, isLoading } = useGetGenreMovies(
+    id,
+    page,
+    rating,
+    decade,
+    language
+  );
 
-    router.push(`${pathname}?${params.toString()}`);
-  };
+  const movies = data?.results || [];
+  const totalPages = data?.total_pages || 1;
 
   useEffect(() => {
     const nextPage = page + 1;
@@ -61,10 +64,10 @@ const GenrePage = () => {
     if (nextPage > 500) return;
 
     queryClient.prefetchQuery({
-      queryKey: ["genreMovies", id, nextPage, rating],
-      queryFn: () => GetGenreMovies(id, nextPage, rating),
+      queryKey: ["genreMovies", id, nextPage, rating, decade, language],
+      queryFn: () => GetGenreMovies(id, nextPage, rating, decade, language),
     });
-  }, [page, id, rating, queryClient]);
+  }, [page, id, rating, decade, language, queryClient]);
 
   return (
     <div className="max-w-6xl mx-auto px-4">
@@ -78,16 +81,24 @@ const GenrePage = () => {
 
         <div className="flex items-center gap-3">
           <SortButtonGenre />
-          <FilterButtonGenre rating={rating} />
+          <FilterButtonGenre
+            rating={rating}
+            decade={decade}
+            language={language}
+          />
         </div>
       </div>
 
       <div className="my-10">
-        <GenreCards id={id} page={page} rating={rating} />
+        <GenreCards movies={movies} isLoading={isLoading} />
       </div>
 
       <div className="flex items-center justify-center gap-4 mt-6">
-        <PaginationDemo page={page} setPage={changePage} />
+        <PaginationDemo
+          page={page}
+          setPage={changePage}
+          totalPages={totalPages}
+        />
       </div>
     </div>
   );

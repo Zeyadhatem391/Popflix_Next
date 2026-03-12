@@ -2,20 +2,18 @@
 
 import DefaultImage from "@/assets/images/default.png";
 import GenreCardsSkeleton from "@/components/skeletons/GenreCardsSkeleton";
-import useGetGenreMovies from "@/hooks/useGetGenreMovies";
 import Image from "next/image";
 import Link from "next/link";
+import { Movie } from "@/lib/types/Movie";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
 type GenreCardsProps = {
-  id: number;
-  page: number;
-  rating: number;
+  movies: Movie[];
+  isLoading: boolean;
 };
 
-const GenreCards = ({ id, page, rating }: GenreCardsProps) => {
-  const { data: movies = [], isLoading } = useGetGenreMovies(id, page, rating);
+const GenreCards = ({ movies, isLoading }: GenreCardsProps) => {
 
   if (isLoading) {
     return <GenreCardsSkeleton />;
@@ -25,6 +23,7 @@ const GenreCards = ({ id, page, rating }: GenreCardsProps) => {
     <section>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 pb-2">
         {movies.map((movie) => {
+
           const movieImage = movie.poster_path
             ? IMAGE_BASE + movie.poster_path
             : DefaultImage.src;

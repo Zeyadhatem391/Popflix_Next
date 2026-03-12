@@ -24,11 +24,13 @@ const CategoriesMovies = () => {
       {/* Scrollable container */}
       <div className="flex lg:grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-6 overflow-x-auto lg:overflow-visible no-scrollbar">
         {categories.map((cat) => (
-          <Link key={cat.id} href={`/genre/${cat.name}`} className="flex-shrink-0 w-72 lg:w-auto">
+          <Link
+            key={cat.id}
+            href={`/genre/${cat.name}`}
+            className="flex-shrink-0 w-72 lg:w-auto"
+          >
             <div className="group rounded-xl overflow-hidden bg-gray-800 cursor-pointer transition duration-300 hover:bg-gray-900">
-              
-              {/* Image */}
-              <div className="relative w-full h-44 overflow-hidden">
+              <div className="relative w-full h-52 overflow-hidden">
                 {cat.image && (
                   <Image
                     src={cat.image}
@@ -40,14 +42,13 @@ const CategoriesMovies = () => {
 
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300"></div>
 
-                <div className="absolute bottom-3 left-3 rounded-full p-2 bg-gray-900/80 text-white">
+                <div className="absolute bottom-5 left-3 rounded-full p-2 bg-gray-900/80 text-white">
                   <FaPlus size={14} />
                 </div>
-              </div>
 
-              {/* Title */}
-              <div className="py-3 px-4 text-white font-medium text-lg">
-                {cat.name}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white font-semibold text-xl">
+                  {cat.name}
+                </div>
               </div>
             </div>
           </Link>

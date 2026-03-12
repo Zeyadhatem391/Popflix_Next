@@ -15,13 +15,16 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 type FilterProps = {
   rating: number;
+  decade: string;
+  language: string;
 };
 
 const ratings = [5, 6, 7, 8, 9];
 
-const FilterButtonGenre = ({ rating }: FilterProps) => {
+const FilterButtonGenre = ({ rating, decade, language }: FilterProps) => {
   const [selectedRating, setSelectedRating] = useState<number>(rating);
-
+  const [selectedDecade, setSelectedDecade] = useState<string>(decade);
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(language);
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -35,6 +38,18 @@ const FilterButtonGenre = ({ rating }: FilterProps) => {
       params.delete("rating");
     }
 
+    if (selectedDecade) {
+      params.set("decade", selectedDecade);
+    } else {
+      params.delete("decade");
+    }
+
+    if (selectedLanguage) {
+      params.set("language", selectedLanguage);
+    } else {
+      params.delete("language");
+    }
+
     params.set("page", "1");
 
     router.push(`${pathname}?${params.toString()}`);
@@ -43,7 +58,24 @@ const FilterButtonGenre = ({ rating }: FilterProps) => {
   const resetFilter = () => {
     const params = new URLSearchParams(searchParams);
 
-    params.delete("rating");
+    if (selectedRating) {
+      params.set("rating", selectedRating.toString());
+    } else {
+      params.delete("rating");
+    }
+
+    if (selectedDecade) {
+      params.set("decade", selectedDecade);
+    } else {
+      params.delete("decade");
+    }
+
+    if (selectedLanguage) {
+      params.set("language", selectedLanguage);
+    } else {
+      params.delete("language");
+    }
+
     params.set("page", "1");
 
     router.push(`${pathname}?${params.toString()}`);
@@ -53,8 +85,8 @@ const FilterButtonGenre = ({ rating }: FilterProps) => {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className="flex items-center gap-2 rounded-md px-4 py-2 sm:px-5 sm:py-3
-          text-sm sm:text-lg font-semibold
+          className="flex items-center gap-2 rounded-md p-5
+          text-lg font-semibold
           bg-stone-800 text-white border border-stone-800
           hover:bg-stone-700 hover:border-stone-700
           transition-all duration-200"
@@ -110,16 +142,29 @@ const FilterButtonGenre = ({ rating }: FilterProps) => {
             </h3>
 
             <select
+              value={selectedDecade}
+              onChange={(e) => setSelectedDecade(e.target.value)}
               className="w-full bg-zinc-800 border border-zinc-700
               rounded-md px-2 py-1.5 sm:px-3 sm:py-2
               text-xs sm:text-sm
               focus:outline-none"
             >
-              <option>2020 - 2025</option>
-              <option>2015 - 2020</option>
-              <option>2010 - 2015</option>
-              <option>2005 - 2010</option>
-              <option>2000 - 2005</option>
+              <option value="">All</option>
+              {[
+                "1950",
+                "1960",
+                "1970",
+                "1980",
+                "1990",
+                "2000",
+                "2010",
+                "2020",
+                "Now",
+              ].map((d) => (
+                <option key={d} value={d}>
+                  {d}s
+                </option>
+              ))}
             </select>
           </div>
 
@@ -149,17 +194,17 @@ const FilterButtonGenre = ({ rating }: FilterProps) => {
             </h3>
 
             <select
-              className="w-full bg-zinc-800 border border-zinc-700
-              rounded-md px-2 py-1.5 sm:px-3 sm:py-2
-              text-xs sm:text-sm
-              focus:outline-none"
+              value={selectedLanguage}
+              onChange={(e) => setSelectedLanguage(e.target.value)}
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm focus:outline-none"
             >
-              <option>All</option>
-              <option>English</option>
-              <option>French</option>
-              <option>Spanish</option>
-              <option>Japanese</option>
-              <option>Korean</option>
+              <option value="">All</option>
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="ko">Korean</option>
+              <option value="ar">Arabic</option>
+              <option value="fr">French</option>
+              <option value="ja">Japanese</option>
             </select>
           </div>
 
