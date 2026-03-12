@@ -17,11 +17,12 @@ type FilterProps = {
   rating: number;
   decade: string;
   language: string;
+  reset: () => void;
 };
 
 const ratings = [5, 6, 7, 8, 9];
 
-const FilterButtonGenre = ({ rating, decade, language }: FilterProps) => {
+const FilterButtonGenre = ({ rating, decade, language,reset }: FilterProps) => {
   const [selectedRating, setSelectedRating] = useState<number>(rating);
   const [selectedDecade, setSelectedDecade] = useState<string>(decade);
   const [selectedLanguage, setSelectedLanguage] = useState<string>(language);
@@ -55,32 +56,7 @@ const FilterButtonGenre = ({ rating, decade, language }: FilterProps) => {
     router.push(`${pathname}?${params.toString()}`);
   };
 
-  const resetFilter = () => {
-    const params = new URLSearchParams(searchParams);
-
-    if (selectedRating) {
-      params.set("rating", selectedRating.toString());
-    } else {
-      params.delete("rating");
-    }
-
-    if (selectedDecade) {
-      params.set("decade", selectedDecade);
-    } else {
-      params.delete("decade");
-    }
-
-    if (selectedLanguage) {
-      params.set("language", selectedLanguage);
-    } else {
-      params.delete("language");
-    }
-
-    params.set("page", "1");
-
-    router.push(`${pathname}?${params.toString()}`);
-  };
-
+ 
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -211,7 +187,7 @@ const FilterButtonGenre = ({ rating, decade, language }: FilterProps) => {
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-3 sm:pt-4">
             <Button
-              onClick={resetFilter}
+              onClick={reset}
               className="flex-1 bg-zinc-800 text-white border border-zinc-700 hover:bg-zinc-700 text-sm"
             >
               Reset

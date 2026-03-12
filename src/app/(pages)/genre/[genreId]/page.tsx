@@ -44,9 +44,10 @@ const GenrePage = () => {
     language,
     page,
     changePage,
+    resetFilters,
   } = useGenreFilters();
 
-  // الآن بعد تعريف كل المتغيرات
+  
   const { data, isLoading } = useGetGenreMovies(
     id,
     page,
@@ -85,6 +86,7 @@ const GenrePage = () => {
             rating={rating}
             decade={decade}
             language={language}
+             reset={resetFilters}
           />
         </div>
       </div>
