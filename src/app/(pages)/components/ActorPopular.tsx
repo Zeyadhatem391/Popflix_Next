@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default.png";
-import usePopularActors from "@/hooks/usePopularActors";
+import usePopularActors from "@/hooks/Actors/usePopularActors";
 import ActorPopularSkeleton from "@/components/skeletons/ActorPopularSkeleton";
 import Link from "next/link";
 

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Movie } from "@/lib/types/Movie";
 import DefaultImage from "@/assets/images/default.png";
-import { useGetHeroMovies } from "@/hooks/useGetHeroMovies";
+import { useGetHeroMovies } from "@/hooks/Movies/useGetHeroMovies";
 import HeroMoviesSkeleton from "@/components/skeletons/HeroMoviesSkeleton";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";

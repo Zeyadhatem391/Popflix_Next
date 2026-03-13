@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default.png";
-import useGetDetailsMovies from "@/hooks/useGetDetailsMovies";
+import useGetDetailsMovies from "@/hooks/Movies/useGetDetailsMovies";
 import MovieDetailsSkeleton from "@/components/skeletons/MovieDetailsSkeleton";
 
 import { useParams } from "next/navigation";

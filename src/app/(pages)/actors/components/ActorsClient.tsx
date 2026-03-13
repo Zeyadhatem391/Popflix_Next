@@ -6,11 +6,11 @@ import { useRouter, usePathname } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import ActorsCards from "../components/ActorsCards";
-import useGetAllActors, { GetActors } from "@/hooks/useGetAllActors";
+import useGetAllActors, { GetActors } from "@/hooks/Actors/useGetAllActors";
 
 import { PaginationDemo } from "../../components/PaginationGenre";
-import SortButton from "./SortButton";
-import FilterButton from "./FilterButton";
+// import SortButton from "./SortButton";
+// import FilterButton from "./FilterButton";
 
 type Props = {
   page: number;
@@ -53,10 +53,10 @@ const ActorsClient = ({ page }: Props) => {
       <div className="flex flex-col items-center justify-center gap-4 mt-6">
         <h2 className="text-3xl font-bold text-center">Actors</h2>
 
-        <div className="flex items-center gap-3">
+        {/* <div className="flex items-center gap-3">
           <SortButton />
           <FilterButton />
-        </div>
+        </div> */}
       </div>
 
       <div className="my-10">

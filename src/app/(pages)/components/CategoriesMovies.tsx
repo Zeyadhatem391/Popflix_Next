@@ -1,7 +1,7 @@
 "use client";
 
 import CategoriesMoviesSkeleton from "@/components/skeletons/CategoriesMoviesSkeleton";
-import { useGetCategoriesMovies } from "@/hooks/useGetCategoriesMovies";
+import { useGetCategoriesMovies } from "@/hooks/Movies/useGetCategoriesMovies";
 import Image from "next/image";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";

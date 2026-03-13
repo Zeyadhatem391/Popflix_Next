@@ -10,9 +10,9 @@ import { useParams } from "next/navigation";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import useGetGenreMovies, { GetGenreMovies } from "@/hooks/useGetGenreMovies";
+import useGetGenreMovies, { GetGenreMovies } from "@/hooks/Genres/useGetGenreMovies";
 import { PaginationDemo } from "../../components/PaginationGenre";
-import { useGenreFilters } from "@/hooks/useGenreFilters";
+import { useGenreFilters } from "@/hooks/Genres/useGenreFilters";
 
 const genres: Record<string, number> = {
   Action: 28,

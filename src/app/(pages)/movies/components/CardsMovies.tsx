@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DefaultImage from "@/assets/images/default.png";
 import { useEffect, useRef } from "react";
-import useMovies from "@/hooks/useGetMovies";
+import useMovies from "@/hooks/Movies/useGetMovies";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 

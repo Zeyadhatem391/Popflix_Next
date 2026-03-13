@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import DefaultImage from "@/assets/images/default.png";
-import useGetActorMovies from "@/hooks/useGetActorMovies";
+import useGetActorMovies from "@/hooks/Actors/useGetActorMovies";
 import ActorMoviesSkeleton from "@/components/skeletons/ActorMoviesSkeleton";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";

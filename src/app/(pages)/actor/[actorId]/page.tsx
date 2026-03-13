@@ -2,7 +2,7 @@
 import Image from "next/image";
 import DefaultImage from "@/assets/images/default.png";
 import { useParams } from "next/navigation";
-import useGetActorDetails from "@/hooks/useGetActorDetails";
+import useGetActorDetails from "@/hooks/Actors/useGetActorDetails";
 import ActorDetailsSkeleton from "@/components/skeletons/ActorDetailsSkeleton";
 import ActorMovies from "../components/ActorMovies";
 
