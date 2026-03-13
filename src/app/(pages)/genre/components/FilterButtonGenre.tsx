@@ -178,7 +178,7 @@ const FilterButtonGenre = ({
             <select
               value={selectedLanguage}
               onChange={(e) => setSelectedLanguage(e.target.value)}
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm focus:outline-none"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-md px-3 py-2 text-xs sm:text-sm focus:outline-none"
             >
               <option value="">All</option>
               <option value="en">English</option>

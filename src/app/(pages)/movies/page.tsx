@@ -6,6 +6,9 @@ const MoviesPage = () => {
     <div className="max-w-7xl mx-auto px-4 ">
       <HeroMovies />
       <CategoryMovies genreId={28} title="Action" />
+      <CategoryMovies genreId={10752} title="War" />
+      <CategoryMovies genreId={37} title="Western" />
+      <CategoryMovies genreId={36} title="History" />
       <CategoryMovies genreId={16} title="Animation" />
       <CategoryMovies genreId={18} title="Drama" />
       <CategoryMovies genreId={35} title="Comedy" />
