@@ -22,13 +22,24 @@ type FilterProps = {
 
 const ratings = [5, 6, 7, 8, 9];
 
-const FilterButtonGenre = ({ rating, decade, language,reset }: FilterProps) => {
+const FilterButtonGenre = ({
+  rating,
+  decade,
+  language,
+  reset,
+}: FilterProps) => {
   const [selectedRating, setSelectedRating] = useState<number>(rating);
   const [selectedDecade, setSelectedDecade] = useState<string>(decade);
   const [selectedLanguage, setSelectedLanguage] = useState<string>(language);
+
+  const [open, setOpen] = useState(false);
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+
+  const activeFilters =
+    (rating ? 1 : 0) + (decade ? 1 : 0) + (language ? 1 : 0);
 
   const applyFilter = () => {
     const params = new URLSearchParams(searchParams);
@@ -54,21 +65,35 @@ const FilterButtonGenre = ({ rating, decade, language,reset }: FilterProps) => {
     params.set("page", "1");
 
     router.push(`${pathname}?${params.toString()}`);
+
+    setOpen(false);
   };
 
- 
+  const handleReset = () => {
+    setSelectedRating(0);
+    setSelectedDecade("");
+    setSelectedLanguage("");
+
+    reset();
+
+    setOpen(false);
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          className="flex items-center gap-2 rounded-md p-5
-          text-lg font-semibold
-          bg-stone-800 text-white border border-stone-800
-          hover:bg-stone-700 hover:border-stone-700
-          transition-all duration-200"
+          className={`flex items-center gap-2 rounded-md p-5
+  text-lg font-semibold
+  border transition-all duration-200
+  ${
+    activeFilters > 0
+      ? "bg-red-600 border-red-600 hover:bg-red-500"
+      : "bg-stone-800 border-stone-800 hover:bg-stone-700"
+  }`}
         >
           <Filter size={18} />
-          Filter
+          Filter {activeFilters > 0 && `(${activeFilters})`}
         </Button>
       </DialogTrigger>
 
@@ -135,31 +160,12 @@ const FilterButtonGenre = ({ rating, decade, language,reset }: FilterProps) => {
                 "2000",
                 "2010",
                 "2020",
-                "Now",
+                "2025",
               ].map((d) => (
                 <option key={d} value={d}>
                   {d}s
                 </option>
               ))}
-            </select>
-          </div>
-
-          {/* Sort */}
-          <div>
-            <h3 className="text-xs sm:text-sm font-semibold mb-2 sm:mb-3 text-zinc-300">
-              Sort Order
-            </h3>
-
-            <select
-              className="w-full bg-zinc-800 border border-zinc-700
-              rounded-md px-2 py-1.5 sm:px-3 sm:py-2
-              text-xs sm:text-sm
-              focus:outline-none"
-            >
-              <option>Popularity</option>
-              <option>Rating</option>
-              <option>Newest</option>
-              <option>Oldest</option>
             </select>
           </div>
 
@@ -187,7 +193,7 @@ const FilterButtonGenre = ({ rating, decade, language,reset }: FilterProps) => {
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-3 sm:pt-4">
             <Button
-              onClick={reset}
+              onClick={handleReset}
               className="flex-1 bg-zinc-800 text-white border border-zinc-700 hover:bg-zinc-700 text-sm"
             >
               Reset
