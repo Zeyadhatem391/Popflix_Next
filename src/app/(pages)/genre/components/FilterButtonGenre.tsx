@@ -187,6 +187,7 @@ const FilterButtonGenre = ({
               <option value="ar">Arabic</option>
               <option value="fr">French</option>
               <option value="ja">Japanese</option>
+              <option value="hi">Hindi</option>
             </select>
           </div>
 

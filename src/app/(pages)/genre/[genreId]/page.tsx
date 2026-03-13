@@ -43,17 +43,19 @@ const GenrePage = () => {
     decade,
     language,
     page,
+    sortBy,
     changePage,
     resetFilters,
+    updateFilter,
   } = useGenreFilters();
 
-  
   const { data, isLoading } = useGetGenreMovies(
     id,
     page,
     rating,
     decade,
-    language
+    language,
+    sortBy,
   );
 
   const movies = data?.results || [];
@@ -65,10 +67,11 @@ const GenrePage = () => {
     if (nextPage > 500) return;
 
     queryClient.prefetchQuery({
-      queryKey: ["genreMovies", id, nextPage, rating, decade, language],
-      queryFn: () => GetGenreMovies(id, nextPage, rating, decade, language),
+      queryKey: ["genreMovies", id, nextPage, rating, decade, language, sortBy],
+      queryFn: () =>
+        GetGenreMovies(id, nextPage, rating, decade, language, sortBy),
     });
-  }, [page, id, rating, decade, language, queryClient]);
+  }, [page, id, rating, decade, language, sortBy, queryClient]);
 
   return (
     <div className="max-w-6xl mx-auto px-4">
@@ -81,12 +84,12 @@ const GenrePage = () => {
         <h2 className="text-3xl font-bold text-center">{genreName} Movies</h2>
 
         <div className="flex items-center gap-3">
-          <SortButtonGenre />
+          <SortButtonGenre sortBy={sortBy} updateFilter={updateFilter} />
           <FilterButtonGenre
             rating={rating}
             decade={decade}
             language={language}
-             reset={resetFilters}
+            reset={resetFilters}
           />
         </div>
       </div>

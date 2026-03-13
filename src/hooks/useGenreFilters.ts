@@ -10,8 +10,9 @@ export const useGenreFilters = () => {
   const rating = Number(searchParams.get("rating")) || 0;
   const decade = searchParams.get("decade") || "";
   const language = searchParams.get("language") || "";
-  const sort = searchParams.get("sort") || "popularity.desc";
+  const sortBy = searchParams.get("sort") || "popularity.desc";
   const page = Number(searchParams.get("page")) || 1;
+
 
   const updateFilter = (key: string, value: string | number) => {
     const params = new URLSearchParams(searchParams);
@@ -42,7 +43,7 @@ export const useGenreFilters = () => {
     rating,
     decade,
     language,
-    sort,
+    sortBy,
     page,
     updateFilter,
     changePage,

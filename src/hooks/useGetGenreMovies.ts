@@ -11,7 +11,8 @@ export const GetGenreMovies = async (
   page: number,
   rating: number,
   decade: string,
-  language: string
+  language: string,
+  sortBy:string,
 ): Promise<MoviesResponse> => {
 
   const params = new URLSearchParams({
@@ -30,6 +31,10 @@ export const GetGenreMovies = async (
 
   if (language) {
     params.set("with_original_language", language);
+  }
+
+  if (sortBy) {
+    params.set("sort_by", sortBy);
   }
 
   const res = await fetch(
@@ -53,11 +58,12 @@ const useGetGenreMovies = (
   page: number,
   rating: number,
   decade: string,
-  language: string
+  language: string,
+  sortBy:string
 ) => {
   return useQuery<MoviesResponse>({
-    queryKey: ["genreMovies", genreId, page, rating, decade, language],
-    queryFn: () => GetGenreMovies(genreId, page, rating, decade, language),
+    queryKey: ["genreMovies", genreId, page, rating, decade, language,sortBy],
+    queryFn: () => GetGenreMovies(genreId, page, rating, decade, language,sortBy),
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
   });
