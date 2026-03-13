@@ -5,6 +5,7 @@ import { FaRegHeart, FaSearch } from "react-icons/fa";
 import SearchNavBar from "../common/(NavBar)/SearchNavBar";
 import Logo from "../common/(NavBar)/Logo";
 import UserImage from "../common/(NavBar)/UserImage";
+import MenuPage from "../common/(NavBar)/MenuPage";
 
 const Navbar = () => {
   return (
@@ -15,10 +16,18 @@ const Navbar = () => {
       </div>
 
       {/* Search */}
-      <SearchNavBar />
+      <div className="flex gap-2">
+        <div className=" hidden md:block ">
+          <MenuPage />
+        </div>
+        <SearchNavBar />
+      </div>
 
       {/* Right Side */}
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-5">
+        <div className="md:hidden flex items-center justify-center">
+          <MenuPage />
+        </div>
         <div className="md:hidden flex items-center justify-center">
           <FaSearch className="w-5 h-5 cursor-pointer" />
         </div>
