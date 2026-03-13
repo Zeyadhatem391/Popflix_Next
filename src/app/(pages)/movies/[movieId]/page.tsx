@@ -7,6 +7,7 @@ import MovieDetailsSkeleton from "@/components/skeletons/MovieDetailsSkeleton";
 
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import FavoriteButton from "../components/FavoriteButton";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
@@ -72,9 +73,7 @@ const MovieDetails = () => {
       <div className="flex items-center gap-5 mb-4">
         <span className="text-lg">⭐ {data.vote_average.toFixed(1)}</span>
 
-        <button className="border-2 border-white px-4 py-2 rounded-md transition hover:bg-white hover:text-black">
-          Add To Favorite
-        </button>
+        <FavoriteButton />
       </div>
 
       {/* Overview */}
