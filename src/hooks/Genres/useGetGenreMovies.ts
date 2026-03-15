@@ -38,7 +38,7 @@ export const GetGenreMovies = async (
   }
 
   const res = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?${params.toString()}`
+    `${process.env.NEXT_PUBLIC_API_URL}/3/discover/movie?${params.toString()}`
   );
 
   if (!res.ok) {
@@ -59,11 +59,11 @@ const useGetGenreMovies = (
   rating: number,
   decade: string,
   language: string,
-  sortBy:string
+  sortBy: string
 ) => {
   return useQuery<MoviesResponse>({
-    queryKey: ["genreMovies", genreId, page, rating, decade, language,sortBy],
-    queryFn: () => GetGenreMovies(genreId, page, rating, decade, language,sortBy),
+    queryKey: ["genreMovies", genreId, page, rating, decade, language, sortBy],
+    queryFn: () => GetGenreMovies(genreId, page, rating, decade, language, sortBy),
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
   });
