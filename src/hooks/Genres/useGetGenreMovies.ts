@@ -17,7 +17,7 @@ export const GetGenreMovies = async (
 ): Promise<MoviesResponse> => {
 
   const params = new URLSearchParams({
-    api_key: "7b8da597ddda3922e0a74cec92c25b67",
+    api_key: `${process.env.NEXT_PUBLIC_API_KEY}`,
     page: page.toString(),
   });
 

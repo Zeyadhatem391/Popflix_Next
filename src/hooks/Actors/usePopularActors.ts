@@ -3,7 +3,7 @@ import { PopularActorsResponse } from "@/lib/types/Actor";
 
 const PopularActors = async (): Promise<PopularActorsResponse> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/3/person/popular?api_key=7b8da597ddda3922e0a74cec92c25b67`
+    `${process.env.NEXT_PUBLIC_API_URL}/3/person/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
   );
 
   if (!response.ok) {

@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { Movie } from "@/lib/types/Movie";
 
-const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
 const fetchHeroMovies = async (): Promise<Movie[]> => {
     const randomPage = Math.floor(Math.random() * 5 + 1);
     const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/3/discover/movie?api_key=7b8da597ddda3922e0a74cec92c25b67&page=${randomPage}`
+        `${process.env.NEXT_PUBLIC_API_URL}/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${randomPage}`
     );
 
     if (!res.ok) throw new Error("Failed to fetch movies");

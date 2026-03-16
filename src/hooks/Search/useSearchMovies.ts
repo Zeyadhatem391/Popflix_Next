@@ -5,7 +5,7 @@ const GetSearchMovies = async (searchQuery: string): Promise<Movie[]> => {
   if (!searchQuery) return [];
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/3/search/movie?api_key=7b8da597ddda3922e0a74cec92c25b67&query=${searchQuery}`
+    `${process.env.NEXT_PUBLIC_API_URL}/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${searchQuery}`
   );
 
   if (!res.ok) {

@@ -1,22 +1,21 @@
 "use client";
 
 import Back from "@/components/common/Back";
-import InputSearch from "@/components/common/InputSearch";
 import { useRouter, usePathname } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ActorsCards from "../components/ActorsCards";
 import useGetAllActors, { GetActors } from "@/hooks/Actors/useGetAllActors";
 
 import { PaginationDemo } from "../../components/PaginationGenre";
-// import SortButton from "./SortButton";
-// import FilterButton from "./FilterButton";
+import InputSearchActors from "./InputSearchActors";
 
 type Props = {
   page: number;
 };
 
 const ActorsClient = ({ page }: Props) => {
+  const [searchQuary, setSearchQuary] = useState("");
   const router = useRouter();
   const pathname = usePathname();
   const queryClient = useQueryClient();
@@ -47,16 +46,7 @@ const ActorsClient = ({ page }: Props) => {
     <div className="max-w-6xl mx-auto px-4">
       <div className="flex items-center gap-3 w-full my-3">
         <Back />
-        <InputSearch />
-      </div>
-
-      <div className="flex flex-col items-center justify-center gap-4 mt-6">
-        <h2 className="text-3xl font-bold text-center">Actors</h2>
-
-        {/* <div className="flex items-center gap-3">
-          <SortButton />
-          <FilterButton />
-        </div> */}
+        <InputSearchActors setSearchQuary={setSearchQuary} />
       </div>
 
       <div className="my-10">

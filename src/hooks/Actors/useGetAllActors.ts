@@ -10,7 +10,7 @@ type ActorResponse = {
 
 export const GetActors = async (page: number): Promise<ActorResponse> => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/3/person/popular?api_key=7b8da597ddda3922e0a74cec92c25b67&page=${page}`
+    `${process.env.NEXT_PUBLIC_API_URL}/3/person/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`
   );
 
   if (!res.ok) {

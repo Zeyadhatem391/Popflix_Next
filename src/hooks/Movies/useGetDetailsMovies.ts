@@ -53,7 +53,7 @@ const GetDetailsMovies = async (
   movieId: string
 ): Promise<Movie> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/3/movie/${movieId}?api_key=7b8da597ddda3922e0a74cec92c25b67&append_to_response=credits,videos`
+    `${process.env.NEXT_PUBLIC_API_URL}/3/movie/${movieId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=credits,videos`
   );
 
   if (!response.ok) {
