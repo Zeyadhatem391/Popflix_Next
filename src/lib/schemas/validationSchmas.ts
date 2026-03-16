@@ -12,7 +12,7 @@ export const registerSchema = z
             .regex(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/, "Phone number must be valid Egyptian number"),
         password: z
             .string()
-            .min(6, "Password must be at least 6 characters")
+            .min(8, "Password must be at least 8 characters")
             .max(50, "Password must be at most 50 characters"),
         password_confirmation: z.string().min(1, "Please confirm your password"),
         agree_terms: z.boolean().refine((val) => val === true, {

@@ -19,6 +19,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { LockKeyhole, Mail } from "lucide-react";
 
 type LoginData = {
   login: string;
@@ -67,33 +68,35 @@ export default function Login() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      placeholder="Email"
-                      className="input text-lg h-11 border-2 border-gray-200 rounded-lg placeholder:text-[16px]"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Input
+                        placeholder="Email"
+                        {...field}
+                        className="input "
+                      />
+                    </div>
                   </FormControl>
-
                   <FormMessage className="text-red-500 text-sm" />
                 </FormItem>
               )}
             />
 
-            {/* Password */}
             <FormField
               control={form.control}
               name="password"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      className="input text-lg h-11 border-2 border-gray-200 rounded-lg placeholder:text-[16px]"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <LockKeyhole className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Input
+                        placeholder="Password"
+                        {...field}
+                        className="input "
+                      />
+                    </div>
                   </FormControl>
-
                   <FormMessage className="text-red-500 text-sm" />
                 </FormItem>
               )}
