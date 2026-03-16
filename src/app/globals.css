@@ -48,7 +48,7 @@
 }
 
 .input {
-  @apply w-full p-4  rounded-md bg-[#2c2c2c] text-white placeholder:text-[#bbb] border border-[#444] focus:outline-none focus:ring-2 focus:ring-red-600 placeholder:pl-6 text-lg h-11 placeholder:text-[16px]
+  @apply w-full px-10  rounded-md bg-[#2c2c2c] text-white placeholder:text-[#bbb] border border-[#444] focus:outline-none focus:ring-2 focus:ring-red-600 text-lg h-11 placeholder:text-[16px]
 }
 
 .link_nav {
