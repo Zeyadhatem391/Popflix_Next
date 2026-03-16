@@ -14,7 +14,7 @@ const getMovies = async (categories: string): Promise<Movie[]> => {
   const regionQuery = categories === "upcoming" ? "&region=US" : "";
 
   const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${categories}?api_key=7b8da597ddda3922e0a74cec92c25b67${regionQuery}`,
+    `https://api.themoviedb.org/3/movie/${categories}?api_key=${process.env.NEXT_PUBLIC_API_KEY}${regionQuery}`,
     {
       next: { revalidate: 60 },
     },
