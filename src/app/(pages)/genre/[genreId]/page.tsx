@@ -1,7 +1,7 @@
 "use client";
 
 import Back from "@/components/common/Back";
-import InputSearch from "@/components/common/InputSearsh";
+import InputSearch from "@/components/common/InputSearch";
 import SortButtonGenre from "../components/SortButtonGenre";
 import FilterButtonGenre from "../components/FilterButtonGenre";
 import GenreCards from "../components/GenreCards";
@@ -9,10 +9,13 @@ import GenreCards from "../components/GenreCards";
 import { useParams } from "next/navigation";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
-import useGetGenreMovies, { GetGenreMovies } from "@/hooks/Genres/useGetGenreMovies";
+import { useEffect, useState } from "react";
+import useGetGenreMovies, {
+  GetGenreMovies,
+} from "@/hooks/Genres/useGetGenreMovies";
 import { PaginationDemo } from "../../components/PaginationGenre";
 import { useGenreFilters } from "@/hooks/Genres/useGenreFilters";
+import { useDebounce } from "@/hooks/Search/useDebounce";
 
 const genres: Record<string, number> = {
   Action: 28,
@@ -29,14 +32,16 @@ const genres: Record<string, number> = {
   Thriller: 53,
   Documentary: 99,
   Family: 10751,
-  War:10752,
-  Western:37,
-  TVMovie:10770,
-  Music:10402,
-  History:36,
+  War: 10752,
+  Western: 37,
+  TVMovie: 10770,
+  Music: 10402,
+  History: 36,
 };
 
 const GenrePage = () => {
+  const [searchQuery, setSearchQuary] = useState("");
+  const debouncedQuery = useDebounce(searchQuery, 800);
   const params = useParams();
   const queryClient = useQueryClient();
 
@@ -61,6 +66,7 @@ const GenrePage = () => {
     decade,
     language,
     sortBy,
+    debouncedQuery,
   );
 
   const movies = data?.results || [];
@@ -71,18 +77,28 @@ const GenrePage = () => {
 
     if (nextPage > 500) return;
 
-    queryClient.prefetchQuery({
-      queryKey: ["genreMovies", id, nextPage, rating, decade, language, sortBy],
-      queryFn: () =>
-        GetGenreMovies(id, nextPage, rating, decade, language, sortBy),
-    });
-  }, [page, id, rating, decade, language, sortBy, queryClient]);
+    if (!debouncedQuery) {
+      queryClient.prefetchQuery({
+        queryKey: [
+          "genreMovies",
+          id,
+          nextPage,
+          rating,
+          decade,
+          language,
+          sortBy,
+        ],
+        queryFn: () =>
+          GetGenreMovies(id, nextPage, rating, decade, language, sortBy, ""),
+      });
+    }
+  }, [page, id, rating, decade, language, sortBy, debouncedQuery, queryClient]);
 
   return (
     <div className="max-w-6xl mx-auto px-4">
       <div className="flex items-center gap-3 w-full my-3">
         <Back />
-        <InputSearch />
+        <InputSearch setSearchQuary={setSearchQuary} genreName={genreName} />
       </div>
 
       <div className="flex flex-col items-center justify-center gap-4 mt-6">

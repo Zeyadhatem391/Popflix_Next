@@ -1,7 +1,7 @@
 "use client";
 
 import Back from "@/components/common/Back";
-import InputSearch from "@/components/common/InputSearsh";
+import InputSearch from "@/components/common/InputSearch";
 import { useRouter, usePathname } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
