@@ -3,7 +3,7 @@ import { Movie } from "@/lib/types/Movie";
 
 const GetMovies = async (genreId: number): Promise<Movie[]> => {
   const res = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=7b8da597ddda3922e0a74cec92c25b67&with_genres=${genreId}`
+    `${process.env.NEXT_PUBLIC_API_URL}/3/discover/movie?api_key=7b8da597ddda3922e0a74cec92c25b67&with_genres=${genreId}`
   );
 
   if (!res.ok) {

@@ -68,21 +68,22 @@ const SearchNavBar = ({ open, setOpen }: SearchNavBarProps) => {
                 <Link
                   href={`/movies/${movie.id}`}
                   className=" flex justify-between"
+                  onClick={() => setOpen(false)}
                 >
-                 <div className="flex flex-row items-center gap-4">
-                   {movie.poster_path && (
-                    <Image
-                      src={`https://image.tmdb.org/t/p/w185${movie.poster_path}`}
-                      alt={movie.title}
-                      width={120}
-                      height={180}
-                      className="rounded-lg object-cover"
-                    />
-                  )}
-                  <h3 className="text-white text-lg sm:text-xl font-semibold mt-2 sm:mt-0">
-                    {movie.title}
-                  </h3>
-                 </div>
+                  <div className="flex flex-row items-center gap-4">
+                    {movie.poster_path && (
+                      <Image
+                        src={`https://image.tmdb.org/t/p/w185${movie.poster_path}`}
+                        alt={movie.title}
+                        width={120}
+                        height={180}
+                        className="rounded-lg object-cover"
+                      />
+                    )}
+                    <h3 className="text-white text-lg sm:text-xl font-semibold mt-2 sm:mt-0">
+                      {movie.title}
+                    </h3>
+                  </div>
                   ⭐{movie.vote_average.toFixed(1)}
                 </Link>
               </div>

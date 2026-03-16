@@ -27,7 +27,7 @@ const fetchCategoriesMovies = async (): Promise<Category[]> => {
     const categoriesWithImages: Category[] = await Promise.all(
         data.genres.slice(0, 12).map(async (genre: Genre) => {
             const movieRes = await fetch(
-                `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genre.id}`
+                `${process.env.NEXT_PUBLIC_API_URL}/3/discover/movie?api_key=${API_KEY}&with_genres=${genre.id}`
             );
 
             const movieData = await movieRes.json();

@@ -12,7 +12,7 @@ export type Actor = {
 
 const GetActorDetails = async (id: string): Promise<Actor> => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/person/${id}?api_key=7b8da597ddda3922e0a74cec92c25b67`,
+    `${process.env.NEXT_PUBLIC_API_URL}/3/person/${id}?api_key=7b8da597ddda3922e0a74cec92c25b67`,
   );
 
   if (!response.ok) {
