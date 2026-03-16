@@ -4,16 +4,16 @@ import { Search } from "lucide-react";
 import { useState } from "react";
 
 type InputSearchActorsProps = {
-  setSearchQuary: (value: string) => void;
+  setSearchQuery: (value: string) => void;
 };
 
-const InputSearchActors = ({ setSearchQuary }: InputSearchActorsProps) => {
+const InputSearchActors = ({ setSearchQuery }: InputSearchActorsProps) => {
   const [query, setQuery] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
-    setSearchQuary(value);
+    setSearchQuery(value);
   };
 
   return (

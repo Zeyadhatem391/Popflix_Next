@@ -9,18 +9,20 @@ import useGetAllActors, { GetActors } from "@/hooks/Actors/useGetAllActors";
 
 import { PaginationDemo } from "../../components/PaginationGenre";
 import InputSearchActors from "./InputSearchActors";
+import { useDebounce } from "@/hooks/Search/useDebounce";
 
 type Props = {
   page: number;
 };
 
 const ActorsClient = ({ page }: Props) => {
-  const [searchQuary, setSearchQuary] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const debouncedQuery = useDebounce(searchQuery, 800);
   const router = useRouter();
   const pathname = usePathname();
   const queryClient = useQueryClient();
 
-  const { data, isLoading } = useGetAllActors(page);
+  const { data, isLoading } = useGetAllActors(page, debouncedQuery);
 
   const actors = data?.results || [];
   const totalPages = data?.total_pages || 1;
@@ -35,18 +37,19 @@ const ActorsClient = ({ page }: Props) => {
     const nextPage = page + 1;
 
     if (nextPage > 500) return;
-
-    queryClient.prefetchQuery({
-      queryKey: ["actors", nextPage],
-      queryFn: () => GetActors(nextPage),
-    });
-  }, [page, queryClient]);
+    if (!debouncedQuery) {
+      queryClient.prefetchQuery({
+        queryKey: ["actors", nextPage],
+        queryFn: () => GetActors(nextPage, ""),
+      });
+    }
+  }, [page, debouncedQuery, queryClient]);
 
   return (
     <div className="max-w-6xl mx-auto px-4">
       <div className="flex items-center gap-3 w-full my-3">
         <Back />
-        <InputSearchActors setSearchQuary={setSearchQuary} />
+        <InputSearchActors setSearchQuery={setSearchQuery} />
       </div>
 
       <div className="my-10">

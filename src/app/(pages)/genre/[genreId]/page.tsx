@@ -40,7 +40,7 @@ const genres: Record<string, number> = {
 };
 
 const GenrePage = () => {
-  const [searchQuery, setSearchQuary] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const debouncedQuery = useDebounce(searchQuery, 800);
   const params = useParams();
   const queryClient = useQueryClient();
@@ -98,7 +98,7 @@ const GenrePage = () => {
     <div className="max-w-6xl mx-auto px-4">
       <div className="flex items-center gap-3 w-full my-3">
         <Back />
-        <InputSearch setSearchQuary={setSearchQuary} genreName={genreName} />
+        <InputSearch setSearchQuery={setSearchQuery} genreName={genreName} />
       </div>
 
       <div className="flex flex-col items-center justify-center gap-4 mt-6">

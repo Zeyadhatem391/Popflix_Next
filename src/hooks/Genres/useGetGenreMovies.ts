@@ -23,19 +23,11 @@ export const GetGenreMovies = async (
 
   let url = "";
 
-  /* ----------------------------- */
-  /* search endpoint */
-  /* ----------------------------- */
-
   if (debouncedQuery) {
     params.set("query", debouncedQuery);
 
     url = `${process.env.NEXT_PUBLIC_API_URL}/3/search/movie?${params.toString()}`;
   }
-
-  /* ----------------------------- */
-  /* discover endpoint */
-  /* ----------------------------- */
 
   else {
 
