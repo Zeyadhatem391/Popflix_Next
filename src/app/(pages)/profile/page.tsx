@@ -23,8 +23,8 @@ export default function ProfilePage() {
         <Image
           src={DefaultImage}
           alt="User"
-          width={40}
-          height={40}
+          width={160}
+          height={160}
           className="rounded-full border border-[#333]"
         />
       </div>
