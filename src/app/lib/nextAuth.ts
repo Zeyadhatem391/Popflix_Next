@@ -21,10 +21,9 @@ export const authOptions: AuthOptions = {
                 login: { label: "Login", type: "text" },
                 password: { label: "Password", type: "password" },
             },
-
             async authorize(credentials) {
                 const response = await fetch(
-                    "https://api.themoviedb.org/api/auth/login",
+                    `${process.env.NEXT_PUBLIC_API_URL_SING}/api/auth/login`,
                     {
                         method: "POST",
                         headers: {
@@ -38,16 +37,7 @@ export const authOptions: AuthOptions = {
                     }
                 );
 
-                const text = await response.text();
-                console.log("API RESPONSE:", text);
-
-                let result;
-
-                try {
-                    result = JSON.parse(text);
-                } catch (error) {
-                    throw new Error("Server did not return JSON");
-                }
+                const result = await response.json();
 
                 if (!response.ok || !result.success) {
                     throw new Error(result?.message || "Invalid credentials");
@@ -57,11 +47,11 @@ export const authOptions: AuthOptions = {
                     id: result.data.user.id.toString(),
                     name: result.data.user.username,
                     email: result.data.user.email,
+                    phone: result.data.user.phone,
                     accessToken: result.data.token,
                 };
             },
-        })
-
+        }),
     ],
 
     session: {
@@ -73,12 +63,14 @@ export const authOptions: AuthOptions = {
         async jwt({ token, user }) {
             if (user) {
                 token.accessToken = (user as any).accessToken;
+                token.phone = (user as any).phone;
             }
             return token;
         },
 
         async session({ session, token }) {
             (session as any).accessToken = token.accessToken as string;
+            (session as any).phone = token.phone as string;
             return session;
         },
     },

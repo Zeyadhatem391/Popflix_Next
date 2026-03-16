@@ -1,32 +1,42 @@
 "use client";
 
-import GoogleSignInButton from "@/features/auth/components/GoogleSignInButton";
-import { LoginSchema } from "@/lib/schemas/validationSchmas";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "@/lib/schemas/validationSchmas";
+import { signIn } from "next-auth/react";
+import { toast } from "sonner";
+
+import GoogleSignInButton from "@/features/auth/components/GoogleSignInButton";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+type LoginData = {
+  login: string;
+  password: string;
+};
 
 export default function Login() {
   const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState("");
 
-  type FormValues = z.infer<typeof LoginSchema>;
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(LoginSchema),
-    mode: "onBlur",
+  const form = useForm<LoginData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      login: "",
+      password: "",
+    },
   });
 
-  const onSubmit = async (data: FormValues) => {
-    setErrorMessage("");
-
+  const onSubmit = async (data: LoginData) => {
     const result = await signIn("credentials", {
       login: data.login,
       password: data.password,
@@ -34,13 +44,12 @@ export default function Login() {
     });
 
     if (result?.ok) {
+      toast.success("Login successful");
       router.push("/");
     } else {
-      setErrorMessage(result?.error || "Login failed");
+      toast.error(result?.error || "Invalid email or password");
     }
   };
-
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#111] p-4">
@@ -49,46 +58,64 @@ export default function Login() {
           Login
         </h2>
 
-        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <input
-              placeholder="Email"
-              className="input"
-              {...register("login")}
+        <Form {...form}>
+          <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
+            {/* Email */}
+            <FormField
+              control={form.control}
+              name="login"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      placeholder="Email"
+                      className="input text-lg h-11 border-2 border-gray-200 rounded-lg placeholder:text-[16px]"
+                      {...field}
+                    />
+                  </FormControl>
+
+                  <FormMessage className="text-red-500 text-sm" />
+                </FormItem>
+              )}
             />
-            {errors.login && (
-              <p className="text-red-500 text-sm">{errors.login.message}</p>
-            )}
-          </div>
 
-          <div>
-            <input
-              type="password"
-              placeholder="Password"
-              className="input"
-              {...register("password")}
+            {/* Password */}
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      className="input text-lg h-11 border-2 border-gray-200 rounded-lg placeholder:text-[16px]"
+                      {...field}
+                    />
+                  </FormControl>
+
+                  <FormMessage className="text-red-500 text-sm" />
+                </FormItem>
+              )}
             />
-            {errors.password && (
-              <p className="text-red-500 text-sm">{errors.password.message}</p>
-            )}
-          </div>
 
-          {errorMessage && (
-            <p className="text-red-500 text-sm">{errorMessage}</p>
-          )}
+            {/* Login Button */}
+            <Button
+              type="submit"
+              disabled={form.formState.isSubmitting}
+              className="w-full bg-red-600 hover:bg-red-700 text-lg text-white font-semibold py-2 h-10 rounded-md transition"
+            >
+              {form.formState.isSubmitting ? "Logging in..." : "Login"}
+            </Button>
+          </form>
+        </Form>
 
-          <button
-            type="submit"
-            className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 rounded-md transition"
-          >
-            Login
-          </button>
-        </form>
-
-        <div className="mt-4">
+        {/* Social Login */}
+        <div className="mt-2 flex flex-col gap-2">
           <GoogleSignInButton />
         </div>
 
+        {/* Register */}
         <p className="text-center text-gray-400 mt-4">
           Don't have an account?{" "}
           <a href="/register" className="text-red-600 underline">
