@@ -73,7 +73,7 @@ const MovieDetails = () => {
       <div className="flex items-center gap-5 mb-4">
         <span className="text-lg">⭐ {data.vote_average.toFixed(1)}</span>
 
-        <FavoriteButton />
+        <FavoriteButton idMovie={data.id}/>
       </div>
 
       {/* Overview */}
