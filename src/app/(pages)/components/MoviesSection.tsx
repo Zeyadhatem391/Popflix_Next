@@ -1,4 +1,5 @@
 import DefaultImage from "@/assets/images/default.png";
+import TitleWithViewMore from "@/components/common/TitleWithViewMore";
 import { Movie } from "@/lib/types/Movie";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,9 +35,11 @@ const MoviesSection = async ({ title, categories }: MoviesSectionPropes) => {
   return (
     <section className="my-10 mx-7">
       {/* Title */}
-      <div className="flex items-center justify-between mb-6">
+      {/* <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl md:text-2xl font-semibold ml-0 lg:ml-10">{title}</h2>
-      </div>
+      </div> */}
+
+      <TitleWithViewMore genreId={1} title={title} Url="actors" ViewMore={false}/>
 
       {/* Movies Row */}
       <div className="flex lg:justify-center gap-5 overflow-x-auto no-scrollbar pb-2">

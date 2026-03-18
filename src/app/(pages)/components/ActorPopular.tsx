@@ -5,6 +5,7 @@ import DefaultImage from "@/assets/images/default.png";
 import usePopularActors from "@/hooks/Actors/usePopularActors";
 import ActorPopularSkeleton from "@/components/skeletons/ActorPopularSkeleton";
 import Link from "next/link";
+import TitleWithViewMore from "@/components/common/TitleWithViewMore";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/w300";
 
@@ -17,18 +18,8 @@ const ActorPopular = () => {
 
   return (
     <section className="my-10 mx-7">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl md:text-2xl font-semibold  ml-0 lg:ml-10">
-          The Most Famous Actors
-        </h2>
 
-        <Link
-          href="actors"
-          className="border border-white px-3 py-1.5 rounded-md text-sm hover:bg-white hover:text-black transition"
-        >
-          View More
-        </Link>
-      </div>
+      <TitleWithViewMore genreId={1} title="The Most Famous Actors" Url="actors" ViewMore={true}/>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6  gap-2 justify-items-center">
         {actors?.map((actor) => {

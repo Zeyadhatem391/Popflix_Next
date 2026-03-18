@@ -1,5 +1,6 @@
 "use client";
 
+import TitleWithViewMore from "@/components/common/TitleWithViewMore";
 import CategoriesMoviesSkeleton from "@/components/skeletons/CategoriesMoviesSkeleton";
 import { useGetCategoriesMovies } from "@/hooks/Movies/useGetCategoriesMovies";
 import Image from "next/image";
@@ -15,11 +16,7 @@ const CategoriesMovies = () => {
   return (
     <section className="my-10 mx-7">
       {/* Title */}
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl md:text-2xl font-semibold lg:ml-10">
-          Categories
-        </h2>
-      </div>
+      <TitleWithViewMore genreId={1} title="Categories" Url="actors" ViewMore={false}/>
 
       {/* Scrollable container */}
       <div className="flex lg:grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-6 overflow-x-auto lg:overflow-visible no-scrollbar">
