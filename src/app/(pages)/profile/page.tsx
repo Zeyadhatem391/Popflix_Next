@@ -11,8 +11,8 @@ export default function ProfilePage() {
     email: "zeyadhatem151177@example.com",
     phone: "+20 100 000 0000",
     avatar: DefaultImage,
-    favorites: 12,
-    memberSince: "2025",
+    favorites: 0,
+    memberSince: "2026",
   };
 
   const { data: session, status } = useSession();
@@ -94,19 +94,11 @@ export default function ProfilePage() {
             </button>
           </Link>
 
-          <button className="w-full bg-[#1a1a1a] hover:bg-[#242424] transition px-4 py-2 text-sm rounded-lg border border-[#262626] cursor-pointer">
-            Change Password
-          </button>
-
           <button
             onClick={() => signOut({ callbackUrl: "/login" })}
-            className="w-full bg-[#1a1a1a] hover:bg-[#242424] transition px-4 py-2 text-sm rounded-lg border border-[#262626] cursor-pointer"
+            className="w-full bg-red-700 hover:bg-red-600 transition px-4 py-2 text-sm rounded-lg cursor-pointer"
           >
             Logout
-          </button>
-
-          <button className="w-full bg-red-700 hover:bg-red-600 transition px-4 py-2 text-sm rounded-lg cursor-pointer">
-            Delete Account
           </button>
         </div>
       </div>

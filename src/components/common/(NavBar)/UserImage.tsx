@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 
 import DefualtImage from "@/assets/images/default.png";
 import SignOutButton from "@/features/auth/components/SignOutButton";
-import AddProfile from "./AddProfile";
 const UserImage = () => {
   const [open, setOpen] = useState(false);
 
@@ -71,8 +70,6 @@ const UserImage = () => {
               </div>
 
               <div className="flex flex-col text-left text-white">
-                <AddProfile />
-
                 <Link
                   href="/profile"
                   onClick={() => setOpen(false)}
