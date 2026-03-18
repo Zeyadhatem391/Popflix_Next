@@ -5,8 +5,9 @@ import { Typewriter as SimpleTypewriter } from "react-simple-typewriter";
 import Head from "next/head";
 
 const backgroundImages = [
+  "https://image.tmdb.org/t/p/w1280/z3xHxsW817eU5FtQzjWDYhVSQVi.jpg",
   "https://image.tmdb.org/t/p/w1280/6ELJEzQJ3Y45HczvreC3dg0GV5R.jpg",
-  "https://image.tmdb.org/t/p/w1280/xRI636TOdS1K1GBqIBRSmfZ1T5x.jpg",
+  "https://image.tmdb.org/t/p/w1280/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg",
   "https://image.tmdb.org/t/p/w1280/dqK9Hag1054tghRQSqLSfrkvQnA.jpg",
   "https://image.tmdb.org/t/p/w1280/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg",
   "https://image.tmdb.org/t/p/w1280/saHP97rTPS5eLmrLQEcANmKrsFl.jpg",

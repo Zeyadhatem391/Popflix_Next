@@ -35,10 +35,6 @@ const MoviesSection = async ({ title, categories }: MoviesSectionPropes) => {
   return (
     <section className="my-10 mx-7">
       {/* Title */}
-      {/* <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl md:text-2xl font-semibold ml-0 lg:ml-10">{title}</h2>
-      </div> */}
-
       <TitleWithViewMore genreId={1} title={title} Url="actors" ViewMore={false}/>
 
       {/* Movies Row */}

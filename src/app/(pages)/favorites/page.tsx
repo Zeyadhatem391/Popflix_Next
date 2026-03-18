@@ -7,7 +7,7 @@ const FavoritesPage = async () => {
   const session = await getServerSession(authOptions);
 
   return (
-    <section className="w-full min-h-screen flex items-center justify-center px-4">
+    <section className="w-full min-h-screen flex justify-center px-4 py-5 bg-[#111]">
       {session ? (
         <FavoritesClient />
       ) : (

@@ -48,7 +48,7 @@ const FavoritesClient = () => {
             return (
               <div
                 key={movie.id}
-                className="relative min-w-[160px] md:min-w-[230px] h-[260px] md:h-[300px]
+                className="relative  min-w-[160px] md:min-w-[230px] h-[260px] md:h-[300px]
                 rounded-xl overflow-hidden group transition-transform duration-300 hover:scale-105"
               >
                 <Link
