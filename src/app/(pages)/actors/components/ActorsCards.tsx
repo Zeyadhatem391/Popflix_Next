@@ -8,15 +8,11 @@ import { Actor } from "@/lib/types/Actor";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/w200";
 
-
-
 type ActorsCardsProps = {
   actors: Actor[];
   isLoading: boolean;
 };
 const ActorsCards = ({ actors, isLoading }: ActorsCardsProps) => {
-
-
   if (isLoading) return <ActorCardSkeleton count={10} />;
 
   return (

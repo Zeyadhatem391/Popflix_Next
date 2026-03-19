@@ -36,14 +36,15 @@ const TitleWithViewMore = ({
   ViewMore,
 }: TitleWithViewMorePtops) => {
   const GenreUrl = genres[genreId];
+
   return (
     <div className="flex items-center justify-between mb-6">
       <h2 className="text-xl md:text-2xl font-semibold ml-0 lg:ml-8 pl-2 border-l-6 border-red-800 ">
         {title}
       </h2>
-      {ViewMore === true && (
+      {ViewMore && (
         <Link
-          href={`/genre/${GenreUrl}` || `/${Url}`}
+          href={GenreUrl ? `/genre/${GenreUrl}` : `/${Url}`}
           className="border border-white px-3 py-1.5 rounded-md text-sm hover:bg-white hover:text-black transition"
         >
           View More
