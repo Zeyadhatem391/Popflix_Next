@@ -9,10 +9,24 @@ import HeroMoviesSkeleton from "@/components/skeletons/HeroMoviesSkeleton";
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
 const HeroMovies = () => {
-  const { data: movies, isLoading, isError } = useGetHeroMovies();
+  const { data: movies, isLoading, isError, refetch } = useGetHeroMovies();
 
   if (isLoading) return <HeroMoviesSkeleton />;
-  if (isError || !movies) return <p>error</p>;
+  if (isError || !movies)
+    return (
+      <div className="flex flex-col items-center justify-center py-20 gap-4">
+        <p className="text-lg text-red-500 font-medium">
+          Something went wrong while fetching movies 😢
+        </p>
+
+        <button
+          onClick={() => refetch()}
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-md transition"
+        >
+          Try Again
+        </button>
+      </div>
+    );
 
   const rows: { big: Movie; smalls: Movie[] }[] = [];
 

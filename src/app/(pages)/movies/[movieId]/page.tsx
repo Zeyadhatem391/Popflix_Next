@@ -16,11 +16,26 @@ const MovieDetails = () => {
 
   const movieId = params.movieId as string;
 
-  const { data, isLoading } = useGetDetailsMovies(movieId);
+  const { data, isLoading, isError, refetch } = useGetDetailsMovies(movieId);
 
   if (isLoading || !data) {
     return <MovieDetailsSkeleton />;
   }
+  if (isError)
+    return (
+      <div className="flex flex-col items-center justify-center py-20 gap-4">
+        <p className="text-lg text-red-500 font-medium">
+          Something went wrong while fetching movies 😢
+        </p>
+
+        <button
+          onClick={() => refetch()}
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-md transition"
+        >
+          Try Again
+        </button>
+      </div>
+    );
 
   /* ========= Images ========= */
 
@@ -73,7 +88,7 @@ const MovieDetails = () => {
       <div className="flex items-center gap-5 mb-4">
         <span className="text-lg">⭐ {data.vote_average.toFixed(1)}</span>
 
-        <FavoriteButton idMovie={data.id}/>
+        <FavoriteButton idMovie={data.id} />
       </div>
 
       {/* Overview */}

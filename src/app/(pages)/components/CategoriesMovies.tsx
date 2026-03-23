@@ -8,15 +8,39 @@ import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 
 const CategoriesMovies = () => {
-  const { data: categories, isLoading, isError } = useGetCategoriesMovies();
+  const {
+    data: categories,
+    isLoading,
+    isError,
+    refetch,
+  } = useGetCategoriesMovies();
 
   if (isLoading) return <CategoriesMoviesSkeleton />;
-  if (isError || !categories) return <p>error</p>;
+  if (isError || !categories)
+    return (
+      <div className="flex flex-col items-center justify-center py-20 gap-4">
+        <p className="text-lg text-red-500 font-medium">
+          Something went wrong while fetching movies 😢
+        </p>
+
+        <button
+          onClick={() => refetch()}
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-md transition"
+        >
+          Try Again
+        </button>
+      </div>
+    );
 
   return (
     <section className="my-10 mx-7">
       {/* Title */}
-      <TitleWithViewMore genreId={1} title="Categories" Url="actors" ViewMore={false}/>
+      <TitleWithViewMore
+        genreId={1}
+        title="Categories"
+        Url="actors"
+        ViewMore={false}
+      />
 
       {/* Scrollable container */}
       <div className="flex lg:grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-6 overflow-x-auto lg:overflow-visible no-scrollbar">

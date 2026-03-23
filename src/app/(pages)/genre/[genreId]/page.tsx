@@ -59,7 +59,7 @@ const GenrePage = () => {
     updateFilter,
   } = useGenreFilters();
 
-  const { data, isLoading } = useGetGenreMovies(
+  const { data, isLoading, isError, refetch } = useGetGenreMovies(
     id,
     page,
     rating,
@@ -116,7 +116,12 @@ const GenrePage = () => {
       </div>
 
       <div className="my-10">
-        <GenreCards movies={movies} isLoading={isLoading} />
+        <GenreCards
+          movies={movies}
+          isLoading={isLoading}
+          isError={isError}
+          refetch={refetch}
+        />
       </div>
 
       <div className="flex items-center justify-center gap-4 mt-6">

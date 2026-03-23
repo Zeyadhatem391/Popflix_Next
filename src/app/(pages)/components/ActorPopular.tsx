@@ -10,16 +10,35 @@ import TitleWithViewMore from "@/components/common/TitleWithViewMore";
 const IMAGE_BASE = "https://image.tmdb.org/t/p/w300";
 
 const ActorPopular = () => {
-  const { data, isLoading } = usePopularActors();
+  const { data, isLoading, isError, refetch } = usePopularActors();
 
   if (isLoading) return <ActorPopularSkeleton />;
+  if (isError)
+    return (
+      <div className="flex flex-col items-center justify-center py-20 gap-4">
+        <p className="text-lg text-red-500 font-medium">
+          Something went wrong while fetching movies 😢
+        </p>
+
+        <button
+          onClick={() => refetch()}
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-md transition"
+        >
+          Try Again
+        </button>
+      </div>
+    );
 
   const actors = data?.results.slice(0, 6);
 
   return (
     <section className="my-10 mx-7">
-
-      <TitleWithViewMore genreId={1} title="The Most Famous Actors" Url="actors" ViewMore={true}/>
+      <TitleWithViewMore
+        genreId={1}
+        title="The Most Famous Actors"
+        Url="actors"
+        ViewMore={true}
+      />
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6  gap-2 justify-items-center">
         {actors?.map((actor) => {
