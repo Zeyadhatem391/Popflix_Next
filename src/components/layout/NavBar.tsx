@@ -52,7 +52,7 @@ const Navbar = () => {
 
         {/* Favorites */}
         <Link href="/favorites">
-          <FaRegHeart className="w-6 h-6 hover:text-red-500 transition" />
+          <FaRegHeart className="w-7 h-7 hover:text-red-500 transition" />
         </Link>
 
         <UserImage />

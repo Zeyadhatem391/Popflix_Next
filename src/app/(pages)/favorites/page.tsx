@@ -11,7 +11,7 @@ const FavoritesPage = async () => {
       {session ? (
         <FavoritesClient />
       ) : (
-        <div className="flex flex-col items-center text-center space-y-6 max-w-md">
+        <div className="flex flex-col items-center text-center space-y-6 max-w-md justify-center">
           <h1 className="text-3xl md:text-4xl font-bold text-white">
             Welcome to Popfliex
           </h1>

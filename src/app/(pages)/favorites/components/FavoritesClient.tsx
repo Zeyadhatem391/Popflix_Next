@@ -26,7 +26,7 @@ const FavoritesClient = () => {
   return (
     <>
       {isEmpty ? (
-        <div className="flex flex-col items-center text-center space-y-6 max-w-md mx-auto">
+        <div className="flex flex-col items-center text-center justify-center space-y-6 max-w-md mx-auto">
           <h1 className="text-3xl font-bold text-white">
             You haven't added anything to your Favorites yet
           </h1>
