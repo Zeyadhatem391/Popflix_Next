@@ -52,13 +52,12 @@ const UserImage = () => {
     <>
       {status === "authenticated" ? (
         <div className="relative" ref={dropdownRef}>
-          <button onClick={() => setOpen(!open)}>
+          <button onClick={() => setOpen(!open)} className="w-8 h-8 ">
             <Image
               src={profileImage}
               alt="User"
-              width={32}
-              height={32}
-              className="rounded-full object-cover border-2 border-red-600"
+              fill
+              className="object-cover rounded-full border-2 border-red-600"
             />
           </button>
 
