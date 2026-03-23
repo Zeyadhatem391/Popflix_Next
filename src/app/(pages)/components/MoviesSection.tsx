@@ -15,7 +15,7 @@ const getMovies = async (categories: string): Promise<Movie[]> => {
   const regionQuery = categories === "upcoming" ? "&region=US" : "";
 
   const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${categories}?api_key=${process.env.NEXT_PUBLIC_API_KEY}${regionQuery}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/3/movie/${categories}?api_key=${process.env.NEXT_PUBLIC_API_KEY}${regionQuery}`,
     {
       next: { revalidate: 60 },
     },
@@ -35,7 +35,12 @@ const MoviesSection = async ({ title, categories }: MoviesSectionPropes) => {
   return (
     <section className="my-10 mx-7">
       {/* Title */}
-      <TitleWithViewMore genreId={1} title={title} Url="actors" ViewMore={false}/>
+      <TitleWithViewMore
+        genreId={1}
+        title={title}
+        Url="actors"
+        ViewMore={false}
+      />
 
       {/* Movies Row */}
       <div className="flex lg:justify-center gap-5 overflow-x-auto no-scrollbar pb-2">

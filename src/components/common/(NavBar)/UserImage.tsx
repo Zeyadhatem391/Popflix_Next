@@ -5,14 +5,22 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 
-import DefualtImage from "@/assets/images/default.png";
+import DefaultImage from "@/assets/images/default.png";
 import SignOutButton from "@/features/auth/components/SignOutButton";
+import useGetImageProfile from "@/hooks/Profile/useGetImageProfile";
 const UserImage = () => {
   const [open, setOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const { data: session, status } = useSession();
+
+  const { data } = useGetImageProfile(session?.accessToken);
+
+  const profileImage =
+    data?.profile_picture && data.profile_picture !== ""
+      ? data.profile_picture
+      : session?.user?.image || DefaultImage;
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -32,7 +40,7 @@ const UserImage = () => {
 
   if (status === "loading") {
     <Image
-      src={DefualtImage}
+      src={profileImage}
       alt="User"
       width={32}
       height={32}
@@ -46,7 +54,7 @@ const UserImage = () => {
         <div className="relative" ref={dropdownRef}>
           <button onClick={() => setOpen(!open)}>
             <Image
-              src={session?.user?.image || DefualtImage}
+              src={profileImage}
               alt="User"
               width={32}
               height={32}
@@ -58,7 +66,7 @@ const UserImage = () => {
             <div className="absolute right-0 top-10 mt-3 w-56 bg-black rounded-xl shadow-xl border border-gray-800 animate-fadeIn z-50">
               <div className="p-4 text-center border-b border-gray-700">
                 <Image
-                  src={session?.user?.image || DefualtImage}
+                  src={profileImage}
                   alt="User"
                   width={60}
                   height={60}
