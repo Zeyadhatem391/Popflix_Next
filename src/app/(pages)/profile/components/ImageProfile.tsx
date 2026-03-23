@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Session } from "next-auth";
 import DefaultImage from "@/assets/images/default.png";
 import useGetImageProfile from "@/hooks/Profile/useGetImageProfile";
+import EditImage from "./EditImage";
 
 type ImageProfileProps = {
   session: Session | null;
@@ -27,9 +28,7 @@ const ImageProfile = ({ session }: ImageProfileProps) => {
           {session?.user?.name}
         </h1>
 
-        <button className="w-fit mt-1 px-4 py-1.5 text-sm bg-blue-600 hover:bg-blue-500 rounded-md transition cursor-pointer">
-          Edit image
-        </button>
+        <EditImage />
       </div>
     </div>
   );

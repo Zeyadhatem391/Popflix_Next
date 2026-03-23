@@ -57,7 +57,7 @@ const UserImage = () => {
               src={profileImage}
               alt="User"
               fill
-              className="object-cover rounded-full border-2 border-red-600"
+              className="object-center rounded-full border-2 border-red-600"
             />
           </button>
 
@@ -69,7 +69,7 @@ const UserImage = () => {
                   alt="User"
                   width={60}
                   height={60}
-                  className="rounded-full mx-auto mb-2 border-2 border-red-600"
+                  className="object-center rounded-full mx-auto mb-2 border-2 border-red-600"
                 />
                 <h6 className="text-white font-semibold">
                   {session?.user?.name}
