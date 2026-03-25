@@ -40,6 +40,7 @@ const MoviesSection = async ({ title, categories }: MoviesSectionPropes) => {
         title={title}
         Url="actors"
         ViewMore={false}
+         margin={true}
       />
 
       {/* Movies Row */}

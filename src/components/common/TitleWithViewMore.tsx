@@ -5,6 +5,7 @@ type TitleWithViewMorePtops = {
   title: string;
   Url?: string;
   ViewMore?: boolean;
+  margin?: boolean;
 };
 
 const genres: Record<number, string> = {
@@ -34,12 +35,15 @@ const TitleWithViewMore = ({
   title,
   Url,
   ViewMore,
+  margin,
 }: TitleWithViewMorePtops) => {
   const GenreUrl = genres[genreId];
 
   return (
-    <div className="flex items-center justify-between mb-6">
-      <h2 className="text-xl md:text-2xl font-semibold ml-0 lg:ml-8 pl-2 border-l-6 border-red-800 ">
+    <div
+      className={`flex items-center justify-between mb-6 ${margin ? "mx-0 lg:mx-8" : ""}`}
+    >
+      <h2 className="text-xl md:text-2xl font-semibold  pl-2 border-l-6 border-red-800 ">
         {title}
       </h2>
       {ViewMore && (

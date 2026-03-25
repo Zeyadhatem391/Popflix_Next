@@ -17,7 +17,7 @@ const ActorPopular = () => {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
         <p className="text-lg text-red-500 font-medium">
-          Something went wrong while fetching movies 😢
+          Something went wrong while fetching Actor 😢
         </p>
 
         <button
@@ -29,18 +29,19 @@ const ActorPopular = () => {
       </div>
     );
 
-  const actors = data?.results.slice(0, 6);
+  const actors = data?.results.slice(0, 5);
 
   return (
     <section className="my-10 mx-7">
       <TitleWithViewMore
         genreId={1}
-        title="The Most Famous Actors"
+        title="Actors"
         Url="actors"
         ViewMore={true}
+         margin={true}
       />
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6  gap-2 justify-items-center">
+      <div className=" gap-2 justify-items-center flex lg:grid lg:grid-cols-5 overflow-x-auto no-scrollbar">
         {actors?.map((actor) => {
           const actorImage = actor.profile_path
             ? IMAGE_BASE + actor.profile_path

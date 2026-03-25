@@ -40,6 +40,7 @@ const CategoriesMovies = () => {
         title="Categories"
         Url="actors"
         ViewMore={false}
+        margin={true}
       />
 
       {/* Scrollable container */}
