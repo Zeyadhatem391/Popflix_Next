@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import ActorsCards from "../components/ActorsCards";
 import useGetAllActors, { GetActors } from "@/hooks/Actors/useGetAllActors";
 
-import { PaginationDemo } from "../../components/PaginationGenre";
+import { PaginationDemo } from "../../../components/PaginationGenre";
 import InputSearchActors from "./InputSearchActors";
 import { useDebounce } from "@/hooks/Search/useDebounce";
 

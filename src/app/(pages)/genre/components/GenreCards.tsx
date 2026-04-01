@@ -13,6 +13,7 @@ type GenreCardsProps = {
   isLoading: boolean;
   isError: boolean;
   refetch: () => void;
+  error: Error | null;
 };
 
 const GenreCards = ({
@@ -20,6 +21,7 @@ const GenreCards = ({
   isLoading,
   isError,
   refetch,
+  error,
 }: GenreCardsProps) => {
   if (isLoading) {
     return <GenreCardsSkeleton />;
@@ -44,6 +46,7 @@ const GenreCards = ({
   return (
     <section>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 pb-2">
+        {error && <p className="text-red-500 mt-4">{error.message}</p>}
         {movies.map((movie) => {
           const movieImage = movie.poster_path
             ? IMAGE_BASE + movie.poster_path

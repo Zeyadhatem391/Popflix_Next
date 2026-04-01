@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import DefaultImage from "@/assets/images/default.png";
 import { useGetHeroMovies } from "@/hooks/Movies/useGetHeroMovies";
-import FavoriteButton from "../movies/components/FavoriteButton";
+import FavoriteButton from "../(pages)/movies/components/FavoriteButton";
 import SectionDetailsSkeleton from "@/components/skeletons/SectionDetailsSkeleton";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";

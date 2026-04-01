@@ -1,9 +1,9 @@
 import Hero from "../components/Hero";
-import ActorPopular from "./components/ActorPopular";
-import CategoriesMovies from "./components/CategoriesMovies";
-import MoviesSection from "./components/MoviesSection";
-import SectionCompany from "./components/SectionCompany";
-import SectionDetailsMovies from "./components/SectionDetailsMovies";
+import ActorPopular from "../components/ActorPopular";
+import SectionDetailsMovies from "../components/SectionDetailsMovies";
+import CategoriesMovies from "../components/CategoriesMovies";
+import SectionCompany from "../components/SectionCompany";
+import MoviesSection from "../components/MoviesSection";
 
 export default function Home() {
   return (

@@ -18,7 +18,7 @@ const SearchNavBar = ({ open, setOpen }: SearchNavBarProps) => {
   const [query, setQuery] = useState("");
   const debouncedQuery = useDebounce(query, 800);
 
-  const { data: movies, isLoading } = useSearchMovies(debouncedQuery);
+  const { data: movies, isLoading, error } = useSearchMovies(debouncedQuery);
 
   return (
     <>
@@ -52,6 +52,7 @@ const SearchNavBar = ({ open, setOpen }: SearchNavBarProps) => {
 
           {/* Results */}
           <div className="max-w-5xl mx-auto px-6 py-10 space-y-4">
+            {error && <p className="text-red-500 mt-4">{error.message}</p>}
             {isLoading && (
               <p className="text-gray-400 text-center">Loading...</p>
             )}

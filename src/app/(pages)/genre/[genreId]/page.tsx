@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import useGetGenreMovies, {
   GetGenreMovies,
 } from "@/hooks/Genres/useGetGenreMovies";
-import { PaginationDemo } from "../../components/PaginationGenre";
+import { PaginationDemo } from "../../../components/PaginationGenre";
 import { useGenreFilters } from "@/hooks/Genres/useGenreFilters";
 import { useDebounce } from "@/hooks/Search/useDebounce";
 
@@ -59,7 +59,7 @@ const GenrePage = () => {
     updateFilter,
   } = useGenreFilters();
 
-  const { data, isLoading, isError, refetch } = useGetGenreMovies(
+  const { data, isLoading, isError, refetch, error } = useGetGenreMovies(
     id,
     page,
     rating,
@@ -121,6 +121,7 @@ const GenrePage = () => {
           isLoading={isLoading}
           isError={isError}
           refetch={refetch}
+          error={error}
         />
       </div>
 

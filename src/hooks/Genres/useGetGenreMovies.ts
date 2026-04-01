@@ -1,4 +1,5 @@
 import { Movie } from "@/lib/types/Movie";
+import { containsBlockedWord } from "@/lib/utils/blockedKeywords";
 import { useQuery } from "@tanstack/react-query";
 
 type MoviesResponse = {
@@ -25,8 +26,10 @@ export const GetGenreMovies = async (
 
   if (debouncedQuery) {
     params.set("query", debouncedQuery);
-
-    url = `${process.env.NEXT_PUBLIC_API_URL}/3/search/movie?${params.toString()}`;
+    if (debouncedQuery && containsBlockedWord(debouncedQuery)) {
+      throw new Error("This search term is not allowed.");
+    }
+    url = `${process.env.NEXT_PUBLIC_API_URL}/3/search/movie?${params.toString()}&include_adult=false`;
   }
 
   else {
@@ -49,7 +52,7 @@ export const GetGenreMovies = async (
       params.set("sort_by", sortBy);
     }
 
-    url = `${process.env.NEXT_PUBLIC_API_URL}/3/discover/movie?${params.toString()}`;
+    url = `${process.env.NEXT_PUBLIC_API_URL}/3/discover/movie?${params.toString()}&include_adult=false`;
   }
 
   const res = await fetch(url);
