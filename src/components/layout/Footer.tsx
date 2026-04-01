@@ -6,37 +6,84 @@ export default async function Footer() {
   const session = await getServerSession(authOptions);
 
   return (
-    <footer className="bg-black text-white px-5 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 border-t border-[#333] mt-5">
-      {/* Navigation */}
-      <div className="flex gap-3 flex-wrap">
-        <Link href="/about">
-          <button className="bg-transparent border border-[#444] px-3 py-2 rounded-lg hover:bg-[#222] transition duration-300 cursor-pointer">
-            About
-          </button>
-        </Link>
+    <footer className="bg-black text-white border-t border-[#333] mt-10">
+      <div className="max-w-screen-xl mx-auto px-5 py-10">
 
-        <Link href="/contact">
-          <button className="bg-transparent border border-[#444] px-3 py-2 rounded-lg hover:bg-[#222] transition duration-300 cursor-pointer">
-            Contact
-          </button>
-        </Link>
+        {/* Top Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
-        {!session && (
-          <Link href="/login">
-            <button className="bg-transparent border border-[#444] px-3 py-2 rounded-lg hover:bg-[#222] transition duration-300 cursor-pointer">
-              Login
-            </button>
-          </Link>
-        )}
-      </div>
+          {/* Logo / Brand */}
+          <div>
+            <h2 className="text-2xl font-bold mb-4">🎬 PopFlix</h2>
+            <p className="text-gray-400 text-sm">
+              Discover the latest movies, actors and trending categories.
+            </p>
+          </div>
 
-      {/* Action Button */}
-      <div>
-        <Link href="/movies">
-          <button className="bg-[#444] px-4 py-2 rounded-lg font-bold hover:bg-[#666] transition duration-300 cursor-pointer">
-            🎬 Movies
-          </button>
-        </Link>
+          {/* Navigation */}
+          <div>
+            <h3 className="text-sm font-semibold uppercase mb-4 text-gray-300">
+              Navigation
+            </h3>
+            <ul className=" text-gray-400 flex gap-4 flex-row md:flex-col">
+              <li>
+                <Link href="/about" className="hover:text-white transition">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-white transition">
+                  Contact
+                </Link>
+              </li>
+              {!session && (
+                <li>
+                  <Link href="/login" className="hover:text-white transition">
+                    Login
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </div>
+
+          {/* Movies */}
+          <div>
+            <h3 className="text-sm font-semibold uppercase mb-4 text-gray-300">
+              Browse
+            </h3>
+            <ul className="text-gray-400 flex gap-4 flex-row md:flex-col">
+              <li>
+                <Link href="/movies" className="hover:text-white transition">
+                  Movies
+                </Link>
+              </li>
+              <li>
+                <Link href="/actors" className="hover:text-white transition">
+                  Actors
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Social */}
+          <div>
+            <h3 className="text-sm font-semibold uppercase mb-4 text-gray-300">
+              Follow Us
+            </h3>
+            <div className="flex gap-4 text-gray-400 flex-row md:flex-col">
+              <a href="#" className="hover:text-white transition">Facebook</a>
+              <a href="#" className="hover:text-white transition">Twitter</a>
+              <a href="#" className="hover:text-white transition">GitHub</a>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-[#333] mt-10 pt-6 text-center text-gray-500 text-sm">
+          © {new Date().getFullYear()} PopFlix. All Rights Reserved.
+        </div>
+
       </div>
     </footer>
   );
