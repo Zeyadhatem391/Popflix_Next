@@ -71,9 +71,9 @@ export default async function Footer() {
               Follow Us
             </h3>
             <div className="flex gap-4 text-gray-400 flex-row md:flex-col">
-              <a href="#" className="hover:text-white transition">Facebook</a>
-              <a href="#" className="hover:text-white transition">Twitter</a>
-              <a href="#" className="hover:text-white transition">GitHub</a>
+              <a href="https://www.facebook.com/share/19wmyZPHU6/?mibextid=wwXIfrhttps://www.facebook.com/share/19wmyZPHU6/?mibextid=wwXIfr" target="_blank" className="hover:text-white transition">Facebook</a>
+              <a href="https://wa.me/+201112079745" className="hover:text-white transition" target="_blank">whatsapp</a>
+              <a href="https://github.com/Zeyadhatem391" className="hover:text-white transition" target="_blank">GitHub</a>
             </div>
           </div>
 
