@@ -24,8 +24,8 @@ const MenuPage = () => {
   return (
     <DropdownMenu >
       <DropdownMenuTrigger asChild id="menu-trigger-1">
-        <Button className="p-2 bg-stone-800 text-white rounded-md hover:bg-stone-700">
-          <IoMenuSharp size={24} />
+        <Button className="p-1 md:p-2 bg-stone-800 text-white rounded-md hover:bg-stone-700">
+          <IoMenuSharp size={20} />
         </Button>
       </DropdownMenuTrigger>
 

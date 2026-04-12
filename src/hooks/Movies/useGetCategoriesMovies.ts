@@ -16,7 +16,7 @@ export type Category = {
 
 const fetchCategoriesMovies = async (): Promise<Category[]> => {
     const res = await fetch(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}&include_adult=false`
     );
 
     if (!res.ok) throw new Error("Failed to fetch categories");
@@ -26,7 +26,7 @@ const fetchCategoriesMovies = async (): Promise<Category[]> => {
     const categoriesWithImages: Category[] = await Promise.all(
         data.genres.slice(0, 12).map(async (genre: Genre) => {
             const movieRes = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&with_genres=${genre.id}`
+                `${process.env.NEXT_PUBLIC_API_URL}/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&with_genres=${genre.id}&include_adult=false`
             );
 
             const movieData = await movieRes.json();

@@ -52,7 +52,7 @@ const UserImage = () => {
     <>
       {status === "authenticated" ? (
         <div className="relative" ref={dropdownRef}>
-          <button onClick={() => setOpen(!open)} className="w-8 h-8 ">
+          <button onClick={() => setOpen(!open)} className="w-6 h-6 md:w-8 md:h-8">
             <Image
               src={profileImage}
               alt="User"

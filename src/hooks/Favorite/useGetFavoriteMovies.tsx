@@ -6,7 +6,7 @@ const GetMovies = async (ids: number[]): Promise<Movie[]> => {
 
   const requests = ids.map((id) =>
     fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&include_adult=false`,
     ).then((res) => {
       if (!res.ok) throw new Error("Failed to fetch movie");
       return res.json();

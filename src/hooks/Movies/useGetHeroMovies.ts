@@ -5,7 +5,7 @@ import { Movie } from "@/lib/types/Movie";
 const fetchHeroMovies = async (): Promise<Movie[]> => {
     const randomPage = Math.floor(Math.random() * 5 + 1);
     const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${randomPage}`
+        `${process.env.NEXT_PUBLIC_API_URL}/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${randomPage}&include_adult=false`
     );
 
     if (!res.ok) throw new Error("Failed to fetch movies");

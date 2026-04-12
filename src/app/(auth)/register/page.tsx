@@ -73,7 +73,7 @@ export default function RegisterForm() {
     if (result.success) {
       toast.success(result.message);
       setTimeout(() => {
-        router.push("/");
+        router.push("/login");
       }, 2500);
     } else {
       toast.error(result.message);
