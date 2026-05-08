@@ -1,5 +1,5 @@
 import Image, { StaticImageData } from "next/image";
-import { cn } from "@/lib/cn";
+import { cn } from "@/lib/utils";
 
 interface Props {
   src: string | StaticImageData;
