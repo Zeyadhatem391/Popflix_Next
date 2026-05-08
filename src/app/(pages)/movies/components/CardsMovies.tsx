@@ -1,10 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import DefaultImage from "@/assets/images/default.png";
 import { useEffect, useRef } from "react";
 import useMovies from "@/hooks/Movies/useGetMovies";
+import MoviesCard from "@/components/molecules/MoviesCard";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
@@ -58,7 +57,6 @@ const CardsMovies = ({ genreId }: CardsMoviesProps) => {
           gap-2.5
           overflow-x-auto no-scrollbar
           w-full
-         
         "
       >
         {loopMovies.map((movie, index) => {
@@ -69,44 +67,14 @@ const CardsMovies = ({ genreId }: CardsMoviesProps) => {
               : DefaultImage.src;
 
           return (
-            <div
+            <MoviesCard
               key={`${movie.id}-${index}`}
-              className="
-                relative
-                min-w-[49%]
-                sm:min-w-[45%]
-                md:min-w-50
-                h-68
-                rounded-xl
-                overflow-hidden group
-                shrink-0
-                transition-transform
-                md:hover:scale-105
-              "
-            >
-              <Link
-                href={`/movies/${movie.id}`}
-                className="relative block w-full h-full"
-              >
-                <Image
-                  src={image}
-                  alt={movie.title}
-                  fill
-                  sizes="
-                    (max-width:640px) 50vw,
-                    (max-width:768px) 45vw,
-                    200px
-                  "
-                  className="object-cover"
-                />
-
-                <div className="absolute bottom-0 w-full bg-linear-to-t from-black/80 to-transparent p-2 text-center">
-                  <h5 className="text-sm md:text-lg font-medium">
-                    {movie.title}
-                  </h5>
-                </div>
-              </Link>
-            </div>
+              id={movie.id}
+              title={movie.title}
+              vote_average={movie.vote_average}
+              hiddinName={true}
+              image={image}
+            />
           );
         })}
       </div>

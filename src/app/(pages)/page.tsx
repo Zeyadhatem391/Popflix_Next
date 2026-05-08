@@ -12,7 +12,11 @@ export default function Home() {
       <SectionCompany />
       <SectionDetailsMovies />
       <MoviesSection categories="now_playing" title="Trending Now" />
-      <MoviesSection categories="upcoming" title="Upcoming" />
+      <MoviesSection
+        categories="upcoming"
+        title="Upcoming"
+        hiddinVote={false}
+      />
       <ActorPopular />
       <CategoriesMovies />
     </>

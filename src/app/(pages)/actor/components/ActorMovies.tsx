@@ -1,9 +1,9 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
+
 import DefaultImage from "@/assets/images/default.png";
 import useGetActorMovies from "@/hooks/Actors/useGetActorMovies";
 import ActorMoviesSkeleton from "@/components/skeletons/ActorMoviesSkeleton";
+import MoviesCard from "@/components/molecules/MoviesCard";
 
 const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
@@ -36,27 +36,13 @@ const ActorMovies = ({ moviesId }: ActorMoviesProps) => {
             : DefaultImage.src;
 
           return (
-            <Link href={`/movies/${movie.id}`} key={movie.id} className="group">
-              <div className="bg-zinc-900 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 relative">
-                {/* Image */}
-                <div className="relative w-full h-[320px]">
-                  <Image
-                    src={movieImage}
-                    alt={movie.title || "Movie Poster"}
-                    fill
-                    sizes="(max-width:768px) 50vw, 25vw"
-                    className="object-fill group-hover:scale-105 transition-transform duration-300"
-                  />
-
-                  {/* Rating */}
-                  {movie.vote_average !== undefined && (
-                    <span className="absolute top-2 left-2 bg-black bg-opacity-70 text-yellow-400 text-xs font-semibold px-2 py-1 rounded-md shadow">
-                      ⭐ {movie.vote_average.toFixed(1)}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </Link>
+            <MoviesCard
+              key={movie.id}
+              id={movie.id}
+              title={movie.title}
+              vote_average={movie.vote_average}
+              image={movieImage}
+            />
           );
         })}
       </div>

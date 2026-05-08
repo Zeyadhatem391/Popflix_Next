@@ -52,7 +52,10 @@ const UserImage = () => {
     <>
       {status === "authenticated" ? (
         <div className="relative" ref={dropdownRef}>
-          <button onClick={() => setOpen(!open)} className="w-6 h-6 md:w-8 md:h-8">
+          <button
+            onClick={() => setOpen(!open)}
+            className="w-6 h-6 md:w-8 md:h-8"
+          >
             <Image
               src={profileImage}
               alt="User"
@@ -91,7 +94,10 @@ const UserImage = () => {
           )}
         </div>
       ) : (
-        <Link href="/login" className="link_nav">
+        <Link
+          href="/login"
+          className="relative text-lg font-semibold italic cursor-pointer after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-red-500 after:scale-x-0 after:origin-left after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-red-500"
+        >
           Login
         </Link>
       )}
