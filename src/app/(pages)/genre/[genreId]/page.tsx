@@ -95,7 +95,7 @@ const GenrePage = () => {
   }, [page, id, rating, decade, language, sortBy, debouncedQuery, queryClient]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto px-4">
       <div className="flex items-center gap-3 w-full my-3">
         <Back />
         <InputSearch setSearchQuery={setSearchQuery} genreName={genreName} />
