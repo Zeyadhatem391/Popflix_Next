@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaRegHeart, FaSearch } from "react-icons/fa";
+import { Heart, Search } from "@/assets/icons/Icons";
 import SearchNavBar from "../common/(NavBar)/SearchNavBar";
 import Logo from "../common/(NavBar)/Logo";
 import UserImage from "../common/(NavBar)/UserImage";
@@ -24,7 +24,7 @@ const Navbar = () => {
         <MenuPage />
         <div onClick={() => setOpenSearch(true)}>
           <div className="relative w-[250px] md:w-[400px] rounded-2xl cursor-pointer hidden md:block">
-            <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <Input
               type="text"
               placeholder="Search movies..."
@@ -47,12 +47,12 @@ const Navbar = () => {
           className="md:hidden flex items-center justify-center"
           onClick={() => setOpenSearch(true)}
         >
-          <FaSearch className="w-4 h-4 cursor-pointer" />
+          <Search className="w-4 h-4 cursor-pointer" />
         </div>
 
         {/* Favorites */}
         <Link href="/favorites">
-          <FaRegHeart className="w-4 h-4 md:w-6 md:h-6 hover:text-red-500 transition" />
+          <Heart className="w-4 h-4 md:w-6 md:h-6 hover:text-red-500 transition" />
         </Link>
 
         <UserImage />

@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import GoogleSignInButton from "@/features/auth/components/GoogleSignInButton";
 import Link from "next/link";
-import { UserRound, Mail, Phone, LockKeyhole } from "lucide-react";
+import { UserRound, Mail, Phone, LockKeyhole } from "@/assets/icons/Icons";
 
 type RegisterData = {
   username: string;
@@ -43,7 +43,6 @@ export default function RegisterForm() {
     },
   });
 
-
   const passwordValue = form.watch("password");
   form.setValue("password_confirmation", passwordValue);
 
@@ -64,7 +63,7 @@ export default function RegisterForm() {
           password_confirmation: data.password_confirmation,
           agree_terms: data.agree_terms,
         }),
-      }
+      },
     );
 
     const result = await response.json();

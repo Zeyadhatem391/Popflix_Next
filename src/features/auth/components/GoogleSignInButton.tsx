@@ -1,6 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { FcGoogle } from "react-icons/fc";
+import { FcGoogle } from "@/assets/icons/Icons";
 
 export default function GoogleSignInButton() {
   return (

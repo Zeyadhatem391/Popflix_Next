@@ -4,6 +4,7 @@ export type Actor = {
   id: number;
   name: string;
   birthday: string;
+  gender:number
   known_for_department: string;
   place_of_birth: string;
   biography: string;

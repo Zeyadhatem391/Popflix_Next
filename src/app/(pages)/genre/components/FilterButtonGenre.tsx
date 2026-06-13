@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Filter } from "lucide-react";
+import { Filter } from "@/assets/icons/Icons";
 import {
   Dialog,
   DialogContent,

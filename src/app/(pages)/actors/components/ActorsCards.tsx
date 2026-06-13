@@ -1,12 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import DefaultImage from "@/assets/images/default.png";
+
 import ActorCardSkeleton from "@/components/skeletons/ActorCardSkeleton";
 import { Actor } from "@/lib/types/Actor";
-
-const IMAGE_BASE = "https://image.tmdb.org/t/p/w200";
+import ActorImage from "@/app/components/ActorImage";
 
 type ActorsCardsProps = {
   actors: Actor[];
@@ -24,15 +22,11 @@ const ActorsCards = ({ actors, isLoading }: ActorsCardsProps) => {
           className="flex flex-col items-center gap-2 transform hover:scale-105 hover:shadow-lg transition-all"
         >
           <div className="w-32 h-40 relative rounded-xl overflow-hidden bg-gray-200 shadow-md">
-            <Image
-              src={
-                actor.profile_path
-                  ? `${IMAGE_BASE}${actor.profile_path}`
-                  : DefaultImage
-              }
-              alt={actor.name}
-              fill
-              sizes="128px"
+            <ActorImage
+              profilePath={actor.profile_path}
+              gender={actor.gender}
+              name={actor.name}
+              
               className="object-cover"
             />
           </div>

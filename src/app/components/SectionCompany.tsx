@@ -2,9 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import DefaultImage from "@/assets/images/default.png";
+import { getMovieImage } from "../lib/helpers/getMovieImage";
 
-const IMAGE_BASE = "https://image.tmdb.org/t/p/w300";
 
 const Companies = [
   {
@@ -65,10 +64,7 @@ const SectionCompany = () => {
     <section className="my-10 mx-7">
       <div className="gap-3 md:gap-9 justify-items-center flex overflow-x-auto no-scrollbar">
         {Companies.map((Company) => {
-          const CompanyImage = Company.logo_path
-            ? IMAGE_BASE + Company.logo_path
-            : DefaultImage.src;
-
+          const CompanyImage = getMovieImage(Company.logo_path);
           return (
             <div key={Company.id} className="flex cursor-pointer">
               <Link href={`/company/${Company.id}`}>

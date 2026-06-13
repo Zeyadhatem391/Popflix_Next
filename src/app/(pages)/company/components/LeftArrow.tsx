@@ -1,4 +1,4 @@
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft } from "@/assets/icons/Icons";
 import Link from "next/link";
 
 type LeftArrowProps = {

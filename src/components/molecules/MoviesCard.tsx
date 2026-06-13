@@ -1,10 +1,10 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
 interface Props {
   id: number;
   title: string;
-  image: string;
+  image: string | StaticImageData;
   vote_average?: number;
   hiddinVote?: boolean;
   hiddinName?: boolean;

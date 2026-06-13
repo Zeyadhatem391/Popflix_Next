@@ -1,13 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import DefaultImage from "@/assets/images/default.png";
 import usePopularActors from "@/hooks/Actors/usePopularActors";
 import ActorPopularSkeleton from "@/components/skeletons/ActorPopularSkeleton";
 import Link from "next/link";
 import TitleWithViewMore from "@/components/common/TitleWithViewMore";
-
-const IMAGE_BASE = "https://image.tmdb.org/t/p/w300";
+import { getMovieImage } from "../lib/helpers/getMovieImage";
 
 const ActorPopular = () => {
   const { data, isLoading, isError, refetch } = usePopularActors();
@@ -38,15 +36,12 @@ const ActorPopular = () => {
         title="Actors"
         Url="actors"
         ViewMore={true}
-         margin={true}
+        margin={true}
       />
 
       <div className=" gap-2 justify-items-center flex lg:grid lg:grid-cols-5 overflow-x-auto no-scrollbar">
         {actors?.map((actor) => {
-          const actorImage = actor.profile_path
-            ? IMAGE_BASE + actor.profile_path
-            : DefaultImage.src;
-
+          const actorImage = getMovieImage(actor.profile_path);
           return (
             <div
               key={actor.id}

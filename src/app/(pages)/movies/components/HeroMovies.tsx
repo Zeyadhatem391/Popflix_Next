@@ -2,11 +2,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Movie } from "@/lib/types/Movie";
-import DefaultImage from "@/assets/images/default.png";
 import { useGetHeroMovies } from "@/hooks/Movies/useGetHeroMovies";
 import HeroMoviesSkeleton from "@/components/skeletons/HeroMoviesSkeleton";
-
-const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
+import { getMovieImage } from "@/app/lib/helpers/getMovieImage";
 
 const HeroMovies = () => {
   const { data: movies, isLoading, isError, refetch } = useGetHeroMovies();
@@ -61,10 +59,7 @@ export default HeroMovies;
 
 /* ================= BIG CARD ================= */
 const BigCard = ({ movie }: { movie: Movie }) => {
-  const image = movie.backdrop_path
-    ? IMAGE_BASE + movie.backdrop_path
-    : DefaultImage.src;
-
+  const image = getMovieImage(movie.backdrop_path);
   return (
     <Link
       href={`/movies/${movie.id}`}
@@ -93,10 +88,7 @@ const SmallGrid = ({ movies }: { movies: Movie[] }) => {
   return (
     <div className="flex-1 grid grid-cols-2 grid-rows-2 ">
       {movies.map((movie) => {
-        const image = movie.poster_path
-          ? IMAGE_BASE + movie.poster_path
-          : DefaultImage.src;
-
+        const image = getMovieImage(movie.poster_path);
         return (
           <Link
             key={movie.id}

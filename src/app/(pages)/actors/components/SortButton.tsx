@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown } from "@/assets/icons/Icons";
 
 const SortButton = () => {
   return (
