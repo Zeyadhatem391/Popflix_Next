@@ -7,7 +7,7 @@ import {
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
 
-import { ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
+import { ArrowUpDown, ArrowUp, ArrowDown } from "@/assets/icons/Icons";
 import { useState } from "react";
 
 const sortOptions = [

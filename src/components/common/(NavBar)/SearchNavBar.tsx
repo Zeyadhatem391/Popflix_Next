@@ -2,8 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { FaSearch } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
+import { Menu, X } from "@/assets/icons/Icons";
 import Image from "next/image";
 import { useDebounce } from "@/hooks/Search/useDebounce";
 import useSearchMovies from "@/hooks/Search/useSearchMovies";
@@ -38,7 +37,7 @@ const SearchNavBar = ({ open, setOpen }: SearchNavBarProps) => {
                 onClick={() => {}}
                 className="px-6 bg-red-600 hover:bg-red-700 rounded-lg flex items-center justify-center"
               >
-                <FaSearch />
+                <Menu />
               </button>
             </div>
 
@@ -46,7 +45,7 @@ const SearchNavBar = ({ open, setOpen }: SearchNavBarProps) => {
               onClick={() => setOpen(false)}
               className="text-white text-3xl ml-4"
             >
-              <IoClose />
+              <X />
             </button>
           </div>
 

@@ -2,12 +2,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import DefaultImage from "@/assets/images/default.png";
 import { useGetHeroMovies } from "@/hooks/Movies/useGetHeroMovies";
 import FavoriteButton from "../(pages)/movies/components/FavoriteButton";
 import SectionDetailsSkeleton from "@/components/skeletons/SectionDetailsSkeleton";
+import { getMovieImage } from "../lib/helpers/getMovieImage";
 
-const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
 const genresMap: Record<number, string> = {
   28: "Action",
@@ -54,12 +53,8 @@ const SectionDetailsMovies = () => {
 
   const movie = movies?.[0];
   if (!movie) return null;
-  
-  const image =
-    movie.backdrop_path && movie.backdrop_path !== "null"
-      ? IMAGE_BASE + movie.backdrop_path
-      : DefaultImage.src;
 
+  const movieImage = getMovieImage(movie.backdrop_path);
   return (
     <section className="my-10 mx-7">
       <div className="flex flex-col lg:flex-row gap-8 items-center">
@@ -69,7 +64,7 @@ const SectionDetailsMovies = () => {
             className="relative group overflow-hidden block rounded-2xl"
           >
             <Image
-              src={image}
+              src={movieImage}
               alt={movie.title}
               width={1920}
               height={1080}

@@ -1,6 +1,6 @@
 "use client";
 
-import { Search } from "lucide-react";
+import { Search } from "@/assets/icons/Icons";
 import { useState } from "react";
 
 type InputSearchProps = {

@@ -1,13 +1,11 @@
 "use client";
 
-import DefaultImage from "@/assets/images/default.png";
 import GenreCardsSkeleton from "@/components/skeletons/GenreCardsSkeleton";
-import Image from "next/image";
-import Link from "next/link";
 import { Movie } from "@/lib/types/Movie";
 import MoviesCard from "@/components/molecules/MoviesCard";
+import { getMovieImage } from "@/app/lib/helpers/getMovieImage";
 
-const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
+
 
 type GenreCardsProps = {
   movies: Movie[];
@@ -49,9 +47,7 @@ const GenreCards = ({
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 pb-2">
         {error && <p className="text-red-500 mt-4">{error.message}</p>}
         {movies.map((movie) => {
-          const movieImage = movie.poster_path
-            ? IMAGE_BASE + movie.poster_path
-            : DefaultImage.src;
+         const movieImage = getMovieImage(movie.poster_path);
 
           return (
             <MoviesCard

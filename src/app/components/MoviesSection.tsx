@@ -1,14 +1,13 @@
-import DefaultImage from "@/assets/images/default.png";
 import TitleWithViewMore from "@/components/common/TitleWithViewMore";
 import MoviesCard from "@/components/molecules/MoviesCard";
 import { Movie } from "@/lib/types/Movie";
+import { getMovieImage } from "../lib/helpers/getMovieImage";
 
-const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
 type MoviesSectionPropes = {
   title: string;
   categories: string;
-  hiddinVote?:boolean;
+  hiddinVote?: boolean;
 };
 
 const getMovies = async (categories: string): Promise<Movie[]> => {
@@ -29,7 +28,11 @@ const getMovies = async (categories: string): Promise<Movie[]> => {
   return data.results.slice(0, 5);
 };
 
-const MoviesSection = async ({ title, categories,hiddinVote }: MoviesSectionPropes) => {
+const MoviesSection = async ({
+  title,
+  categories,
+  hiddinVote,
+}: MoviesSectionPropes) => {
   const movies = await getMovies(categories);
 
   return (
@@ -46,13 +49,10 @@ const MoviesSection = async ({ title, categories,hiddinVote }: MoviesSectionProp
       {/* Movies Row */}
       <div className="flex lg:justify-center gap-5 overflow-x-auto no-scrollbar pb-2">
         {movies.map((movie) => {
-          const movieImage = movie.poster_path
-            ? IMAGE_BASE + movie.poster_path
-            : DefaultImage.src;
-
+          const movieImage = getMovieImage(movie.poster_path);
           return (
             <MoviesCard
-               key={movie.id}  
+              key={movie.id}
               id={movie.id}
               title={movie.title}
               vote_average={movie.vote_average}

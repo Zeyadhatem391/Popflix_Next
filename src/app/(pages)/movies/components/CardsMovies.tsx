@@ -1,11 +1,9 @@
 "use client";
 
-import DefaultImage from "@/assets/images/default.png";
 import { useEffect, useRef } from "react";
 import useMovies from "@/hooks/Movies/useGetMovies";
 import MoviesCard from "@/components/molecules/MoviesCard";
-
-const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
+import { getMovieImage } from "@/app/lib/helpers/getMovieImage";
 
 interface CardsMoviesProps {
   genreId: number;
@@ -60,11 +58,7 @@ const CardsMovies = ({ genreId }: CardsMoviesProps) => {
         "
       >
         {loopMovies.map((movie, index) => {
-          const image = movie.backdrop_path
-            ? IMAGE_BASE + movie.backdrop_path
-            : movie.poster_path
-              ? IMAGE_BASE + movie.poster_path
-              : DefaultImage.src;
+          const image = getMovieImage(movie.backdrop_path);
 
           return (
             <MoviesCard

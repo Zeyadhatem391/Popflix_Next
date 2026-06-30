@@ -2,7 +2,7 @@
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { FaSignInAlt, FaHeart, FaRegHeart } from "react-icons/fa";
+import { LogIn, Heart } from "@/assets/icons/Icons";
 import { toast } from "sonner";
 
 type FavoriteButtonProps = {
@@ -74,7 +74,7 @@ const FavoriteButton = ({ idMovie }: FavoriteButtonProps) => {
               : "border-white text-white hover:bg-white hover:text-black"
           }`}
         >
-          {isFavorite ? <FaHeart /> : <FaRegHeart />}
+          {isFavorite ? <Heart fill="none" />: <Heart />}
           {isFavorite ? "Remove Favorite" : "Add To Favorite"}
         </button>
       ) : (
@@ -99,7 +99,7 @@ const FavoriteButton = ({ idMovie }: FavoriteButtonProps) => {
               onClick={() => router.push("/login")}
               className="flex items-center justify-center gap-2 w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition"
             >
-              <FaSignInAlt />
+              <LogIn />
               Go To Login
             </button>
 

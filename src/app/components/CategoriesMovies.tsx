@@ -5,7 +5,7 @@ import CategoriesMoviesSkeleton from "@/components/skeletons/CategoriesMoviesSke
 import { useGetCategoriesMovies } from "@/hooks/Movies/useGetCategoriesMovies";
 import Image from "next/image";
 import Link from "next/link";
-import { FaPlus } from "react-icons/fa";
+import { Plus  } from "@/assets/icons/Icons";
 
 const CategoriesMovies = () => {
   const {
@@ -71,7 +71,7 @@ const CategoriesMovies = () => {
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300"></div>
 
                 <div className="absolute bottom-5 left-3 rounded-full p-2 bg-gray-900/80 text-white">
-                  <FaPlus size={14} />
+                  <Plus  size={14} />
                 </div>
 
                 <div className="absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white font-semibold text-xl">

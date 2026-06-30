@@ -1,13 +1,11 @@
 "use client";
-import Image from "next/image";
-import DefaultImage from "@/assets/images/default.png";
+
 import { useParams } from "next/navigation";
 import useGetActorDetails from "@/hooks/Actors/useGetActorDetails";
 import ActorDetailsSkeleton from "@/components/skeletons/ActorDetailsSkeleton";
 import ActorMovies from "../components/ActorMovies";
 
-const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
-
+import ActorImage from "@/app/components/ActorImage";
 
 const ActorDetails = () => {
   const params = useParams();
@@ -18,20 +16,16 @@ const ActorDetails = () => {
   if (isLoading || !data) {
     return <ActorDetailsSkeleton />;
   }
-  const actorImage = data?.profile_path
-    ? IMAGE_BASE + data?.profile_path
-    : DefaultImage.src;
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-10">
       <div className="grid md:grid-cols-3 gap-8">
         {/* ===== Actor Image ===== */}
         <div className="flex justify-center">
-          <Image
-            src={actorImage}
-            alt="Actor Image"
-            width={350}
-            height={450}
+          <ActorImage
+            profilePath={data?.profile_path}
+            gender={data?.gender}
+            name={data?.name}
             className="rounded-2xl object-cover shadow-lg"
           />
         </div>
@@ -80,7 +74,7 @@ const ActorDetails = () => {
             </p>
           </div>
         </div>
-        <ActorMovies moviesId={id}/>
+        <ActorMovies moviesId={id} />
       </div>
     </section>
   );
