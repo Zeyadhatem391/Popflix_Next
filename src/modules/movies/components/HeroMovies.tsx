@@ -1,33 +1,19 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Movie } from "@/shared/types/Movie";
-import { useGetHeroMovies } from "@/shared/hooks/Movies/useGetHeroMovies";
-import HeroMoviesSkeleton from "@/shared/components/skeletons/HeroMoviesSkeleton";
+
+import {
+  getHeroMovies,
+  type HeroMovie,
+} from "@/modules/movies/api/getHeroMovies";
 import { getMovieImage } from "@/lib/helpers/getMovieImage";
 
-const HeroMovies = () => {
-  const { data: movies, isLoading, isError, refetch } = useGetHeroMovies();
+export default async function HeroMovies() {
+  const movies = await getHeroMovies();
 
-  if (isLoading) return <HeroMoviesSkeleton />;
-  if (isError || !movies)
-    return (
-      <div className="flex flex-col items-center justify-center py-20 gap-4">
-        <p className="text-lg text-red-500 font-medium">
-          Something went wrong while fetching movies 😢
-        </p>
-
-        <button
-          onClick={() => refetch()}
-          className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-md transition"
-        >
-          Try Again
-        </button>
-      </div>
-    );
-
-  const rows: { big: Movie; smalls: Movie[] }[] = [];
-
+  const rows: {
+    big: HeroMovie;
+    smalls: HeroMovie[];
+  }[] = [];
   for (let i = 0; i < movies.length; i += 5) {
     const big = movies[i];
     const smalls = movies.slice(i + 1, i + 5);
@@ -42,64 +28,79 @@ const HeroMovies = () => {
       <div className="space-y-0">
         {rows.map((row, index) => (
           <div
-            key={index}
-            className="flex flex-col md:flex-row h-auto md:h-140"
+            key={row.big.id}
+            className="flex flex-col md:flex-row h-auto md:h-[560px]"
           >
-            {index % 2 === 0 && <BigCard movie={row.big} />}
-            <SmallGrid movies={row.smalls} />
-            {index % 2 !== 0 && <BigCard movie={row.big} />}
+            {index % 2 === 0 && (
+              <BigCard movie={row.big} priority={index === 0} />
+            )}
+
+            <SmallGrid movies={row.smalls} priority={index === 0} />
+
+            {index % 2 !== 0 && <BigCard movie={row.big} priority={false} />}
           </div>
         ))}
       </div>
     </section>
   );
-};
+}
 
-export default HeroMovies;
-
-/* ================= BIG CARD ================= */
-const BigCard = ({ movie }: { movie: Movie }) => {
+function BigCard({ movie, priority }: { movie: HeroMovie; priority: boolean }) {
   const image = getMovieImage(movie.backdrop_path);
+
   return (
     <Link
       href={`/movies/${movie.id}`}
-      className="relative flex-1 group overflow-hidden block"
+      className="relative flex-1 overflow-hidden group block"
     >
       <Image
         src={image}
-        alt={movie.title}
+        alt={movie.title || "movies"}
         width={1920}
         height={1080}
+        priority={priority}
+        fetchPriority={priority ? "high" : "auto"}
+        sizes="(max-width: 768px) 100vw, 50vw"
         className="w-full h-full object-cover scale-105 group-hover:scale-110 transition duration-500"
       />
 
       <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-center items-center text-center p-6">
         <h3 className="text-2xl font-bold text-white">{movie.title}</h3>
+
         <p className="text-lg text-gray-200 mt-3 max-w-lg">
           {movie.overview?.slice(0, 120)}
         </p>
       </div>
     </Link>
   );
-};
+}
 
-/* ================= SMALL GRID ================= */
-const SmallGrid = ({ movies }: { movies: Movie[] }) => {
+function SmallGrid({
+  movies,
+  priority,
+}: {
+  movies: HeroMovie[];
+  priority: boolean;
+}) {
   return (
-    <div className="flex-1 grid grid-cols-2 grid-rows-2 ">
-      {movies.map((movie) => {
+    <div className="flex-1 grid grid-cols-2 grid-rows-2">
+      {movies.map((movie, index) => {
         const image = getMovieImage(movie.poster_path);
+
         return (
           <Link
             key={movie.id}
             href={`/movies/${movie.id}`}
-            className="relative group overflow-hidden block"
+            className="relative overflow-hidden group block"
           >
             <Image
               src={image}
-              alt={movie.title}
+              alt={movie.title || "movies"}
               width={500}
               height={750}
+              priority={priority && index < 2}
+              fetchPriority={priority && index < 2 ? "high" : "auto"}
+              sizes="(max-width:768px) 50vw, 25vw"
               className="w-full h-full object-cover scale-105 group-hover:scale-110 transition duration-500"
             />
 
@@ -113,4 +114,4 @@ const SmallGrid = ({ movies }: { movies: Movie[] }) => {
       })}
     </div>
   );
-};
+}

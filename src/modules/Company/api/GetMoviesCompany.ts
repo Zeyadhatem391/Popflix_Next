@@ -8,11 +8,7 @@ export type Movie =
 export async function GetMoviesCompany(companyId: number) {
     "use cache";
 
-    cacheLife({
-        stale: 5400,
-        revalidate: 3600,
-        expire: 7200,
-    });
+    cacheLife("weeks");
 
     const { data: Movie, error } = await client.GET("/3/discover/movie", {
         params: {
