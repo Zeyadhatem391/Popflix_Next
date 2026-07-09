@@ -13,7 +13,8 @@ const CompanyMovies = ({ id }: CompanyMoviesProps) => {
   const companyId = Number(id);
   const { data, isLoading } = useGetMoviesCompany(companyId);
 
-  const company = data?.movie?.results ?? [];
+  const company = data?.Movie.results ?? [];
+
   if (isLoading) return <ActorMoviesSkeleton />;
 
   if (!company || company.length === 0)
