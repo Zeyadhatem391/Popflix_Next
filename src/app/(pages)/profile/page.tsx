@@ -5,7 +5,7 @@ import DefaultImage from "@/assets/images/default.png";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import ImageProfile from "./components/ImageProfile";
+import ImageProfile from "../../../modules/profile/components/ImageProfile";
 
 export default function ProfilePage() {
   const [ids, setIds] = useState<number[]>([]);

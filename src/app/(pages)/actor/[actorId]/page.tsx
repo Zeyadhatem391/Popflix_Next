@@ -1,11 +1,11 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import useGetActorDetails from "@/hooks/Actors/useGetActorDetails";
-import ActorDetailsSkeleton from "@/components/skeletons/ActorDetailsSkeleton";
-import ActorMovies from "../components/ActorMovies";
+import useGetActorDetails from "@/shared/hooks/Actors/useGetActorDetails";
+import ActorDetailsSkeleton from "@/shared/components/skeletons/ActorDetailsSkeleton";
+import ActorMovies from "../../../../modules/actorDetails/components/ActorMovies";
 
-import ActorImage from "@/app/components/ActorImage";
+import ActorImage from "@/modules/home/components/organisms/ActorImage";
 
 const ActorDetails = () => {
   const params = useParams();

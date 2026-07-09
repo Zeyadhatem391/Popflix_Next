@@ -1,7 +1,7 @@
-import { authOptions } from "@/app/lib/nextAuth";
+import { authOptions } from "@/lib/nextAuth";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import FavoritesClient from "./components/FavoritesClient";
+import FavoritesClient from "../../../modules/favorites/components/FavoritesClient";
 
 const FavoritesPage = async () => {
   const session = await getServerSession(authOptions);

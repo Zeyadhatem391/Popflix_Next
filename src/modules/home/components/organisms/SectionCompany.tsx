@@ -1,12 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { getMovieImage } from "../../../../app/lib/helpers/getMovieImage";
+import { getMovieImage } from "../../../../lib/helpers/getMovieImage";
 import { Companies } from "@/modules/Company/data/data";
 
 const SectionCompany = async () => {
-  "use cache";
-
   return (
     <section className="my-10 mx-7">
       <div className="flex justify-items-center gap-3 overflow-x-auto no-scrollbar md:gap-9">

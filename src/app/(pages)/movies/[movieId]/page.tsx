@@ -4,7 +4,7 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 import MovieDetails from "./MovieDetails";
-import { getMovieDetails } from "@/modules/movies/api/getMovieDetails";
+import { getMovieDetails } from "@/modules/movieDetails/api/getMovieDetails";
 import { Metadata } from "next";
 
 type Props = {

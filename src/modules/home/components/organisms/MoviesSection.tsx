@@ -1,6 +1,6 @@
-import TitleWithViewMore from "@/components/common/TitleWithViewMore";
-import MoviesCard from "@/components/molecules/MoviesCard";
-import { getMovieImage } from "@/app/lib/helpers/getMovieImage";
+import TitleWithViewMore from "@/shared/components/common/TitleWithViewMore";
+import MoviesCard from "@/shared/components/molecules/MoviesCard";
+import { getMovieImage } from "@/lib/helpers/getMovieImage";
 import { getMovies } from "../../api/getMovies";
 
 type MoviesSectionPropes = {

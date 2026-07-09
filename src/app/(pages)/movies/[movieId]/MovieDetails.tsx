@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import useGetDetailsMovies from "@/modules/movies/hooks/useGetDetailsMovies";
-import MovieDetailsSkeleton from "@/components/skeletons/MovieDetailsSkeleton";
+import useGetDetailsMovies from "@/modules/movieDetails/hooks/useGetDetailsMovies";
+import MovieDetailsSkeleton from "@/shared/components/skeletons/MovieDetailsSkeleton";
 
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import FavoriteButton from "../components/FavoriteButton";
-import { getMovieImage } from "@/app/lib/helpers/getMovieImage";
+import { getMovieImage } from "@/lib/helpers/getMovieImage";
+import FavoriteButton from "@/modules/movieDetails/components/FavoriteButton";
 
 const MovieDetails = () => {
   const params = useParams();

@@ -1,4 +1,4 @@
-import ActorsClient from "./components/ActorsClient";
+import ActorsClient from "../../../modules/actors/components/ActorsClient";
 
 type Props = {
   searchParams: Promise<{ page?: string }>;

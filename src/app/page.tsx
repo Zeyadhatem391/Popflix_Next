@@ -2,16 +2,16 @@ import { Suspense } from "react";
 
 import PublicLayout from "@/shared/components/layout/PublicLayout";
 
-import Hero from "./components/Hero";
-import ActorPopular from "./components/ActorPopular";
-import CategoriesMovies from "./components/CategoriesMovies";
+import Hero from "../modules/home/components/organisms/Hero";
+import ActorPopular from "../modules/home/components/organisms/ActorPopular";
+import CategoriesMovies from "../modules/home/components/organisms/CategoriesMovies";
 import MoviesSection from "../modules/home/components/organisms/MoviesSection";
 import SectionCompany from "../modules/home/components/organisms/SectionCompany";
-import SectionDetailsMovies from "./components/SectionDetailsMovies";
+import SectionDetailsMovies from "../modules/home/components/organisms/SectionDetailsMovies";
 
-import SectionDetailsSkeleton from "@/components/skeletons/SectionDetailsSkeleton";
-import ActorPopularSkeleton from "@/components/skeletons/ActorPopularSkeleton";
-import CategoriesMoviesSkeleton from "@/components/skeletons/CategoriesMoviesSkeleton";
+import SectionDetailsSkeleton from "@/shared/components/skeletons/SectionDetailsSkeleton";
+import ActorPopularSkeleton from "@/shared/components/skeletons/ActorPopularSkeleton";
+import CategoriesMoviesSkeleton from "@/shared/components/skeletons/CategoriesMoviesSkeleton";
 
 export default function Home() {
   return (
@@ -34,7 +34,6 @@ export default function Home() {
       <Suspense fallback={<CategoriesMoviesSkeleton />}>
         <CategoriesMovies />
       </Suspense>
-      
     </PublicLayout>
   );
 }

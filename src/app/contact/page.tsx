@@ -1,4 +1,4 @@
-import ButtonBack from "@/components/common/ButtonBack";
+import ButtonBack from "@/shared/components/common/ButtonBack";
 
 export default function Contact() {
   return (

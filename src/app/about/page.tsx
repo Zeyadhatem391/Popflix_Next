@@ -1,16 +1,13 @@
 import Image from "next/image";
 import Portfolio from "@/assets/images/Portfolio.jpeg";
-import ButtonBack from "@/components/common/ButtonBack";
+import ButtonBack from "@/shared/components/common/ButtonBack";
 const About = () => {
   return (
     <div className="bg-[#111] text-gray-200 min-h-screen py-10 px-4 animate__animated animate__fadeInUp">
       <div className="max-w-6xl mx-auto">
-        {/* Back Button */}
         <ButtonBack />
 
-        {/* Content Section */}
         <div className="grid md:grid-cols-2 gap-12 items-center mt-15 lg:mt-0">
-          {/* Text */}
           <div>
             <h1 className="text-3xl md:text-4xl font-bold mb-4">About Me</h1>
 
@@ -42,13 +39,12 @@ const About = () => {
             </a>
           </div>
 
-          {/* Image */}
           <div>
             <Image
               src={Portfolio}
               alt="About"
               className="w-full rounded-2xl shadow-2xl object-cover"
-              priority
+              preload
             />
           </div>
         </div>

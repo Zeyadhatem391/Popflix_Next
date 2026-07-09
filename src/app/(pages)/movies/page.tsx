@@ -1,5 +1,5 @@
-import CategoryMovies from "./components/CategoryMovies";
-import HeroMovies from "./components/HeroMovies";
+import CategoryMovies from "@/modules/movies/components/CategoryMovies";
+import HeroMovies from "@/modules/movies/components/HeroMovies";
 
 const MoviesPage = () => {
   return (

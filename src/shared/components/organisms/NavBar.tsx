@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { Heart, Search } from "@/assets/icons/Icons";
-import SearchNavBar from "../../../components/common/(NavBar)/SearchNavBar";
-import Logo from "../../../components/common/(NavBar)/Logo";
-import UserImage from "../../../components/common/(NavBar)/UserImage";
-import MenuPage from "../../../components/common/(NavBar)/MenuPage";
+import SearchNavBar from "../common/(NavBar)/SearchNavBar";
+import Logo from "../common/(NavBar)/Logo";
+import UserImage from "../common/(NavBar)/UserImage";
+import MenuPage from "../common/(NavBar)/MenuPage";
 import { useState } from "react";
 import { Input } from "../../../components/ui/input";
 

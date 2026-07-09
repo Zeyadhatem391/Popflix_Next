@@ -1,18 +1,31 @@
-"use client";
-import { useParams } from "next/navigation";
-import CompanyPages from "../components/CompanyPages";
-import CompanyMovies from "../components/CompanyMovies";
+import { Suspense } from "react";
+import CompanyPages from "@/modules/Company/components/CompanyPages";
+import CompanyMovies from "@/modules/Company/components/CompanyMovies";
+import ActorMoviesSkeleton from "@/shared/components/skeletons/ActorMoviesSkeleton";
 
-const CompanyPage = () => {
-  const params = useParams();
-  const id = params.companyId as string;
+export default function Page({
+  params,
+}: {
+  params: Promise<{ companyId: string }>;
+}) {
+  return (
+    <Suspense fallback={<ActorMoviesSkeleton />}>
+      <CompanyContent params={params} />
+    </Suspense>
+  );
+}
+
+async function CompanyContent({
+  params,
+}: {
+  params: Promise<{ companyId: string }>;
+}) {
+  const { companyId } = await params;
 
   return (
     <div className="my-10 mx-7">
-      <CompanyPages id={id} />
-      <CompanyMovies id={id} />
+      <CompanyPages id={companyId} />
+      <CompanyMovies id={companyId} />
     </div>
   );
-};
-
-export default CompanyPage;
+}

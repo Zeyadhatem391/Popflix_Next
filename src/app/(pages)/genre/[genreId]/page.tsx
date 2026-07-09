@@ -1,19 +1,19 @@
 "use client";
 
-import Back from "@/components/common/Back";
-import InputSearch from "@/components/common/InputSearch";
-import SortButtonGenre from "../components/SortButtonGenre";
-import FilterButtonGenre from "../components/FilterButtonGenre";
-import GenreCards from "../components/GenreCards";
+import Back from "@/shared/components/common/Back";
+import InputSearch from "@/shared/components/common/InputSearch";
+import SortButtonGenre from "../../../../modules/genre/components/SortButtonGenre";
+import FilterButtonGenre from "../../../../modules/genre/components/FilterButtonGenre";
+import GenreCards from "../../../../modules/genre/components/GenreCards";
 
 import { useParams } from "next/navigation";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
-import { PaginationDemo } from "../../../components/PaginationGenre";
-import { useGenreFilters } from "@/hooks/Genres/useGenreFilters";
-import { useDebounce } from "@/hooks/Search/useDebounce";
+import { PaginationDemo } from "../../../../modules/home/components/organisms/PaginationGenre";
+import { useGenreFilters } from "@/shared/hooks/Genres/useGenreFilters";
+import { useDebounce } from "@/shared/hooks/Search/useDebounce";
 import useGetGenreMovies from "@/modules/genre/hooks/useGetGenreMovies";
 import { GetGenreMovie } from "@/modules/genre/api/GetGenreMovie";
 
@@ -71,7 +71,6 @@ const GenrePage = () => {
 
   const movies = data?.results || [];
 
-  
   const totalPages = data?.total_pages || 1;
 
   useEffect(() => {
