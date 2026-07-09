@@ -1,9 +1,6 @@
-"use client";
-
 import Image from "next/image";
 import { unknownMan, unknownWoman } from "@/assets/images/images";
-
-const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
+import { getMovieImage } from "@/lib/helpers/getMovieImage";
 
 interface ActorImageProps {
   profilePath?: string | null;
@@ -24,11 +21,13 @@ const ActorImage = ({
 }: ActorImageProps) => {
   const fallbackImage = gender === 1 ? unknownWoman : unknownMan;
 
-  const imageSrc = profilePath ? `${IMAGE_BASE}${profilePath}` : fallbackImage;
+  const image = getMovieImage(profilePath);
+
+  const imageAcrot = profilePath ? image : fallbackImage;
 
   return (
     <Image
-      src={imageSrc}
+      src={imageAcrot}
       alt={name}
       width={width}
       height={height}

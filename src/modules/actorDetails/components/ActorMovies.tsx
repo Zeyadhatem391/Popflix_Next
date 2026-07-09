@@ -6,7 +6,6 @@ import MoviesCard from "@/shared/components/molecules/MoviesCard";
 import { Film } from "@/assets/icons/Icons";
 import { getMovieImage } from "@/lib/helpers/getMovieImage";
 
-const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
 
 interface ActorMoviesProps {
   moviesId: string;
