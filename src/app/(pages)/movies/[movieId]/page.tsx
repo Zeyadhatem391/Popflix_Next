@@ -1,13 +1,9 @@
-import {
-  HydrationBoundary,
-  QueryClient,
-  dehydrate,
-} from "@tanstack/react-query";
-import MovieDetails from "./MovieDetails";
-import { getMovieDetails } from "@/modules/movieDetails/api/getMovieDetails";
 import { Metadata } from "next";
 import { Suspense } from "react";
+
+import MovieDetails from "./MovieDetails";
 import MovieDetailsSkeleton from "@/shared/components/skeletons/MovieDetailsSkeleton";
+import { getMovieDetails } from "@/modules/movieDetails/api/getMovieDetails";
 
 type Props = {
   params: Promise<{
@@ -15,12 +11,12 @@ type Props = {
   }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
   const { movieId } = await params;
 
-  const data = await getMovieDetails(movieId);
-
-  const movie = data.movie;
+  const { movie } = await getMovieDetails(movieId);
 
   return {
     title: movie.title,
@@ -28,7 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: movie.title,
       description: movie.overview,
-      images: [`https://image.tmdb.org/t/p/original${movie.backdrop_path}`],
+      images: movie.backdrop_path
+        ? [`https://image.tmdb.org/t/p/original${movie.backdrop_path}`]
+        : [],
     },
   };
 }
@@ -36,18 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { movieId } = await params;
 
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: ["movie-details", movieId],
-    queryFn: () => getMovieDetails(movieId),
-  });
-
   return (
     <Suspense fallback={<MovieDetailsSkeleton />}>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <MovieDetails />
-      </HydrationBoundary>
+      <MovieDetails movieId={movieId} />
     </Suspense>
   );
 }
