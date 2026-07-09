@@ -11,7 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { registerSchema } from "@/lib/schemas/validationSchmas";
+import { registerSchema } from "@/shared/schemas/validationSchmas";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";

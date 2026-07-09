@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Movie } from "@/lib/types/Movie";
+import { Movie } from "@/shared/types/Movie";
 
 const GetActorMovies = async (id: string) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/3/person/${id}/combined_credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`);

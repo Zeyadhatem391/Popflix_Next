@@ -2,79 +2,67 @@
 
 import TitleWithViewMore from "@/components/common/TitleWithViewMore";
 import CategoriesMoviesSkeleton from "@/components/skeletons/CategoriesMoviesSkeleton";
-import { useGetCategoriesMovies } from "@/hooks/Movies/useGetCategoriesMovies";
 import Image from "next/image";
 import Link from "next/link";
-import { Plus  } from "@/assets/icons/Icons";
+import { Plus } from "@/assets/icons/Icons";
+import { useGetCategories } from "@/modules/categories/hooks/useGetCategories";
+
+const HIDDEN_CATEGORIES = ["Documentary", "TV Movie"];
 
 const CategoriesMovies = () => {
-  const {
-    data: categories,
-    isLoading,
-    isError,
-    refetch,
-  } = useGetCategoriesMovies();
+  const { data, isLoading, isError } = useGetCategories();
 
   if (isLoading) return <CategoriesMoviesSkeleton />;
 
-  if (isError || !categories) {
+  if (isError || !data) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 gap-4">
-        <p className="text-lg text-red-500 font-medium">
-          Something went wrong while fetching movies 😢
-        </p>
-
-        <button
-          onClick={() => refetch()}
-          className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-md transition"
-        >
-          Try Again
-        </button>
-      </div>
+      <section className="my-10 mx-7">
+        <p className="text-red-500">Something went wrong.</p>
+      </section>
     );
   }
 
-  const filteredCategories = categories.filter(
-    (cat) => !["Documentary"].includes(cat.name),
-  );
+  const filteredCategories = data.Categories.filter((cat) => {
+    if (!cat.name) return false;
+
+    return !HIDDEN_CATEGORIES.includes(cat.name);
+  });
 
   return (
     <section className="my-10 mx-7">
-      {/* Title */}
       <TitleWithViewMore
         genreId={1}
         title="Categories"
         Url="actors"
         ViewMore={false}
-        margin={true}
+        margin
       />
 
-      {/* Scrollable container */}
       <div className="flex lg:grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-6 overflow-x-auto lg:overflow-visible no-scrollbar">
         {filteredCategories.map((cat) => (
           <Link
             key={cat.id}
             href={`/genre/${cat.name}`}
-            className="flex-shrink-0 w-72 lg:w-auto"
+            className="shrink-0 w-72 lg:w-auto"
           >
-            <div className="group rounded-xl overflow-hidden bg-gray-800 cursor-pointer transition duration-300 hover:bg-gray-900">
+            <div className="group rounded-xl overflow-hidden bg-gray-800 hover:bg-gray-900 transition">
               <div className="relative w-full h-52 overflow-hidden">
                 {cat.image && (
                   <Image
                     src={cat.image}
-                    alt={cat.name}
+                    alt={cat.name || "image"}
                     fill
-                    className="object-cover"
+                    className="object-cover group-hover:scale-110 transition duration-500"
                   />
                 )}
 
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300"></div>
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition" />
 
-                <div className="absolute bottom-5 left-3 rounded-full p-2 bg-gray-900/80 text-white">
-                  <Plus  size={14} />
+                <div className="absolute bottom-5 left-3 rounded-full bg-gray-900/80 p-2 text-white">
+                  <Plus size={14} />
                 </div>
 
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-white font-semibold text-xl">
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 text-white font-semibold text-xl">
                   {cat.name}
                 </div>
               </div>

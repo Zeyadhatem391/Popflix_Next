@@ -4,7 +4,7 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 import MovieDetails from "./MovieDetails";
-import { getMovieDetails } from "@/services/movies/getMovieDetails";
+import { getMovieDetails } from "@/modules/movies/api/getMovieDetails";
 import { Metadata } from "next";
 
 type Props = {
@@ -16,7 +16,9 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { movieId } = await params;
 
-  const movie = await getMovieDetails(movieId);
+  const data = await getMovieDetails(movieId);
+
+  const movie = data.movie;
 
   return {
     title: movie.title,

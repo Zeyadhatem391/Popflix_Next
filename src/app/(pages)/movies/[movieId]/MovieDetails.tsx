@@ -1,15 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import DefaultImage from "@/assets/images/default.png";
-import useGetDetailsMovies from "@/hooks/Movies/useGetDetailsMovies";
+import useGetDetailsMovies from "@/modules/movies/hooks/useGetDetailsMovies";
 import MovieDetailsSkeleton from "@/components/skeletons/MovieDetailsSkeleton";
 
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import FavoriteButton from "../components/FavoriteButton";
-
-const IMAGE_BASE = "https://image.tmdb.org/t/p/original";
+import { getMovieImage } from "@/app/lib/helpers/getMovieImage";
 
 const MovieDetails = () => {
   const params = useParams();
@@ -18,6 +16,12 @@ const MovieDetails = () => {
 
   const { data, isLoading, isError, refetch } = useGetDetailsMovies(movieId);
 
+  const movie = data?.movie;
+
+  const video = data?.videos.results;
+
+  const credits = data?.credits;
+
   if (isLoading || !data) {
     return <MovieDetailsSkeleton />;
   }
@@ -25,7 +29,7 @@ const MovieDetails = () => {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
         <p className="text-lg text-red-500 font-medium">
-          Something went wrong while fetching movies 
+          Something went wrong while fetching movies
         </p>
 
         <button
@@ -37,33 +41,19 @@ const MovieDetails = () => {
       </div>
     );
 
-  /* ========= Images ========= */
-
-  const backdropImage = data.backdrop_path
-    ? IMAGE_BASE + data.backdrop_path
-    : DefaultImage.src;
-
-  const posterImage = data.poster_path
-    ? IMAGE_BASE + data.poster_path
-    : DefaultImage.src;
-
-  /* ========= Director ========= */
+  const moviesImage = getMovieImage(movie?.backdrop_path);
 
   const director =
-    data.credits.crew.find((c) => c.job === "Director")?.name || "-";
+    credits?.crew?.find((c) => c.job === "Director")?.name || "-";
 
-  /* ========= Trailer ========= */
-
-  const trailer = data.videos.results.find(
+  const trailer = video?.find(
     (video) => video.site === "YouTube" && video.type === "Trailer",
   );
 
   return (
     <div className="max-w-5xl mx-auto p-5 text-white ">
-      {/* Title */}
-      <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
+      <h1 className="text-3xl font-bold mb-4">{movie?.title}</h1>
 
-      {/* ===== Trailer OR Poster ===== */}
       <div className="w-full h-125 relative rounded-lg overflow-hidden mb-6">
         {trailer ? (
           <iframe
@@ -74,8 +64,8 @@ const MovieDetails = () => {
           />
         ) : (
           <Image
-            src={backdropImage}
-            alt={data.title}
+            src={moviesImage}
+            alt={movie?.title || "image"}
             fill
             priority
             sizes="100vw"
@@ -84,25 +74,22 @@ const MovieDetails = () => {
         )}
       </div>
 
-      {/* Rating */}
       <div className="flex items-center gap-5 mb-4">
-        <span className="text-lg">⭐ {data.vote_average.toFixed(1)}</span>
+        <span className="text-lg">⭐ {movie?.vote_average.toFixed(1)}</span>
 
-        <FavoriteButton idMovie={data.id} />
+        {movie && <FavoriteButton idMovie={movie.id} />}
       </div>
 
-      {/* Overview */}
-      <p className="leading-7 my-6 text-gray-300">{data.overview}</p>
+      <p className="leading-7 my-6 text-gray-300">{movie?.overview}</p>
 
-      {/* Info */}
       <div className="bg-zinc-800 p-4 rounded-lg mb-6 space-y-3 text-lg font-medium">
-        <div>Release Date: {data.release_date}</div>
+        <div>Release Date: {movie?.release_date}</div>
 
         <div>Director: {director}</div>
 
         <div className="flex flex-wrap gap-2">
           Genres:
-          {data.genres.map((genre) => (
+          {movie?.genres?.map((genre) => (
             <span
               key={genre.id}
               className="bg-zinc-700 px-3 py-1 rounded-md text-sm"
@@ -113,14 +100,11 @@ const MovieDetails = () => {
         </div>
       </div>
 
-      {/* Cast */}
       <h2 className="text-2xl font-semibold mb-4">Cast</h2>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {data.credits.cast.slice(0, 12).map((cast) => {
-          const actorImage = cast.profile_path
-            ? IMAGE_BASE + cast.profile_path
-            : DefaultImage.src;
+        {credits?.cast?.slice(0, 12).map((cast) => {
+          const actorImage = getMovieImage(cast.profile_path);
 
           return (
             <div
@@ -134,7 +118,7 @@ const MovieDetails = () => {
                 <div className="relative w-15 h-22.5 mr-3 shrink-0">
                   <Image
                     src={actorImage}
-                    alt={cast.original_name}
+                    alt={cast.original_name || "image"}
                     fill
                     sizes="60px"
                     className="object-cover rounded"

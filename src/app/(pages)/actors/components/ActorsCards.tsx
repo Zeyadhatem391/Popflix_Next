@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import ActorCardSkeleton from "@/components/skeletons/ActorCardSkeleton";
-import { Actor } from "@/lib/types/Actor";
+import { Actor } from "@/shared/types/Actor";
 import ActorImage from "@/app/components/ActorImage";
 
 type ActorsCardsProps = {

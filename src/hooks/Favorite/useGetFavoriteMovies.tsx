@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Movie } from "@/lib/types/Movie";
+import { Movie } from "@/shared/types/Movie";
 
 const GetMovies = async (ids: number[]): Promise<Movie[]> => {
   if (!ids.length) return [];

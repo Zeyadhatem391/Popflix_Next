@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Movie } from "@/lib/types/Movie";
+import { Movie } from "@/shared/types/Movie";
 import { useGetHeroMovies } from "@/hooks/Movies/useGetHeroMovies";
 import HeroMoviesSkeleton from "@/components/skeletons/HeroMoviesSkeleton";
 import { getMovieImage } from "@/app/lib/helpers/getMovieImage";

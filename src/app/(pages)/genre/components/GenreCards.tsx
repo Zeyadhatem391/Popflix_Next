@@ -1,14 +1,12 @@
 "use client";
 
 import GenreCardsSkeleton from "@/components/skeletons/GenreCardsSkeleton";
-import { Movie } from "@/lib/types/Movie";
 import MoviesCard from "@/components/molecules/MoviesCard";
 import { getMovieImage } from "@/app/lib/helpers/getMovieImage";
-
-
+import { GenreMovies } from "@/modules/genre/api/GetGenreMovie";
 
 type GenreCardsProps = {
-  movies: Movie[];
+  movies: GenreMovies["results"];
   isLoading: boolean;
   isError: boolean;
   refetch: () => void;
@@ -47,13 +45,13 @@ const GenreCards = ({
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 pb-2">
         {error && <p className="text-red-500 mt-4">{error.message}</p>}
         {movies.map((movie) => {
-         const movieImage = getMovieImage(movie.poster_path);
+          const movieImage = getMovieImage(movie.poster_path);
 
           return (
             <MoviesCard
               key={movie.id}
               id={movie.id}
-              title={movie.title}
+              title={movie.title || "movie name"}
               vote_average={movie.vote_average}
               image={movieImage}
             />

@@ -1,43 +1,23 @@
 import TitleWithViewMore from "@/components/common/TitleWithViewMore";
 import MoviesCard from "@/components/molecules/MoviesCard";
-import { Movie } from "@/lib/types/Movie";
-import { getMovieImage } from "../lib/helpers/getMovieImage";
-
+import { getMovieImage } from "@/app/lib/helpers/getMovieImage";
+import { getMovies } from "../../api/getMovies";
 
 type MoviesSectionPropes = {
   title: string;
-  categories: string;
   hiddinVote?: boolean;
 };
 
-const getMovies = async (categories: string): Promise<Movie[]> => {
-  const regionQuery = categories === "upcoming" ? "&region=US" : "";
+const MoviesSection = async ({ title, hiddinVote }: MoviesSectionPropes) => {
+  const DataMovies = await getMovies();
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/3/movie/${categories}?api_key=${process.env.NEXT_PUBLIC_API_KEY}${regionQuery}`,
-    {
-      next: { revalidate: 60 },
-    },
-  );
+  const MoviesNow = DataMovies.moviesNow;
+  const MoviesUpcoming = DataMovies.moviesUpcoming;
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch movies");
-  }
-
-  const data = await res.json();
-  return data.results.slice(0, 5);
-};
-
-const MoviesSection = async ({
-  title,
-  categories,
-  hiddinVote,
-}: MoviesSectionPropes) => {
-  const movies = await getMovies(categories);
+  const movies = title === "Upcoming" ? MoviesUpcoming : MoviesNow;
 
   return (
     <section className="my-10 mx-7">
-      {/* Title */}
       <TitleWithViewMore
         genreId={1}
         title={title}
@@ -46,9 +26,8 @@ const MoviesSection = async ({
         margin={true}
       />
 
-      {/* Movies Row */}
       <div className="flex lg:justify-center gap-5 overflow-x-auto no-scrollbar pb-2">
-        {movies.map((movie) => {
+        {movies.results.map((movie) => {
           const movieImage = getMovieImage(movie.poster_path);
           return (
             <MoviesCard

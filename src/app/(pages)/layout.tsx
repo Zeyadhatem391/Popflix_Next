@@ -1,5 +1,4 @@
-import Footer from "@/components/organisms/Footer";
-import Navbar from "@/components/organisms/NavBar";
+import PublicLayout from "@/shared/components/layout/PublicLayout";
 
 export default function MainLayout({
   children,
@@ -8,9 +7,7 @@ export default function MainLayout({
 }) {
   return (
     <>
-      <Navbar />
-      {children}
-      <Footer />
+      <PublicLayout> {children}</PublicLayout>
     </>
   );
 }

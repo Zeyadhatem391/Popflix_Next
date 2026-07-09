@@ -6,7 +6,7 @@ const About = () => {
     <div className="bg-[#111] text-gray-200 min-h-screen py-10 px-4 animate__animated animate__fadeInUp">
       <div className="max-w-6xl mx-auto">
         {/* Back Button */}
-          <ButtonBack />
+        <ButtonBack />
 
         {/* Content Section */}
         <div className="grid md:grid-cols-2 gap-12 items-center mt-15 lg:mt-0">

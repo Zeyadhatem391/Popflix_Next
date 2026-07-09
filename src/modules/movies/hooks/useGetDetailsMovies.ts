@@ -1,14 +1,13 @@
 
 import { useQuery } from "@tanstack/react-query";
-import { Movie } from "@/lib/types/Movie";
-import { getMovieDetails } from "@/services/movies/getMovieDetails";
+import { getMovieDetails } from "@/modules/movies/api/getMovieDetails";
 
 const useGetDetailsMovies = (movieId: string) => {
-  return useQuery<Movie>({
+  return useQuery({
     queryKey: ["movie-details", movieId],
     queryFn: () => getMovieDetails(movieId),
-    staleTime: 1000 * 60 * 5,
     enabled: !!movieId,
+    staleTime: 1000 * 60 * 5,
   });
 };
 
