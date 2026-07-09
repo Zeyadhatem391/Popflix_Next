@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { authOptions } from "@/lib/nextAuth";
 import { getServerSession } from "next-auth";
 import Link from "next/link";

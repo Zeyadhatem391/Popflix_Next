@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import useGetFavoriteMovies from "@/shared/hooks/Favorite/useGetFavoriteMovies";
 import FavoritesMoviesSkeleton from "@/shared/components/skeletons/FavoritesMoviesSkeleton";
 import MoviesCard from "@/shared/components/molecules/MoviesCard";
