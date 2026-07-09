@@ -6,13 +6,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 
 import ActorsCards from "./ActorsCards";
-import useGetAllActors, {
-  GetActors,
-} from "@/shared/hooks/Actors/useGetAllActors";
+import useGetAllActors from "@/modules/actors/hooks/useGetAllActors";
 
 import { PaginationDemo } from "../../home/components/organisms/PaginationGenre";
 import InputSearchActors from "./InputSearchActors";
-import { useDebounce } from "@/shared/hooks/Search/useDebounce";
+import { GetActors } from "../api/GetActors";
 
 type Props = {
   page: number;
@@ -24,9 +22,7 @@ const ActorsClient = ({ page, query }: Props) => {
   const pathname = usePathname();
   const queryClient = useQueryClient();
 
-  const debouncedQuery = useDebounce(query, 800);
-
-  const { data, isLoading } = useGetAllActors(page, debouncedQuery);
+  const { data, isLoading } = useGetAllActors(page, query);
 
   const actors = data?.results || [];
   const totalPages = data?.total_pages || 1;
@@ -46,15 +42,13 @@ const ActorsClient = ({ page, query }: Props) => {
   };
 
   useEffect(() => {
-    const nextPage = page + 1;
-
-    if (nextPage > 500) return;
+    if (page >= 500) return;
 
     queryClient.prefetchQuery({
-      queryKey: ["actors", nextPage, debouncedQuery],
-      queryFn: () => GetActors(nextPage, debouncedQuery),
+      queryKey: ["actors", page + 1, query],
+      queryFn: () => GetActors(page + 1, query),
     });
-  }, [page, debouncedQuery, queryClient]);
+  }, [page, query, queryClient]);
 
   return (
     <div className="max-w-6xl mx-auto px-4">

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import ActorsClient from "../../../modules/actors/components/ActorsClient";
 import ActorCardSkeleton from "@/shared/components/skeletons/ActorCardSkeleton";
+import ActorsPageContent from "@/modules/actors/components/ActorsPageContent";
 
 type Props = {
   searchParams: Promise<{
@@ -9,15 +9,10 @@ type Props = {
   }>;
 };
 
-export default async function Page({ searchParams }: Props) {
-  const params = await searchParams;
-
-  const page = Number(params.page ?? "1");
-  const query = params.query ?? "";
-
+export default function Page(props: Props) {
   return (
     <Suspense fallback={<ActorCardSkeleton count={10} />}>
-      <ActorsClient page={page} query={query} />
+      <ActorsPageContent {...props} />
     </Suspense>
   );
 }

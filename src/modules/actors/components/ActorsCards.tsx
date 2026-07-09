@@ -3,8 +3,8 @@
 import Link from "next/link";
 
 import ActorCardSkeleton from "@/shared/components/skeletons/ActorCardSkeleton";
-import { Actor } from "@/shared/types/Actor";
 import ActorImage from "@/modules/home/components/organisms/ActorImage";
+import { Actor } from "../api/GetActors";
 
 type ActorsCardsProps = {
   actors: Actor[];
@@ -25,8 +25,7 @@ const ActorsCards = ({ actors, isLoading }: ActorsCardsProps) => {
             <ActorImage
               profilePath={actor.profile_path}
               gender={actor.gender}
-              name={actor.name}
-              
+              name={actor.name || "actor name"}
               className="object-cover"
             />
           </div>
