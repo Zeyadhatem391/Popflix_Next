@@ -1,18 +1,11 @@
 import { client } from "@/lib/client";
 import type { paths } from "@/schema/tmdb";
-import { cacheLife } from "next/cache";
 
 export type MovieDetails =
   paths["/3/movie/{movie_id}"]["get"]["responses"]["200"]["content"]["application/json"];
 
 export async function getMovieDetails(movieId: string) {
-  "use cache";
-
-  cacheLife({
-    stale: 60 * 60 * 24,
-    revalidate: 60 * 60 * 12,
-    expire: 60 * 60 * 24 * 2,
-  });
+  
 
   const id = Number(movieId);
 
