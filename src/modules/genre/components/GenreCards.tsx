@@ -3,9 +3,12 @@
 import GenreCardsSkeleton from "@/shared/components/skeletons/GenreCardsSkeleton";
 import MoviesCard from "@/shared/components/molecules/MoviesCard";
 import { getMovieImage } from "@/lib/helpers/getMovieImage";
+import { GetGenreMovie } from "../api/GetGenreMovie";
+
+type GenreMoviesResponse = Awaited<ReturnType<typeof GetGenreMovie>>;
 
 type GenreCardsProps = {
-  movies: GetGenreMovie["results"];
+  movies: GenreMoviesResponse["results"];
   isLoading: boolean;
   isError: boolean;
   refetch: () => void;
