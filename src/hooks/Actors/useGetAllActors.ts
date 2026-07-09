@@ -1,6 +1,6 @@
 "use client";
 
-import { Actor } from "@/lib/types/Actor";
+import { Actor } from "@/shared/types/Actor";
 import { useQuery } from "@tanstack/react-query";
 
 type ActorResponse = {

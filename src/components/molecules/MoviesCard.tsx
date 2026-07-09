@@ -3,7 +3,7 @@ import Link from "next/link";
 
 interface Props {
   id: number;
-  title: string;
+  title?: string;
   image: string | StaticImageData;
   vote_average?: number;
   hiddinVote?: boolean;
@@ -28,7 +28,7 @@ export default function MoviesCard({
         {/* Movie Image */}
         <Image
           src={image}
-          alt={title}
+          alt={title || "image name"}
           fill
           sizes="(max-width:768px) 50vw, 200px"
           className="object-cover"

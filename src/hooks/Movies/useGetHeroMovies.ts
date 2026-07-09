@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Movie } from "@/lib/types/Movie";
+import { Movie } from "@/shared/types/Movie";
 
 
 const fetchHeroMovies = async (): Promise<Movie[]> => {

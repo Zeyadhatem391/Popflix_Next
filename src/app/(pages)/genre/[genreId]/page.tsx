@@ -10,12 +10,12 @@ import { useParams } from "next/navigation";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import useGetGenreMovies, {
-  GetGenreMovies,
-} from "@/hooks/Genres/useGetGenreMovies";
+
 import { PaginationDemo } from "../../../components/PaginationGenre";
 import { useGenreFilters } from "@/hooks/Genres/useGenreFilters";
 import { useDebounce } from "@/hooks/Search/useDebounce";
+import useGetGenreMovies from "@/modules/genre/hooks/useGetGenreMovies";
+import { GetGenreMovie } from "@/modules/genre/api/GetGenreMovie";
 
 const genres: Record<string, number> = {
   Action: 28,
@@ -70,6 +70,8 @@ const GenrePage = () => {
   );
 
   const movies = data?.results || [];
+
+  
   const totalPages = data?.total_pages || 1;
 
   useEffect(() => {
@@ -89,7 +91,7 @@ const GenrePage = () => {
           sortBy,
         ],
         queryFn: () =>
-          GetGenreMovies(id, nextPage, rating, decade, language, sortBy, ""),
+          GetGenreMovie(id, nextPage, rating, decade, language, sortBy, ""),
       });
     }
   }, [page, id, rating, decade, language, sortBy, debouncedQuery, queryClient]);

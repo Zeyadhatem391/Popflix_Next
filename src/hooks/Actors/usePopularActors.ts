@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { PopularActorsResponse } from "@/lib/types/Actor";
+import { PopularActorsResponse } from "@/shared/types/Actor";
 
 
 const calculateAge = (birthday: string): number => {

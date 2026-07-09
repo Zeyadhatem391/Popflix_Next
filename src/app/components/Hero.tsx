@@ -1,8 +1,9 @@
 "use client";
+
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Typewriter as SimpleTypewriter } from "react-simple-typewriter";
-import Head from "next/head";
 
 const backgroundImages = [
   "https://image.tmdb.org/t/p/w1280/z3xHxsW817eU5FtQzjWDYhVSQVi.jpg",
@@ -14,67 +15,68 @@ const backgroundImages = [
   "https://image.tmdb.org/t/p/w1280/zecxlBpLx0aLIjNjX1IOZuaSgo0.jpg",
 ];
 
-const Hero = () => {
+export default function HeroGood() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % backgroundImages.length);
     }, 5000);
+
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const nextIndex = (currentIndex + 1) % backgroundImages.length;
+
+    const img = new window.Image();
+    img.src = backgroundImages[nextIndex];
+  }, [currentIndex]);
+
   return (
-    <>
-      <Head>
-        <link rel="preload" as="image" href={backgroundImages[0]} />
-      </Head>
+    <div className="relative w-full h-screen">
+      <Image
+        src={backgroundImages[currentIndex]}
+        fill
+        alt="Hero Background"
+        preload
+        sizes="100vw"
+        className="object-cover"
+      />
 
-      <div className="relative w-full h-screen overflow-hidden">
-        {backgroundImages.map((img, idx) => (
-          <div
-            key={idx}
-            className={`absolute inset-0 bg-center bg-cover transition-opacity duration-1000 ${
-              idx === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-            }`}
-            style={{ backgroundImage: `url(${img})` }}
+      <div className="absolute inset-0 bg-black/40 z-20" />
+
+      <div className="absolute top-0 left-0 right-0 h-32 bg-linear-to-b from-black/80 to-transparent z-30" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-black/80 to-transparent z-30" />
+
+      <div className="relative z-40 flex h-full flex-col items-center justify-center px-4 text-center">
+        <h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">
+          Welcome to PopFlix
+        </h1>
+
+        <h2 className="mb-8 text-xl font-semibold text-white md:text-3xl">
+          <SimpleTypewriter
+            words={[
+              "Stream thousands of movies & series.",
+              "Enjoy HD quality with no ads.",
+              "Watch anytime, anywhere.",
+              "Join PopFlix today!",
+            ]}
+            loop
+            cursor
+            cursorStyle="|"
+            typeSpeed={50}
+            deleteSpeed={30}
+            delaySpeed={2000}
           />
-        ))}
+        </h2>
 
-        <div className="absolute inset-0 bg-black/40 z-20" />
-
-        <div className="absolute top-0 left-0 right-0 h-32 bg-linear-to-b from-black/80 to-transparent z-30" />
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-black/80 to-transparent z-30" />
-
-        <div className="relative z-40 flex flex-col items-center justify-center text-center h-full px-4">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
-            Welcome to PopFlix
-          </h1>
-          <h2 className="text-xl md:text-3xl font-semibold text-white mb-8">
-            <SimpleTypewriter
-              words={[
-                "Stream thousands of movies & series.",
-                "Enjoy HD quality with no ads.",
-                "Watch anytime, anywhere.",
-                "Join PopFlix today!",
-              ]}
-              loop={true}
-              cursor
-              cursorStyle="|"
-              typeSpeed={50}
-              deleteSpeed={30}
-              delaySpeed={2000}
-            />
-          </h2>
-          <Link href="/movies">
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 cursor-pointer">
-              Start Watching
-            </button>
-          </Link>
-        </div>
+        <Link href="/movies">
+          <button className="cursor-pointer rounded-full bg-red-600 px-8 py-3 font-bold text-white transition-all duration-300 hover:bg-red-700">
+            Start Watching
+          </button>
+        </Link>
       </div>
-    </>
+    </div>
   );
-};
-
-export default Hero;
+}

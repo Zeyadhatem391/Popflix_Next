@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "@/lib/schemas/validationSchmas";
+import { loginSchema } from "@/shared/schemas/validationSchmas";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 

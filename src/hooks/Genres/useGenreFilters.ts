@@ -1,5 +1,6 @@
 "use client";
 
+import { SortBy } from "@/modules/genre/api/GetGenreMovie";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 export const useGenreFilters = () => {
@@ -10,7 +11,7 @@ export const useGenreFilters = () => {
   const rating = Number(searchParams.get("rating")) || 0;
   const decade = searchParams.get("decade") || "";
   const language = searchParams.get("language") || "";
-  const sortBy = searchParams.get("sort") || "popularity.desc";
+  const sortBy = (searchParams.get("sort") as SortBy | null) ?? "popularity.desc";
   const page = Number(searchParams.get("page")) || 1;
 
 

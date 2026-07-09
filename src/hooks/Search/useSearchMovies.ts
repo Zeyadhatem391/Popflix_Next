@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { Movie } from "@/lib/types/Movie";
-import { containsBlockedWord } from "@/lib/utils/blockedKeywords";
+import { Movie } from "@/shared/types/Movie";
+import { containsBlockedWord } from "@/shared/utils/blockedKeywords";
 
 const GetSearchMovies = async (searchQuery: string): Promise<Movie[]> => {
   if (!searchQuery) return [];
