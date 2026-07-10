@@ -1,11 +1,9 @@
-// LoginLink.tsx
-"use client";
-
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/nextAuth";
 
-export default function LoginLink() {
-  const { data: session } = useSession();
+export default async function LoginLink() {
+  const session = await getServerSession(authOptions);
 
   if (session) return null;
 

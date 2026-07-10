@@ -111,3 +111,18 @@
 }
 
 
+.marquee-track {
+  width: max-content;
+  animation: marquee 50s linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% + 100vw));
+  }
+}

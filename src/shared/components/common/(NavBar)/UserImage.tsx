@@ -39,13 +39,15 @@ const UserImage = () => {
   }, []);
 
   if (status === "loading") {
-    <Image
-      src={profileImage}
-      alt="User"
-      width={32}
-      height={32}
-      className="rounded-full object-cover border-2 border-red-600"
-    />;
+    return (
+      <Image
+        src={profileImage}
+        alt="User"
+        width={32}
+        height={32}
+        className="rounded-full object-cover border-2 border-red-600"
+      />
+    );
   }
 
   return (

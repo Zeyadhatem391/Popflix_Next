@@ -23,7 +23,8 @@ export async function getHeroMovies(): Promise<HeroMovie[]> {
         include_adult: false,
         with_original_language: "ar",
         page: randomPage,
-        "primary_release_date.gte": "2000-01-01",
+        "primary_release_date.gte": "2020-01-01",
+        
       },
     },
   });

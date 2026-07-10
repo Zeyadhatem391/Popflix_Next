@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import PublicLayout from "@/shared/components/layout/PublicLayout";
 
 import Hero from "../modules/home/components/organisms/Hero";
@@ -8,8 +6,6 @@ import CategoriesMovies from "../modules/home/components/organisms/CategoriesMov
 import MoviesSection from "../modules/home/components/organisms/MoviesSection";
 import SectionCompany from "../modules/home/components/organisms/SectionCompany";
 
-import ActorPopularSkeleton from "@/shared/components/skeletons/ActorPopularSkeleton";
-import CategoriesMoviesSkeleton from "@/shared/components/skeletons/CategoriesMoviesSkeleton";
 import SectionDetailsMovies from "@/modules/home/components/organisms/SectionDetailsMovies";
 
 export default function Home() {
@@ -24,13 +20,9 @@ export default function Home() {
 
       <MoviesSection title="Upcoming" hiddinVote={false} />
 
-      <Suspense fallback={<ActorPopularSkeleton />}>
-        <ActorPopular />
-      </Suspense>
+      <ActorPopular />
 
-      <Suspense fallback={<CategoriesMoviesSkeleton />}>
-        <CategoriesMovies />
-      </Suspense>
+      <CategoriesMovies />
     </PublicLayout>
   );
 }

@@ -1,5 +1,5 @@
-import { Metadata } from "next";
 import { Suspense } from "react";
+import { Metadata } from "next";
 
 import MovieDetails from "./MovieDetails";
 import MovieDetailsSkeleton from "@/shared/components/skeletons/MovieDetailsSkeleton";
@@ -11,9 +11,7 @@ type Props = {
   }>;
 };
 
-export async function generateMetadata({
-  params,
-}: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { movieId } = await params;
 
   const { movie } = await getMovieDetails(movieId);
@@ -31,12 +29,16 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: Props) {
-  const { movieId } = await params;
-
+export default function Page(props: Props) {
   return (
     <Suspense fallback={<MovieDetailsSkeleton />}>
-      <MovieDetails movieId={movieId} />
+      <MovieContent {...props} />
     </Suspense>
   );
+}
+
+async function MovieContent({ params }: Props) {
+  const { movieId } = await params;
+
+  return <MovieDetails movieId={movieId} />;
 }
