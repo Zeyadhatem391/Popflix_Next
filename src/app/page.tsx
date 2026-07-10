@@ -1,17 +1,12 @@
-import { Suspense } from "react";
-
 import PublicLayout from "@/shared/components/layout/PublicLayout";
 
-import Hero from "./components/Hero";
-import ActorPopular from "./components/ActorPopular";
-import CategoriesMovies from "./components/CategoriesMovies";
+import Hero from "../modules/home/components/organisms/Hero";
+import ActorPopular from "../modules/home/components/organisms/ActorPopular";
+import CategoriesMovies from "../modules/home/components/organisms/CategoriesMovies";
 import MoviesSection from "../modules/home/components/organisms/MoviesSection";
 import SectionCompany from "../modules/home/components/organisms/SectionCompany";
-import SectionDetailsMovies from "./components/SectionDetailsMovies";
 
-import SectionDetailsSkeleton from "@/components/skeletons/SectionDetailsSkeleton";
-import ActorPopularSkeleton from "@/components/skeletons/ActorPopularSkeleton";
-import CategoriesMoviesSkeleton from "@/components/skeletons/CategoriesMoviesSkeleton";
+import SectionDetailsMovies from "@/modules/home/components/organisms/SectionDetailsMovies";
 
 export default function Home() {
   return (
@@ -19,22 +14,15 @@ export default function Home() {
       <Hero />
       <SectionCompany />
 
-      <Suspense fallback={<SectionDetailsSkeleton />}>
-        <SectionDetailsMovies />
-      </Suspense>
+      <SectionDetailsMovies />
 
       <MoviesSection title="Trending Now" />
 
       <MoviesSection title="Upcoming" hiddinVote={false} />
 
-      <Suspense fallback={<ActorPopularSkeleton />}>
-        <ActorPopular />
-      </Suspense>
+      <ActorPopular />
 
-      <Suspense fallback={<CategoriesMoviesSkeleton />}>
-        <CategoriesMovies />
-      </Suspense>
-      
+      <CategoriesMovies />
     </PublicLayout>
   );
 }

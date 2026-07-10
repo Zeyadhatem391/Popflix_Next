@@ -1,67 +1,38 @@
-"use client";
-
 import Link from "next/link";
-import { Heart, Search } from "@/assets/icons/Icons";
-import SearchNavBar from "../../../components/common/(NavBar)/SearchNavBar";
-import Logo from "../../../components/common/(NavBar)/Logo";
-import UserImage from "../../../components/common/(NavBar)/UserImage";
-import MenuPage from "../../../components/common/(NavBar)/MenuPage";
-import { useState } from "react";
-import { Input } from "../../../components/ui/input";
 
-const Navbar = () => {
-  const [openSearch, setOpenSearch] = useState(false);
+import Logo from "../common/(NavBar)/Logo";
+import MenuPage from "../common/(NavBar)/MenuPage";
+import UserImage from "../common/(NavBar)/UserImage";
+import { Heart } from "@/assets/icons/Icons";
+import SearchTrigger from "../common/(NavBar)/SearchTrigger";
 
+export default function Navbar() {
   return (
     <div className="sticky top-0 z-50 bg-black px-6 md:px-10 lg:px-24 py-4 flex items-center justify-between text-white">
-      {/* Logo */}
       <div className="flex items-center">
         <Logo />
       </div>
 
-      {/* Search / Desktop */}
       <div className="hidden md:flex gap-2">
         <MenuPage />
-        <div onClick={() => setOpenSearch(true)}>
-          <div className="relative w-[250px] md:w-[400px] rounded-2xl cursor-pointer hidden md:block">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-            <Input
-              type="text"
-              placeholder="Search movies..."
-              className="pl-10 bg-[#111] border-gray-700 text-white placeholder:text-gray-400 rounded-2xl cursor-pointer"
-              readOnly
-            />
-          </div>
-        </div>
+        <SearchTrigger desktop />
       </div>
 
-      {/* Right Side */}
       <div className="flex items-center gap-3 md:gap-5">
-        {/* Mobile Menu */}
         <div className="md:hidden flex items-center justify-center">
           <MenuPage />
         </div>
 
-        {/* Mobile Search */}
-        <div
-          className="md:hidden flex items-center justify-center"
-          onClick={() => setOpenSearch(true)}
-        >
-          <Search className="w-4 h-4 cursor-pointer" />
+        <div className="md:hidden flex items-center justify-center">
+          <SearchTrigger />
         </div>
 
-        {/* Favorites */}
         <Link href="/favorites">
           <Heart className="w-4 h-4 md:w-6 md:h-6 hover:text-red-500 transition" />
         </Link>
 
-        <UserImage />
+        {/* <UserImage /> */}
       </div>
-
-      {/* Modal Fullscreen */}
-      {openSearch && <SearchNavBar open={openSearch} setOpen={setOpenSearch} />}
     </div>
   );
-};
-
-export default Navbar;
+}

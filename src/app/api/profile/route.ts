@@ -1,8 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+import { connection, NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
+  await connection();
+
   try {
-    const token = req.headers.get("authorization"); 
+    const token = req.headers.get("authorization");
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL_SING}/api/profile`, {
       headers: {

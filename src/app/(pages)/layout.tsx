@@ -1,3 +1,5 @@
+import NextAuthProvider from "@/providers/NextAuthProvider";
+import ReactQueryProvider from "@/providers/React-query-provider";
 import PublicLayout from "@/shared/components/layout/PublicLayout";
 
 export default function MainLayout({
@@ -7,7 +9,11 @@ export default function MainLayout({
 }) {
   return (
     <>
-      <PublicLayout> {children}</PublicLayout>
+      <PublicLayout><NextAuthProvider>
+          <ReactQueryProvider>
+            {children}
+            </ReactQueryProvider>
+        </NextAuthProvider></PublicLayout>
     </>
   );
 }

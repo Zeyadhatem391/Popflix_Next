@@ -32,9 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Toaster position="top-right" />
-        <NextAuthProvider>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
-        </NextAuthProvider>
+        {children}
       </body>
     </html>
   );
