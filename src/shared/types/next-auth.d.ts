@@ -6,6 +6,7 @@ declare module "next-auth" {
     accessToken: string;
     refreshToken: string;
     role: string;
+    provider: string;
 
     user: DefaultSession["user"] & {
       id: string;
@@ -17,6 +18,7 @@ declare module "next-auth" {
     role: string;
     accessToken: string;
     refreshToken: string;
+    image?: string | null;
   }
 }
 
@@ -26,5 +28,7 @@ declare module "next-auth/jwt" {
     role: string;
     accessToken: string;
     refreshToken: string;
+    provider: string;
+    image?: string | null;
   }
 }

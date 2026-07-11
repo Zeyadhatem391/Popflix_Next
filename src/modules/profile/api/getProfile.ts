@@ -10,28 +10,39 @@ export type Profile = {
 };
 
 export async function getProfile(): Promise<Profile> {
-
   const session = await auth();
 
-
-  if (!(session as any)?.accessToken) {
+  if (!session?.user) {
     throw new Error("Unauthorized");
   }
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL_SING}/auth/profile`,
-    {
-      headers: {
-        Authorization: `Bearer ${(session as any).accessToken}`,
-        Accept: "application/json",
-      },
-      cache: "no-store",
-    }
-  );
+  // Credentials Login
+  if (session.provider === "credentials") {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL_SING}/auth/profile`,
+      {
+        headers: {
+          Authorization: `Bearer ${session.accessToken}`,
+          Accept: "application/json",
+        },
+        cache: "no-store",
+      }
+    );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch profile");
+    if (!res.ok) {
+      throw new Error("Failed to fetch profile");
+    }
+
+    return res.json();
   }
 
-  return res.json();
+  // Google Login
+  return {
+    id: session.user.id ?? "",
+    name: session.user.name ?? "",
+    email: session.user.email ?? "",
+    image: session.user.image ?? null,
+    role: session.role ?? "user",
+    provider: session.provider,
+  };
 }
