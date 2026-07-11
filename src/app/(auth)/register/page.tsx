@@ -1,106 +1,47 @@
 "use client";
 
+import Link from "next/link";
+
 import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
+
 import {
-  FormControl,
-  FormItem,
   Form,
+  FormControl,
   FormField,
+  FormItem,
   FormMessage,
 } from "@/components/ui/form";
 
-import { registerSchema } from "@/shared/schemas/validationSchmas";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import GoogleSignInButton from "@/features/auth/components/GoogleSignInButton";
-import Link from "next/link";
-import { UserRound, Mail, Phone, LockKeyhole } from "@/assets/icons/Icons";
 
-type RegisterData = {
-  username: string;
-  email: string;
-  phone: string;
-  password: string;
-  password_confirmation: string;
-  agree_terms: boolean;
-};
+import { UserRound, Mail, LockKeyhole } from "@/assets/icons/Icons";
+import { useRegisterForm } from "@/modules/(auth)/register/hooks/useRegisterForm";
 
 export default function RegisterForm() {
-  const router = useRouter();
-
-  const form = useForm<RegisterData>({
-    resolver: zodResolver(registerSchema),
-    defaultValues: {
-      username: "",
-      email: "",
-      phone: "",
-      password: "",
-      password_confirmation: "",
-      agree_terms: true,
-    },
-  });
-
-  const passwordValue = form.watch("password");
-  form.setValue("password_confirmation", passwordValue);
-
-  const onSubmit = async (data: RegisterData) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL_SING}/api/auth/register`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          username: data.username,
-          email: data.email,
-          phone: data.phone,
-          password: data.password,
-          password_confirmation: data.password_confirmation,
-          agree_terms: data.agree_terms,
-        }),
-      },
-    );
-
-    const result = await response.json();
-    console.log("Register response:", result);
-
-    if (result.success) {
-      toast.success(result.message);
-      setTimeout(() => {
-        router.push("/login");
-      }, 2500);
-    } else {
-      toast.error(result.message);
-    }
-  };
+  const { form, onSubmit } = useRegisterForm();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#111] p-4">
-      <div className="w-full max-w-md bg-[#1e1e1e] rounded-xl p-6 shadow-lg animate-fadeInUp">
-        <h2 className="text-center text-2xl font-bold text-white mb-6">
+      <div className="w-full max-w-md rounded-xl bg-[#1e1e1e] p-6 shadow-lg animate-fadeInUp">
+        <h2 className="mb-6 text-center text-2xl font-bold text-white">
           Create Account
         </h2>
 
         <Form {...form}>
-          <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-            {/* Username */}
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               control={form.control}
-              name="username"
+              name="name"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
                     <div className="relative">
-                      <UserRound className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <UserRound className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
                       <Input
                         placeholder="Username"
+                        className="input"
                         {...field}
-                        className="input "
                       />
                     </div>
                   </FormControl>
@@ -109,7 +50,6 @@ export default function RegisterForm() {
               )}
             />
 
-            {/* Email */}
             <FormField
               control={form.control}
               name="email"
@@ -117,43 +57,21 @@ export default function RegisterForm() {
                 <FormItem>
                   <FormControl>
                     <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Mail className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
                       <Input
                         type="email"
                         placeholder="Email"
+                        className="input"
                         {...field}
-                        className="input "
                       />
                     </div>
                   </FormControl>
+
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            {/* Phone */}
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                      <Input
-                        type="tel"
-                        placeholder="Phone"
-                        {...field}
-                        className="input "
-                      />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Password */}
             <FormField
               control={form.control}
               name="password"
@@ -161,37 +79,36 @@ export default function RegisterForm() {
                 <FormItem>
                   <FormControl>
                     <div className="relative">
-                      <LockKeyhole className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <LockKeyhole className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
                       <Input
                         type="password"
                         placeholder="Password"
+                        className="input"
                         {...field}
-                        className="input "
                       />
                     </div>
                   </FormControl>
+
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            {/* Submit */}
             <Button
               type="submit"
-              className="w-full bg-red-600 hover:bg-red-700 text-lg text-white font-semibold py-2 h-10 rounded-md transition"
               disabled={form.formState.isSubmitting}
+              className="h-10 w-full rounded-md bg-red-600 py-2 text-lg font-semibold text-white transition hover:bg-red-700"
             >
               {form.formState.isSubmitting ? "Loading..." : "Register"}
             </Button>
           </form>
         </Form>
 
-        {/* Social */}
         <div className="mt-4">
           <GoogleSignInButton />
         </div>
 
-        <p className="text-center text-gray-400 mt-4">
+        <p className="mt-4 text-center text-gray-400">
           Already have an account?{" "}
           <Link href="/login" className="text-red-600 underline">
             Login
