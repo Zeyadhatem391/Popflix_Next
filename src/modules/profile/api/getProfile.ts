@@ -29,7 +29,7 @@ export async function getProfile(): Promise<Profile | null> {
     );
 
     if (!res.ok) {
-      return null;
+      throw new Error("Failed to fetch profile");
     }
 
     return await res.json();

@@ -49,7 +49,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           const result = await response.json();
 
           if (!response.ok) {
-            throw new Error(result.message || "Invalid credentials");
+            console.error("Login API Error:", result);
+            return null;
           }
 
           return {
@@ -61,7 +62,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             refreshToken: result.refreshToken,
           };
         } catch (error: any) {
-          throw new Error(error.message || "Login failed");
+          return null;
         }
       },
     }),
