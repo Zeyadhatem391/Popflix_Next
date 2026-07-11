@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import useGetFavoriteMovies from "@/shared/hooks/Favorite/useGetFavoriteMovies";
 import FavoritesMoviesSkeleton from "@/shared/components/skeletons/FavoritesMoviesSkeleton";
 import MoviesCard from "@/shared/components/molecules/MoviesCard";
+import useGetFavoriteMovies from "../hooks/useGetFavoriteMovies";
 
 const FavoritesClient = () => {
   const [ids, setIds] = useState<number[]>([]);

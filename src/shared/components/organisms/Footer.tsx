@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LoginLink from "../molecules/LoginLink";
+import { Suspense } from "react";
 
 export default async function Footer() {
   return (
@@ -31,7 +32,9 @@ export default async function Footer() {
                   Contact
                 </Link>
               </li>
+              <Suspense fallback="loading">
               <LoginLink />
+              </Suspense>
             </ul>
           </div>
 

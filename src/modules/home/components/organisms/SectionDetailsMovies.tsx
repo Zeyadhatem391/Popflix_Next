@@ -4,6 +4,7 @@ import Link from "next/link";
 import FavoriteButton from "@/modules/movieDetails/components/FavoriteButton";
 import { getMovieImage } from "@/lib/helpers/getMovieImage";
 import { getHeroMovies } from "@/modules/movies/api/getHeroMovies";
+import { Suspense } from "react";
 
 const genresMap: Record<number, string> = {
   28: "Action",
@@ -37,6 +38,9 @@ const SectionDetailsMovies = async () => {
   const movie = movies[4];
 
   const movieImage = getMovieImage(movie.backdrop_path);
+
+  const rating =
+    movie.vote_average === 0 ? 3.2 : Number(movie.vote_average.toFixed(1));
 
   return (
     <section className="my-10 mx-7">
@@ -83,9 +87,7 @@ const SectionDetailsMovies = async () => {
             ))}
           </div>
 
-          <p className="text-yellow-400 text-lg">
-            ⭐ {movie.vote_average.toFixed(1)} / 10
-          </p>
+          <p className="text-yellow-400 text-lg">⭐ {rating} / 10</p>
 
           <p className="text-gray-300 leading-relaxed pr-0 md:pr-10">
             {movie.overview?.slice(0, 350)}
@@ -100,7 +102,9 @@ const SectionDetailsMovies = async () => {
               ▶ Watch Now
             </Link>
 
-            <FavoriteButton idMovie={movie.id} />
+            <Suspense fallback="login..">
+              <FavoriteButton idMovie={movie.id} />
+            </Suspense>
           </div>
         </div>
       </div>

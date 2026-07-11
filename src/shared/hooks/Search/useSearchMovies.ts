@@ -1,33 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
-import { Movie } from "@/shared/types/Movie";
-import { containsBlockedWord } from "@/shared/utils/blockedKeywords";
+// import { useQuery } from "@tanstack/react-query";
+// import { Movie } from "@/shared/types/Movie";
+// import { getSearchNavBar } from "@/modules/home/api/getSearchNavBar";
 
-const GetSearchMovies = async (searchQuery: string): Promise<Movie[]> => {
-  if (!searchQuery) return [];
 
-  if (containsBlockedWord(searchQuery)) {
-    throw new Error("This search term is not allowed.");
-  }
+// const useSearchMovies = (searchQuery: string) => {
+//   return useQuery<Movie[]>({
+//     queryKey: ["searchMovies", searchQuery],
+//     queryFn: () => getSearchNavBar(searchQuery),
+//     enabled: !!searchQuery,
+//     staleTime: 1000 * 60 * 5,
+//   });
+// };
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${searchQuery}&include_adult=false`
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch movies");
-  }
-
-  const data = await res.json();
-  return data.results;
-};
-
-const useSearchMovies = (searchQuery: string) => {
-  return useQuery<Movie[]>({
-    queryKey: ["searchMovies", searchQuery],
-    queryFn: () => GetSearchMovies(searchQuery),
-    enabled: !!searchQuery,
-    staleTime: 1000 * 60 * 5,
-  });
-};
-
-export default useSearchMovies;
+// export default useSearchMovies;

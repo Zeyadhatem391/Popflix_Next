@@ -17,7 +17,6 @@ export {
     ChevronRightIcon, XIcon,
     CheckIcon, CircleIcon, MoreHorizontalIcon,
     ArrowLeft, Home, Ghost,  Menu, X, LogIn ,Heart ,Plus ,
-
     FcGoogle
 
 }

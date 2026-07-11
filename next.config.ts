@@ -14,9 +14,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "grocery.newcinderella.online",
+        hostname: "survey.afaaqware.com",
       },
-
+      {
+        protocol: "https",
+        hostname: "pub-0c119b6b44b743258bcfdf8aa340f009.r2.dev",
+      },
     ],
   },
 };

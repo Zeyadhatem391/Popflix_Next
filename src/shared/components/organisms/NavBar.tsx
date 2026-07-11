@@ -1,10 +1,10 @@
-import Link from "next/link";
+import { Suspense } from "react";
 
 import Logo from "../common/(NavBar)/Logo";
 import MenuPage from "../common/(NavBar)/MenuPage";
+import SearchTrigger from "../../../modules/search/components/SearchTrigger";
 import UserImage from "../common/(NavBar)/UserImage";
-import { Heart } from "@/assets/icons/Icons";
-import SearchTrigger from "../common/(NavBar)/SearchTrigger";
+import UserSkeleton from "../skeletons/UserSkeleton";
 
 export default function Navbar() {
   return (
@@ -27,11 +27,9 @@ export default function Navbar() {
           <SearchTrigger />
         </div>
 
-        <Link href="/favorites">
-          <Heart className="w-4 h-4 md:w-6 md:h-6 hover:text-red-500 transition" />
-        </Link>
-
-        {/* <UserImage /> */}
+        <Suspense fallback={<UserSkeleton />}>
+          <UserImage />
+        </Suspense>
       </div>
     </div>
   );

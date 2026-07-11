@@ -1,13 +1,13 @@
-import { authOptions } from "@/lib/nextAuth";
-import { getServerSession } from "next-auth";
+
 import Link from "next/link";
 import FavoritesClient from "@/modules/favorites/components/FavoritesClient";
+import { auth } from "@/auth";
 
 export default async function FavoritesPageContent() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   return (
-    <section className="w-full min-h-screen flex justify-center px-4 py-5 bg-[#111]">
+    <section className="w-full min-h-screen flex justify-center px-4 py-5 ">
       {session ? (
         <FavoritesClient />
       ) : (

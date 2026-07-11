@@ -45,6 +45,7 @@ const About = () => {
               alt="About"
               className="w-full rounded-2xl shadow-2xl object-cover"
               preload
+              property="100"
             />
           </div>
         </div>

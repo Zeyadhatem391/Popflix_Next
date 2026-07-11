@@ -1,9 +1,8 @@
+import { auth } from "@/auth";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/nextAuth";
 
 export default async function LoginLink() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (session) return null;
 
