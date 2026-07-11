@@ -9,14 +9,13 @@ export type Profile = {
   image: string | null;
 };
 
-export async function getProfile(): Promise<Profile> {
+export async function getProfile(): Promise<Profile | null> {
   const session = await auth();
 
   if (!session?.user) {
-    throw new Error("Unauthorized");
+    return null;
   }
 
-  // Credentials Login
   if (session.provider === "credentials") {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL_SING}/auth/profile`,
@@ -30,13 +29,12 @@ export async function getProfile(): Promise<Profile> {
     );
 
     if (!res.ok) {
-      throw new Error("Failed to fetch profile");
+      return null;
     }
 
-    return res.json();
+    return await res.json();
   }
 
-  // Google Login
   return {
     id: session.user.id ?? "",
     name: session.user.name ?? "",

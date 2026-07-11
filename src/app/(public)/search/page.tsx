@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import SearchPageContent from "@/modules/search/components/SearchPageContent";
+import SearchSkeleton from "@/shared/components/skeletons/SearchSkeleton";
 
 type Props = {
   searchParams: Promise<{
@@ -10,7 +11,7 @@ type Props = {
 
 export default function Page({ searchParams }: Props) {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<SearchSkeleton/>}>
       <SearchPageContent searchParams={searchParams} />
     </Suspense>
   );
