@@ -10,7 +10,7 @@ const MoviesPage = () => {
       <CategoryMovies genreId={37} title="Western" />
       <CategoryMovies genreId={36} title="History" />
       <CategoryMovies genreId={16} title="Animation" />
-      <CategoryMovies genreId={18} title="Drama" />
+      <CategoryMovies genreId={53} title="Thriller" />
       <CategoryMovies genreId={35} title="Comedy" />
       <CategoryMovies genreId={27} title="Horror" />
       <CategoryMovies genreId={14} title="Fantasy" />

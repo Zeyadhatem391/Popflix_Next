@@ -23,10 +23,6 @@ export default function GenreToolbar({
 }: Props) {
   return (
     <>
-      <h2 className="text-3xl font-bold text-center">
-        Movies
-      </h2>
-
       <div className="flex items-center gap-3">
         <SortButtonGenre
           sortBy={sortBy}

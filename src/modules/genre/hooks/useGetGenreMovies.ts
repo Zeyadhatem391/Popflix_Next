@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { GetGenreMovie, SortBy } from "../api/GetGenreMovie";
+import { containsBlockedWord } from "@/shared/utils/blockedKeywords";
 
 const useGetGenreMovies = (
   genreId: number,
@@ -10,6 +11,8 @@ const useGetGenreMovies = (
   sortBy: SortBy,
   debouncedQuery: string
 ) => {
+  const blocked = containsBlockedWord(debouncedQuery);
+
   return useQuery({
     queryKey: [
       "genreMovies",
@@ -32,6 +35,8 @@ const useGetGenreMovies = (
         sortBy,
         debouncedQuery
       ),
+
+    enabled: !blocked,
 
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,

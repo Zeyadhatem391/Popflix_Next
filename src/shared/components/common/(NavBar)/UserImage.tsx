@@ -1,12 +1,15 @@
 import Link from "next/link";
 import DropdownProfile from "./DropdownProfile";
 import { auth } from "@/auth";
+import { getProfile } from "@/modules/profile/api/getProfile";
 
 export default async function UserImage() {
   const session = await auth();
 
+  const profile = await getProfile();
+
   return session ? (
-    <DropdownProfile />
+    <DropdownProfile profile={profile} />
   ) : (
     <Link
       href="/login"

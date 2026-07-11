@@ -5,10 +5,27 @@ import GenreHeader from "./GenreHeader";
 import GenreMovies from "./GenreMovies";
 import GenreToolbar from "./GenreToolbar";
 import useGenrePage from "../hooks/useGenrePage";
+import { containsBlockedWord } from "@/shared/utils/blockedKeywords";
 
 export default function GenrePageContent() {
   const { genreName, search, filters, query } = useGenrePage();
 
+  const blocked = containsBlockedWord(search.debouncedQuery);
+
+  if (blocked) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-20">
+        <GenreHeader
+          genreName={genreName}
+          setSearchQuery={search.setSearchQuery}
+        />
+
+        <p className="mt-10 text-center text-lg text-red-500">
+          This search term is not allowed.
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="max-w-7xl mx-auto px-4">
       <GenreHeader

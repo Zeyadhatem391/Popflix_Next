@@ -24,12 +24,19 @@ export async function getHeroMovies(): Promise<HeroMovie[]> {
         with_original_language: "ar",
         page: randomPage,
         "primary_release_date.gte": "2020-01-01",
-        
       },
     },
   });
 
   if (error) throw error;
 
-  return data.results?.slice(0, 10) ?? [];
+  return (
+    data.results
+      ?.filter(
+        (movie) =>
+          movie.backdrop_path !== null &&
+          movie.poster_path !== null
+      )
+      .slice(0, 10) ?? []
+  );
 }
