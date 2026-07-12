@@ -1,35 +1,40 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
+import { parseAsString, useQueryState } from "nuqs";
 
 type Props = {
   initialValue: string;
 };
 
 export default function SearchInput({ initialValue }: Props) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const [query, setQuery] = useState(initialValue);
 
-  const router = useRouter();
-  const [, startTransition] = useTransition();
+  const [, setUrlQuery] = useQueryState(
+    "query",
+    parseAsString.withDefault("").withOptions({
+      shallow: false,
+    })
+  );
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      startTransition(() => {
-        if (query.trim()) {
-          router.replace(`/search?query=${encodeURIComponent(query)}`);
-        } else {
-          router.replace("/search");
-        }
-      });
+      setUrlQuery(query.trim() || null);
     }, 500);
 
     return () => clearTimeout(timeout);
-  }, [query, router]);
+  }, [query, setUrlQuery]);
 
   return (
     <Input
+      ref={inputRef}
       value={query}
       onChange={(e) => setQuery(e.target.value)}
       placeholder="Search movies..."

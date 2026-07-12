@@ -4,7 +4,7 @@ import DefaultImage from "@/assets/images/default.png";
 import { ChevronDown, Heart, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import LogoutButton from "../LogoutButton";
+import LogoutButton from "../../../../app/(pages)/components/LogoutButton";
 import { useEffect, useRef, useState } from "react";
 
 type DropdownProfileProps = {
@@ -116,7 +116,7 @@ export default function DropdownProfile({
         </div>
 
         <div className="border-t border-zinc-800">
-          <LogoutButton />
+          <LogoutButton className="flex w-full gap-2 px-4 py-3 text-left text-red-500 transition-colors hover:bg-red-50 disabled:opacity-50 dark:hover:bg-red-900/30"/>
         </div>
       </div>
     </div>
