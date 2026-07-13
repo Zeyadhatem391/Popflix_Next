@@ -12,7 +12,6 @@ export async function proxy(request: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  // سواء Google أو Credentials
   const isAuthenticated = !!token;
 
   const isProtectedRoute = protectedRoutes.some((route) =>
@@ -28,7 +27,7 @@ export async function proxy(request: NextRequest) {
   }
 
   if (isAuthenticated && isAuthRoute) {
-    return NextResponse.redirect(new URL("/profile", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
@@ -39,6 +38,6 @@ export const config = {
     "/profile/:path*",
     "/login",
     "/register",
-    "/otp-verify",
+    "/otp-verify/:path*",
   ],
 };
