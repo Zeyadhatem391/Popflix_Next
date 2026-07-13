@@ -21,7 +21,7 @@ export default async function SearchPageContent({
   const error = result.error;
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white pt-10">
       <div className="mx-auto max-w-5xl px-6 py-10">
         <SearchInput initialValue={query} />
 
