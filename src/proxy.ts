@@ -1,7 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
-const protectedRoutes = ["/profile"];
 const authRoutes = ["/login", "/register", "/otp-verify"];
 
 export async function proxy(request: NextRequest) {
@@ -13,16 +12,11 @@ export async function proxy(request: NextRequest) {
   });
 
   const isAuthenticated = !!token;
-
-  const isProtectedRoute = protectedRoutes.some((route) =>
-    pathname.startsWith(route)
-  );
-
   const isAuthRoute = authRoutes.some((route) =>
     pathname.startsWith(route)
   );
 
-  if (!isAuthenticated && isProtectedRoute) {
+  if (!isAuthenticated ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
@@ -35,7 +29,6 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/profile/:path*",
     "/login",
     "/register",
     "/otp-verify/:path*",
