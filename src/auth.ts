@@ -57,11 +57,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             id: result.user.id,
             name: result.user.name,
             email: result.user.email,
+            image: result.user.image ?? null,
             role: result.user.role,
             accessToken: result.accessToken,
             refreshToken: result.refreshToken,
           };
-        } catch (error: any) {
+        } catch (error) {
+          console.error(error);
           return null;
         }
       },
@@ -85,9 +87,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.email = user.email;
         token.image = user.image;
 
-        token.role = (user as any).role;
-        token.accessToken = (user as any).accessToken;
-        token.refreshToken = (user as any).refreshToken;
+        // فقط لو سجل بالإيميل والباسورد
+        if (account?.provider === "credentials") {
+          token.role = (user as any).role;
+          token.accessToken = (user as any).accessToken;
+          token.refreshToken = (user as any).refreshToken;
+        }
       }
 
       return token;
@@ -96,15 +101,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.name = token.name!;
-        session.user.email = token.email!;
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
         session.user.image = token.image as string | null;
       }
 
-      session.role = token.role as string;
-      session.accessToken = token.accessToken as string;
-      session.refreshToken = token.refreshToken as string;
       session.provider = token.provider as string;
+      session.role = token.role as string | undefined;
+      session.accessToken = token.accessToken as string | undefined;
+      session.refreshToken = token.refreshToken as string | undefined;
 
       return session;
     },

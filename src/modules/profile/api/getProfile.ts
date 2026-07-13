@@ -12,35 +12,30 @@ export type Profile = {
 export async function getProfile(): Promise<Profile | null> {
   const session = await auth();
 
-  if (!session?.user) {
+  if (!session) {
     return null;
   }
 
-  if (session.provider === "credentials") {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL_SING}/auth/profile`,
-      {
-        headers: {
-          Authorization: `Bearer ${session.accessToken}`,
-          Accept: "application/json",
-        },
-        cache: "no-store",
-      }
-    );
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch profile");
-    }
-
-    return await res.json();
+  if (session.provider !== "credentials") {
+    return null;
   }
 
-  return {
-    id: session.user.id ?? "",
-    name: session.user.name ?? "",
-    email: session.user.email ?? "",
-    image: session.user.image ?? null,
-    role: session.role ?? "user",
-    provider: session.provider,
-  };
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL_SING}/auth/profile`,
+    {
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+        Accept: "application/json",
+      },
+      cache: "no-store",
+    }
+  );
+
+  if (!res.ok) {
+    return null;
+  }
+
+  const profile: Profile = await res.json();
+
+  return profile;
 }
