@@ -1,20 +1,51 @@
 "use client";
 
 import { Search } from "@/assets/icons/Icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 
 type InputSearchProps = {
   setSearchQuery: (value: string) => void;
   genreName: string;
 };
 
-const InputSearch = ({ setSearchQuery, genreName }: InputSearchProps) => {
-  const [query, setQuery] = useState("");
+const InputSearch = ({
+  setSearchQuery,
+  genreName,
+}: InputSearchProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const initialQuery = searchParams.get("query") ?? "";
+
+  const [query, setQuery] = useState(initialQuery);
+
+  useEffect(() => {
+    setQuery(initialQuery);
+  }, [initialQuery]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+
     setQuery(value);
     setSearchQuery(value);
+
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (value.trim()) {
+      params.set("query", value);
+    } else {
+      params.delete("query");
+    }
+
+    router.replace(`${pathname}?${params.toString()}`, {
+      scroll: false,
+    });
   };
 
   return (

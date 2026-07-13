@@ -1,3 +1,4 @@
+import NextAuthProvider from "@/providers/NextAuthProvider";
 import Footer from "@/shared/components/organisms/Footer";
 import Navbar from "@/shared/components/organisms/NavBar";
 import { ReactNode } from "react";
@@ -5,9 +6,11 @@ import { ReactNode } from "react";
 function PublicLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <Navbar />
-      {children}
+     <NextAuthProvider>
+        <Navbar/>
+          {children}
         <Footer />
+    </NextAuthProvider>
     </>
   );
 }

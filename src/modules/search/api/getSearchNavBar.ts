@@ -1,29 +1,28 @@
 import { client } from "@/lib/client";
 import { paths } from "@/schema/tmdb";
-import { Movie } from "@/shared/types/Movie";
 import { containsBlockedWord } from "@/shared/utils/blockedKeywords";
 import { cacheLife } from "next/cache";
 
 export type SearchMovies =
     paths["/3/search/movie"]["get"]["responses"]["200"]["content"]["application/json"];
 
-export const getSearchNavBar = async (
-    searchQuery: string
-) => {
+export const getSearchNavBar = async (searchQuery: string) => {
     "use cache";
 
-    cacheLife({
-        stale: 60 * 60 * 24,
-        revalidate: 60 * 60 * 12,
-        expire: 60 * 60 * 24 * 2,
-    });
+    cacheLife("minutes")
 
     if (!searchQuery.trim()) {
-        return [];
+        return {
+            data: [],
+            error: null,
+        };
     }
 
     if (containsBlockedWord(searchQuery)) {
-        throw new Error("This search term is not allowed.");
+        return {
+            data: [],
+            error: "This search term is not allowed.",
+        };
     }
 
     const { data, error } = await client.GET("/3/search/movie", {
@@ -36,8 +35,14 @@ export const getSearchNavBar = async (
     });
 
     if (error) {
-        throw error;
+        return {
+            data: [],
+            error: "Failed to search movies.",
+        };
     }
 
-    return (data?.results ?? []);
+    return {
+        data: data?.results ?? [],
+        error: null,
+    };
 };

@@ -9,20 +9,22 @@ export type Profile = {
   image: string | null;
 };
 
-export async function getProfile(): Promise<Profile> {
-
+export async function getProfile(): Promise<Profile | null> {
   const session = await auth();
 
+  if (!session) {
+    return null;
+  }
 
-  if (!(session as any)?.accessToken) {
-    throw new Error("Unauthorized");
+  if (session.provider !== "credentials") {
+    return null;
   }
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL_SING}/auth/profile`,
     {
       headers: {
-        Authorization: `Bearer ${(session as any).accessToken}`,
+        Authorization: `Bearer ${session.accessToken}`,
         Accept: "application/json",
       },
       cache: "no-store",
@@ -30,8 +32,10 @@ export async function getProfile(): Promise<Profile> {
   );
 
   if (!res.ok) {
-    throw new Error("Failed to fetch profile");
+    return null;
   }
 
-  return res.json();
+  const profile: Profile = await res.json();
+
+  return profile;
 }

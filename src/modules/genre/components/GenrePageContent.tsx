@@ -1,141 +1,62 @@
 "use client";
 
-import Back from "@/shared/components/common/Back";
-import InputSearch from "@/shared/components/common/InputSearch";
-
-import { useParams } from "next/navigation";
-
-import { useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-
-import { useGenreFilters } from "@/shared/hooks/Genres/useGenreFilters";
-import { useDebounce } from "@/shared/hooks/Search/useDebounce";
-import useGetGenreMovies from "@/modules/genre/hooks/useGetGenreMovies";
-import { GetGenreMovie } from "@/modules/genre/api/GetGenreMovie";
-import GenreCards from "./GenreCards";
 import { PaginationDemo } from "@/modules/home/components/organisms/PaginationGenre";
-import FilterButtonGenre from "./FilterButtonGenre";
-import SortButtonGenre from "./SortButtonGenre";
+import GenreHeader from "./GenreHeader";
+import GenreMovies from "./GenreMovies";
+import GenreToolbar from "./GenreToolbar";
+import useGenrePage from "../hooks/useGenrePage";
+import { containsBlockedWord } from "@/shared/utils/blockedKeywords";
 
-const genres: Record<string, number> = {
-  Action: 28,
-  Adventure: 12,
-  Animation: 16,
-  Comedy: 35,
-  Crime: 80,
-  Drama: 18,
-  Fantasy: 14,
-  Horror: 27,
-  Mystery: 9648,
-  Romance: 10749,
-  ScienceFiction: 878,
-  Thriller: 53,
-  Documentary: 99,
-  Family: 10751,
-  War: 10752,
-  Western: 37,
-  TVMovie: 10770,
-  Music: 10402,
-  History: 36,
-};
+export default function GenrePageContent() {
+  const { genreName, search, filters, query } = useGenrePage();
 
+  const blocked = containsBlockedWord(search.debouncedQuery);
 
-const GenrePageContent = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const debouncedQuery = useDebounce(searchQuery, 800);
-  const params = useParams();
-  const queryClient = useQueryClient();
+  if (blocked) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-20">
+        <GenreHeader
+          genreName={genreName}
+          setSearchQuery={search.setSearchQuery}
+        />
 
-  const genreName = params.genreId as string;
-  const id = genres[genreName];
-
-  const {
-    rating,
-    decade,
-    language,
-    page,
-    sortBy,
-    changePage,
-    resetFilters,
-    updateFilter,
-  } = useGenreFilters();
-
-  const { data, isLoading, isError, refetch, error } = useGetGenreMovies(
-    id,
-    page,
-    rating,
-    decade,
-    language,
-    sortBy,
-    debouncedQuery,
-  );
-
-  const movies = data?.results || [];
-
-  const totalPages = data?.total_pages || 1;
-
-  useEffect(() => {
-    const nextPage = page + 1;
-
-    if (nextPage > 500) return;
-
-    if (!debouncedQuery) {
-      queryClient.prefetchQuery({
-        queryKey: [
-          "genreMovies",
-          id,
-          nextPage,
-          rating,
-          decade,
-          language,
-          sortBy,
-        ],
-        queryFn: () =>
-          GetGenreMovie(id, nextPage, rating, decade, language, sortBy, ""),
-      });
-    }
-  }, [page, id, rating, decade, language, sortBy, debouncedQuery, queryClient]);
-
+        <p className="mt-10 text-center text-lg text-red-500">
+          This search term is not allowed.
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="max-w-7xl mx-auto px-4">
-      <div className="flex items-center gap-3 w-full my-3">
-        <Back />
-        <InputSearch setSearchQuery={setSearchQuery} genreName={genreName} />
-      </div>
+      <GenreHeader
+        genreName={genreName}
+        setSearchQuery={search.setSearchQuery}
+      />
 
       <div className="flex flex-col items-center justify-center gap-4 mt-6">
         <h2 className="text-3xl font-bold text-center">{genreName} Movies</h2>
 
-        <div className="flex items-center gap-3">
-          <SortButtonGenre sortBy={sortBy} updateFilter={updateFilter} />
-          <FilterButtonGenre
-            rating={rating}
-            decade={decade}
-            language={language}
-            reset={resetFilters}
-          />
-        </div>
+        <GenreToolbar
+          rating={filters.rating}
+          decade={filters.decade}
+          language={filters.language}
+          sortBy={filters.sortBy}
+          updateFilter={filters.updateFilter}
+          resetFilters={filters.resetFilters}
+        />
       </div>
 
       <div className="my-10">
-        <GenreCards
-          movies={movies}
-          isLoading={isLoading}
-          isError={isError}
-          refetch={refetch}
-          error={error}
-        />
+        <GenreMovies query={query} />
       </div>
 
       <div className="flex items-center justify-center gap-4 mt-6">
         <PaginationDemo
-          page={page}
-          setPage={changePage}
-          totalPages={totalPages}
+          page={filters.page}
+          setPage={filters.changePage}
+          totalPages={query.data?.total_pages || 1}
         />
       </div>
     </div>
   );
-};
-
-export default GenrePageContent;
+}

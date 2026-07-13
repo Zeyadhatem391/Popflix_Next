@@ -20,6 +20,8 @@ export async function GetCategories() {
 
   const genres = data?.genres ?? [];
 
+  const usedMovieIds = new Set<number>();
+
   const categories = await Promise.all(
     genres.map(async (genre) => {
       const { data: movies, error } = await client.GET("/3/discover/movie", {
@@ -33,7 +35,19 @@ export async function GetCategories() {
 
       if (error) throw error;
 
-      const movie = (movies as DiscoverResponse)?.results?.[0];
+      const results = (movies as DiscoverResponse)?.results ?? [];
+
+      const movie = results.find((movie) => {
+        const hasImage = movie.backdrop_path || movie.poster_path;
+        const notUsed = !usedMovieIds.has(movie.id);
+
+        if (hasImage && notUsed) {
+          usedMovieIds.add(movie.id);
+          return true;
+        }
+
+        return false;
+      });
 
       return {
         id: genre.id,

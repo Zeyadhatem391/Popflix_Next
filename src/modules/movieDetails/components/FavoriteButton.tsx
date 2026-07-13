@@ -6,14 +6,7 @@ type FavoriteButtonProps = {
 };
 
 export default async function FavoriteButton({ idMovie }: FavoriteButtonProps) {
+  const session = await auth();
 
-    const session = await auth();
-
-
-  return (
-    <FavoriteButtonClient
-      idMovie={idMovie}
-      isAuthenticated={!!session?.accessToken}
-    />
-  );
+  return <FavoriteButtonClient idMovie={idMovie} isAuthenticated={!!session} />;
 }
