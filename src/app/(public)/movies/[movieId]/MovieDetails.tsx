@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import FavoriteButton from "@/modules/movieDetails/components/FavoriteButton";
 import { getMovieDetails } from "@/modules/movieDetails/api/getMovieDetails";
 import { getMovieImage } from "@/lib/helpers/getMovieImage";
 import { Suspense } from "react";
+import HoverPrefetchLink from "@/shared/components/hover-prefetch/HoverPrefetchLink";
 
 interface Props {
   movieId: string;
@@ -91,25 +91,26 @@ const MovieDetails = async ({ movieId }: Props) => {
                   key={cast.id}
                   className="bg-zinc-800 rounded-lg p-3 hover:bg-zinc-700 transition"
                 >
-                  <Link
-                    href={`/actor/${cast.id}`}
-                    className="flex items-center w-full h-full"
-                  >
-                    <div className="relative w-15 h-22.5 mr-3 shrink-0">
-                      <Image
-                        src={actorImage}
-                        alt={cast.original_name || "movie"}
-                        fill
-                        sizes="60px"
-                        className="object-cover rounded"
-                      />
-                    </div>
+                  <HoverPrefetchLink href={`/actor/${cast.id}`}>
+                    <div className="flex items-center w-full h-full">
+                      <div className="relative w-15 h-22.5 mr-3 shrink-0">
+                        <Image
+                          src={actorImage}
+                          alt={cast.original_name || "movie"}
+                          fill
+                          sizes="60px"
+                          className="object-cover rounded"
+                        />
+                      </div>
 
-                    <div>
-                      <p className="font-semibold">{cast.original_name}</p>
-                      <p className="text-sm text-gray-300">{cast.character}</p>
+                      <div>
+                        <p className="font-semibold">{cast.original_name}</p>
+                        <p className="text-sm text-gray-300">
+                          {cast.character}
+                        </p>
+                      </div>
                     </div>
-                  </Link>
+                  </HoverPrefetchLink>
                 </div>
               );
             })}

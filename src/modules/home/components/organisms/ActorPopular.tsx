@@ -1,9 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
-
 import TitleWithViewMore from "@/shared/components/common/TitleWithViewMore";
 import { getMovieImage } from "@/lib/helpers/getMovieImage";
 import { getPopularActors } from "../../api/getPopularActors";
+import HoverPrefetchLink from "@/shared/components/hover-prefetch/HoverPrefetchLink";
 
 const ActorPopular = async () => {
   const actors = await getPopularActors();
@@ -27,7 +26,7 @@ const ActorPopular = async () => {
               key={actor.id}
               className="flex flex-col items-center group cursor-pointer"
             >
-              <Link href={`/actor/${actor.id}`}>
+              <HoverPrefetchLink href={`/actor/${actor.id}`}>
                 <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-zinc-700 group-hover:border-yellow-400 transition duration-300">
                   <Image
                     src={actorImage}
@@ -37,7 +36,7 @@ const ActorPopular = async () => {
                     className="object-center group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
-              </Link>
+              </HoverPrefetchLink>
 
               <p className="text-lg font-medium mt-3 text-center text-gray-300 group-hover:text-yellow-400 transition">
                 {actor.name}

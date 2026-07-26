@@ -79,7 +79,6 @@ export default function LoginForm() {
               )}
             />
 
-            {/* Forgot Password */}
 
             {/* Login Button */}
             <Button

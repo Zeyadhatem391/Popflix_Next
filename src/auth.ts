@@ -87,7 +87,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.email = user.email;
         token.image = user.image;
 
-        // فقط لو سجل بالإيميل والباسورد
         if (account?.provider === "credentials") {
           token.role = (user as any).role;
           token.accessToken = (user as any).accessToken;

@@ -23,10 +23,8 @@ export function useLogin() {
   });
 
   const onSubmit = async (data: LoginData) => {
-    console.group("🔐 Login Debug");
 
     try {
-      console.log("📤 Form Data:", data);
 
       const result = await signIn("credentials", {
         email: data.email,
@@ -34,32 +32,25 @@ export function useLogin() {
         redirect: false,
       });
 
-      console.log("✅ signIn Result:", result);
 
       if (!result) {
-        console.error("❌ signIn returned null");
         toast.error("Unable to login.");
-        console.groupEnd();
         return;
       }
 
       if (result.error) {
-        console.error("❌ signIn Error:", result.error);
         toast.error(result.error);
-        console.groupEnd();
         return;
       }
 
-      console.log("✅ Login Success");
+
       toast.success("Login successful.");
 
-      console.log("➡️ Redirecting to home...");
       router.replace("/");
       router.refresh();
 
-      console.log("🔄 Router refreshed");
+
     } catch (error) {
-      console.error("💥 Login Exception:", error);
       toast.error("Something went wrong.");
     } finally {
       console.groupEnd();
