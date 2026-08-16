@@ -17,7 +17,7 @@ const ActorsCards = ({ actors, isLoading }: ActorsCardsProps) => {
       {actors.map((actor: Actor) => (
         <HoverPrefetchLink key={actor.id} href={`/actor/${actor.id}`}>
           <div className="flex flex-col items-center gap-2 transform hover:scale-105 hover:shadow-lg transition-all">
-            <div className="w-32 h-40 relative rounded-xl overflow-hidden bg-gray-200 shadow-md">
+            <div className="lg:w-50 lg:h-60 h-50 w-40 relative rounded-xl overflow-hidden bg-gray-200 shadow-md">
               <ActorImage
                 profilePath={actor.profile_path}
                 gender={actor.gender}

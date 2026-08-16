@@ -8,22 +8,21 @@ import UserSkeleton from "../skeletons/UserSkeleton";
 
 export default function Navbar() {
   return (
-    <div className="sticky top-0 z-50 bg-black px-6 md:px-10 lg:px-24 py-4 flex items-center justify-between text-white">
+    <div className="sticky top-0 z-50 ds-bg-primary px-6 md:px-10 lg:px-24 py-4 flex items-center justify-between text-white">
       <div className="flex items-center">
         <Logo />
       </div>
 
-      <div className="hidden md:flex gap-2">
+      <div className="hidden lg:flex gap-2">
         <MenuPage />
-        <SearchTrigger desktop />
       </div>
 
       <div className="flex items-center gap-3 md:gap-5">
-        <div className="md:hidden flex items-center justify-center">
+        <div className="lg:hidden flex items-center justify-center">
           <MenuPage />
         </div>
 
-        <div className="md:hidden flex items-center justify-center">
+        <div className="flex items-center justify-center">
           <SearchTrigger />
         </div>
 

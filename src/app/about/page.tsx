@@ -3,7 +3,7 @@ import Portfolio from "@/assets/images/Portfolio.jpeg";
 import ButtonBack from "@/shared/components/common/ButtonBack";
 const About = () => {
   return (
-    <div className="bg-[#111] text-gray-200 min-h-screen py-10 px-4 animate__animated animate__fadeInUp">
+    <div className="text-gray-200 min-h-screen py-10 px-4 animate__animated animate__fadeInUp">
       <div className="max-w-6xl mx-auto">
         <ButtonBack />
 

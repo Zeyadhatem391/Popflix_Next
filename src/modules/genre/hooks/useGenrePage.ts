@@ -10,7 +10,9 @@ import { genres } from "../data/genres";
 export default function useGenrePage() {
     const params = useParams();
 
-    const genreName = params.genreId as string;
+    const genreName =
+        (params.genreId as string) ??
+        (params.categoryId as string);
 
     const id = genres[genreName];
 

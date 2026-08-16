@@ -7,6 +7,7 @@ const MoviesPage = () => {
       <HeroMovies />
       <CategoryMovies genreId={28} title="Action" />
       <CategoryMovies genreId={10752} title="War" />
+      <CategoryMovies genreId={80} title="Crime" />
       <CategoryMovies genreId={37} title="Western" />
       <CategoryMovies genreId={36} title="History" />
       <CategoryMovies genreId={16} title="Animation" />

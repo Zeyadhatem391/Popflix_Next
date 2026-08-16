@@ -7,6 +7,7 @@ import MoviesSection from "../modules/home/components/organisms/MoviesSection";
 import SectionCompany from "../modules/home/components/organisms/SectionCompany";
 
 import SectionDetailsMovies from "@/modules/home/components/organisms/SectionDetailsMovies";
+import Categories from "@/modules/home/components/organisms/Categories";
 
 export default function Home() {
   return (
@@ -20,9 +21,10 @@ export default function Home() {
 
       <MoviesSection title="Upcoming" hiddinVote={false} />
 
+      <Categories />
       <ActorPopular />
 
-      <CategoriesMovies />
+      {/* <CategoriesMovies /> */}
     </PublicLayout>
   );
 }

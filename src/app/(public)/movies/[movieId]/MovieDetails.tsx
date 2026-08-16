@@ -58,7 +58,7 @@ const MovieDetails = async ({ movieId }: Props) => {
 
       <p className="leading-7 my-6 text-gray-300">{movie.overview}</p>
 
-      <div className="bg-zinc-800 rounded-lg p-4 mb-6 space-y-3 text-lg font-medium">
+      <div className="ds-bg-form rounded-lg p-4 mb-6 space-y-3 text-lg font-medium">
         <div>Release Date: {movie.release_date}</div>
 
         <div>Director: {director}</div>
@@ -89,7 +89,7 @@ const MovieDetails = async ({ movieId }: Props) => {
               return (
                 <div
                   key={cast.id}
-                  className="bg-zinc-800 rounded-lg p-3 hover:bg-zinc-700 transition"
+                  className="ds-bg-form rounded-lg p-3 hover:bg-zinc-700 transition"
                 >
                   <HoverPrefetchLink href={`/actor/${cast.id}`}>
                     <div className="flex items-center w-full h-full">

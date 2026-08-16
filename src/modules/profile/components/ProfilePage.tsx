@@ -18,7 +18,7 @@ export default function ProfilePage({ profile }: Props) {
   const favoritesCount = useFavorites();
   return (
     <div className="min-h-screen  text-white flex justify-center items-start py-20 px-4">
-      <div className="w-full max-w-2xl bg-[#141414] rounded-2xl shadow-2xl p-8 border border-[#222]">
+      <div className="w-full max-w-2xl ds-bg-form rounded-2xl shadow-2xl p-8 border border-[#222]">
         <div className="flex flex-col items-center gap-4 pb-8 border-b border-[#222]">
           <div className="relative">
             <Image
@@ -39,7 +39,7 @@ export default function ProfilePage({ profile }: Props) {
         </div>
 
         <div className="grid grid-cols-1 gap-4 py-6 border-b border-[#222]">
-          <div className="bg-[#1a1a1a] rounded-lg p-4 border border-[#262626]">
+          <div className="ds-bg-primary rounded-lg p-4 border border-[#262626]">
             <p className="text-xs text-gray-400 mb-1">Email</p>
 
             <p className="text-sm break-all">{profile.email}</p>
@@ -47,7 +47,7 @@ export default function ProfilePage({ profile }: Props) {
         </div>
 
         <div className="grid grid-cols-1 gap-4 py-6 border-b border-[#222]">
-          <div className="bg-[#1a1a1a] rounded-lg p-4 border border-[#262626]">
+          <div className="ds-bg-primary rounded-lg p-4 border border-[#262626]">
             <p className="text-xs text-gray-400 mb-1">Favorites</p>
 
             <p className="text-sm">{favoritesCount} Movies</p>
@@ -56,7 +56,7 @@ export default function ProfilePage({ profile }: Props) {
 
         <div className="grid grid-cols-2 gap-3 pt-6">
           <Link href="/favorites">
-            <button className="w-full bg-[#1a1a1a] hover:bg-[#242424] transition px-4 py-2 rounded-lg border border-[#262626] cursor-pointer">
+            <button className="w-full ds-bg-primary hover:bg-[#242424] transition px-4 py-2 rounded-lg border border-[#262626] cursor-pointer">
               My Favorites
             </button>
           </Link>

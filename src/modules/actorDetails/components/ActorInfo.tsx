@@ -22,7 +22,7 @@ const ActorInfo = async ({ actorId }: Props) => {
       <div className="md:col-span-2 space-y-6">
         <h1 className="text-3xl md:text-4xl font-bold">{data.name}</h1>
 
-        <div className="bg-zinc-900 rounded-2xl p-6 shadow-md">
+        <div className="ds-bg-form rounded-2xl p-6 shadow-md">
           <h2 className="text-xl font-semibold mb-4 border-b border-zinc-700 pb-2">
             Personal Information
           </h2>
@@ -54,7 +54,7 @@ const ActorInfo = async ({ actorId }: Props) => {
           </div>
         </div>
 
-        <div className="bg-zinc-900 rounded-2xl p-6 shadow-md">
+        <div className="ds-bg-form rounded-2xl p-6 shadow-md">
           <h2 className="text-xl font-semibold mb-3">Biography</h2>
 
           <p className="text-gray-300 leading-relaxed">

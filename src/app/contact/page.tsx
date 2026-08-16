@@ -2,14 +2,14 @@ import ButtonBack from "@/shared/components/common/ButtonBack";
 
 export default function Contact() {
   return (
-    <div className="relative bg-[#111] text-white min-h-screen flex flex-col items-center justify-center px-4 py-10 ">
+    <div className="relative text-white min-h-screen flex flex-col items-center justify-center px-4 py-10 ">
       {/* Back Button */}
 
       <ButtonBack />
 
       {/* Card */}
       <div
-        className="bg-[#1a1a1a] w-full max-w-md p-8 rounded-2xl 
+        className="ds-bg-form w-full max-w-md p-8 rounded-2xl 
       animate-[fadeIn_0.8s_ease-in-out] shadow-xl hover:shadow-green-400"
       >
         <h2 className="text-2xl font-semibold text-center mb-6">

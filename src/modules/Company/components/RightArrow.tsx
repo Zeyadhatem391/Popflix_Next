@@ -33,7 +33,7 @@ const RightArrow = ({ id }: RightArrowProps) => {
       href={`/company/${nextCompanyId}`}
       className="group flex items-center justify-center 
         w-10 h-10 md:w-12 md:h-12 
-        rounded-full bg-zinc-800 
+        rounded-full ds-bg-form 
         hover:bg-yellow-400 
         transition-all duration-300"
     >

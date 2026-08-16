@@ -38,7 +38,7 @@ export default function SearchInput({ initialValue }: Props) {
       value={query}
       onChange={(e) => setQuery(e.target.value)}
       placeholder="Search movies..."
-      className="h-12 bg-zinc-900"
+      className="h-12 ds-bg-form"
     />
   );
 }

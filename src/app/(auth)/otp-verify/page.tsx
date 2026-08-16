@@ -18,8 +18,8 @@ export default function OtpVerifyForm() {
   const { form, onSubmit, resendOtp, isResending, email } = useOtpVerify();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#111] p-4">
-      <div className="w-full max-w-md rounded-xl bg-[#1e1e1e] p-6 shadow-lg animate-fadeInUp">
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="w-full max-w-md rounded-xl ds-bg-form p-6 shadow-lg animate-fadeInUp">
         <div className="flex justify-center">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-600/20">
             <ShieldCheck className="h-8 w-8 text-red-500" />

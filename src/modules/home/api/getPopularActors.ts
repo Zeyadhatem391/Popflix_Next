@@ -22,5 +22,5 @@ export async function getPopularActors() {
     throw error;
   }
 
-  return (data.results ?? []).slice(0, 5);
+  return (data.results ?? []).slice(0, 4);
 }

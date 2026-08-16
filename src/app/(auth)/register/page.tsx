@@ -22,8 +22,8 @@ export default function RegisterForm() {
   const { form, onSubmit } = useRegisterForm();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#111] p-4">
-      <div className="w-full max-w-md rounded-xl bg-[#1e1e1e] p-6 shadow-lg animate-fadeInUp">
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="w-full max-w-md rounded-xl ds-bg-form p-6 shadow-lg animate-fadeInUp">
         <h2 className="mb-6 text-center text-2xl font-bold text-white">
           Create Account
         </h2>

@@ -1,9 +1,9 @@
 @layer theme {
     :root {
-        --color-bg-primary: #000000;
+        --color-bg-primary: #1e0d0b;
         --color-bg-alt: #111827;
-        --color-bg-form: #374151;
-
+        --color-bg-form: #271a18;
+        /* 200e0c */
         --color-text-primary: #2563EB;
         --color-text-secondary: #D1D5DB;
         --color-text-alt: #3B82F6;

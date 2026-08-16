@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "media.themoviedb.org",
+      },
+      {
+        protocol: "https",
         hostname: "pub-0c119b6b44b743258bcfdf8aa340f009.r2.dev",
       },
     ],
