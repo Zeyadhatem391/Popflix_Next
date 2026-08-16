@@ -13,6 +13,10 @@ import { useRouter } from "next/navigation";
 const MenuPage = () => {
   const router = useRouter();
 
+  const goToHome = () => {
+    router.push("/");
+  };
+
   const goToActors = () => {
     router.push("/actors");
   };
@@ -29,6 +33,14 @@ const MenuPage = () => {
     <>
       <div className="hidden lg:block">
         <ul className="flex gap-7">
+          <li>
+            <button
+              className="cursor-pointer hover:text-gray-200"
+              onClick={goToHome}
+            >
+              Home
+            </button>
+          </li>
           <li>
             <button
               className="cursor-pointer hover:text-gray-200"
@@ -68,6 +80,12 @@ const MenuPage = () => {
             align="center"
             className="bg-zinc-900 border border-zinc-800 text-white rounded-lg p-2 "
           >
+             <DropdownMenuItem
+              onClick={goToHome}
+              className="px-4 py-2 hover:bg-stone-700 rounded-md"
+            >
+              Home
+            </DropdownMenuItem>
             <DropdownMenuItem
               onClick={goToActors}
               className="px-4 py-2 hover:bg-stone-700 rounded-md"

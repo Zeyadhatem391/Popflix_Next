@@ -21,7 +21,7 @@ function CategoryPageContent() {
       <div className="mt-10 flex justify-center ">
         <Link href={`/genre/${category}`}>
           <button className="cursor-pointer text-xl font-semibold border p-2 rounded-lg hover:bg-gray-900">
-            Watch more movies
+           Watch more <span className="lowercase">{category}</span> movies
           </button>
         </Link>
       </div>

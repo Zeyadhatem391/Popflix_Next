@@ -31,7 +31,7 @@ export default function SelectCategory() {
               <li key={key}>
                 <Link
                   href={`/category/${encodeURIComponent(value)}`}
-                  className={`block whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 sm:px-5 sm:py-2.5 sm:text-base
+                  className={`block whitespace-nowrap rounded-full px-4 py-2 text-lg font-semibold transition-all duration-200 sm:px-5 sm:py-2.5 
                     ${isActive ? "bg-gray-500 text-white shadow-md" : " hover:bg-gray-800 "}`}
                 >
                   {value}

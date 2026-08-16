@@ -24,7 +24,7 @@ async function Categories() {
       <TitleWithViewMore
         genreId={1}
         title="Categories"
-        Url="actors"
+        Url="category/Action"
         ViewMore={true}
         margin={true}
       />
