@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { registerSchema } from "@/shared/schemas/validationSchmas";
 
 export type RegisterData = {
+    id: string;
     name: string;
     email: string;
     password: string;
@@ -19,6 +20,7 @@ export function useRegisterForm() {
     const form = useForm<RegisterData>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
+            id: crypto.randomUUID(),
             name: "",
             email: "",
             password: "",

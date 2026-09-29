@@ -1,33 +1,13 @@
 import { Suspense } from "react";
-import { Metadata } from "next";
 
-import MovieDetails from "./MovieDetails";
 import MovieDetailsSkeleton from "@/shared/components/skeletons/MovieDetailsSkeleton";
-import { getMovieDetails } from "@/modules/movieDetails/api/getMovieDetails";
+import MovieDetails from "@/modules/movieDetails/components/MovieDetails";
 
 type Props = {
   params: Promise<{
     movieId: string;
   }>;
 };
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { movieId } = await params;
-
-  const { movie } = await getMovieDetails(movieId);
-
-  return {
-    title: movie.title,
-    description: movie.overview,
-    openGraph: {
-      title: movie.title,
-      description: movie.overview,
-      images: movie.backdrop_path
-        ? [`https://image.tmdb.org/t/p/original${movie.backdrop_path}`]
-        : [],
-    },
-  };
-}
 
 export default function Page(props: Props) {
   return (

@@ -2,6 +2,7 @@ import z from "zod";
 
 export const registerSchema = z
     .object({
+         id: z.string(),
         name: z
             .string()
             .min(3, "name must be at least 3 characters")

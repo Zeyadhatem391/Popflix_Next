@@ -7,16 +7,26 @@ import Link from "next/link";
 import LogoutButton from "../../../../app/(pages)/components/LogoutButton";
 import { useEffect, useRef, useState } from "react";
 
+type SessionUser = {
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+};
+
+type User = {
+  id: string;
+  name: string | null;
+  email: string | null;
+};
+
 type DropdownProfileProps = {
-  profile: {
-    name: string | null;
-    email: string | null;
-    image: string | null;
-  };
+  session?: SessionUser | null;
+  user?: User | null;
 };
 
 export default function DropdownProfile({
-  profile,
+  session,
+  user,
 }: DropdownProfileProps) {
   const [open, setOpen] = useState(false);
 
@@ -31,12 +41,14 @@ export default function DropdownProfile({
 
     document.addEventListener("mousedown", handleClickOutside);
 
-    return () =>
+    return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
-  const name = profile.name || "User";
-  const image = profile.image || DefaultImage;
+  const name = session?.name || user?.name || "User";
+  const email = session?.email || user?.email || "";
+  const image = session?.image || DefaultImage;
 
   return (
     <div ref={ref} className="relative">
@@ -80,17 +92,13 @@ export default function DropdownProfile({
             alt={name}
             width={44}
             height={44}
-            className="rounded-full border border-zinc-700 object-cover"
+            className="h-11 w-11 rounded-full border border-zinc-700 object-cover"
           />
 
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-white">
-              {name}
-            </p>
+            <p className="truncate text-sm font-semibold text-white">{name}</p>
 
-            <p className="truncate text-xs text-zinc-400">
-              {profile.email}
-            </p>
+            <p className="truncate text-xs text-zinc-400">{email}</p>
           </div>
         </div>
 
@@ -115,8 +123,9 @@ export default function DropdownProfile({
           </Link>
         </div>
 
+        {/* Logout */}
         <div className="border-t border-zinc-800">
-          <LogoutButton className="flex w-full gap-2 px-4 py-3 text-left text-red-500 transition-colors hover:bg-red-50 disabled:opacity-50 dark:hover:bg-red-900/30"/>
+          <LogoutButton className="flex w-full cursor-pointer gap-2 px-4 py-3 text-left text-red-500 transition-colors hover:bg-red-50 disabled:opacity-50 dark:hover:bg-red-900/30" />
         </div>
       </div>
     </div>

@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import Credentials from "next-auth/providers/credentials";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -12,60 +11,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           prompt: "consent",
           access_type: "offline",
         },
-      },
-    }),
-
-    Credentials({
-      name: "Credentials",
-
-      credentials: {
-        email: {
-          label: "Email",
-          type: "email",
-        },
-        password: {
-          label: "Password",
-          type: "password",
-        },
-      },
-
-      async authorize(credentials) {
-        try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL_SING}/auth/login`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-              },
-              body: JSON.stringify({
-                email: credentials?.email,
-                password: credentials?.password,
-              }),
-            }
-          );
-
-          const result = await response.json();
-
-          if (!response.ok) {
-            console.error("Login API Error:", result);
-            return null;
-          }
-
-          return {
-            id: result.user.id,
-            name: result.user.name,
-            email: result.user.email,
-            image: result.user.image ?? null,
-            role: result.user.role,
-            accessToken: result.accessToken,
-            refreshToken: result.refreshToken,
-          };
-        } catch (error) {
-          console.error(error);
-          return null;
-        }
       },
     }),
   ],
@@ -86,12 +31,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.name = user.name;
         token.email = user.email;
         token.image = user.image;
-
-        if (account?.provider === "credentials") {
-          token.role = (user as any).role;
-          token.accessToken = (user as any).accessToken;
-          token.refreshToken = (user as any).refreshToken;
-        }
       }
 
       return token;
@@ -106,9 +45,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
 
       session.provider = token.provider as string;
-      session.role = token.role as string | undefined;
-      session.accessToken = token.accessToken as string | undefined;
-      session.refreshToken = token.refreshToken as string | undefined;
 
       return session;
     },

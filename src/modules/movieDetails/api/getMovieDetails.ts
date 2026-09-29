@@ -1,6 +1,7 @@
+import { cacheLife } from "next/cache";
+
 import { client } from "@/lib/client";
 import type { paths } from "@/schema/tmdb";
-import { cacheLife } from "next/cache";
 
 export type MovieDetails =
   paths["/3/movie/{movie_id}"]["get"]["responses"]["200"]["content"]["application/json"];
@@ -15,6 +16,10 @@ export async function getMovieDetails(movieId: string) {
   });
 
   const id = Number(movieId);
+
+  if (!Number.isInteger(id) || id <= 0) {
+    throw new Error("Invalid movie ID");
+  }
 
   const [
     { data: movie, error: movieError },

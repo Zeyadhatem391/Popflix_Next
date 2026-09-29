@@ -1,11 +1,17 @@
 import Link from "next/link";
 import DropdownProfile from "./DropdownProfile";
-import checkProfile from "@/modules/profile/api/checkProfile";
+import { cookies } from "next/headers";
+import { auth } from "@/auth";
 
 export default async function UserImage() {
-  const profile = await checkProfile();
+  const session = await auth();
 
-  if (!profile) {
+  const cookieStore = await cookies();
+  const userCookie = cookieStore.get("user");
+
+  const user = userCookie ? JSON.parse(userCookie.value) : null;
+
+  if (!session && !user) {
     return (
       <Link
         href="/login"
@@ -16,5 +22,10 @@ export default async function UserImage() {
     );
   }
 
-  return <DropdownProfile profile={profile} />;
+  return (
+    <DropdownProfile
+      session={session?.user ?? null}
+      user={user}
+    />
+  );
 }
