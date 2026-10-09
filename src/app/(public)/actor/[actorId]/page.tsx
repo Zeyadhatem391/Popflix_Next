@@ -35,7 +35,7 @@ async function ActorContent({
   const { actorId } = await params;
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-10">
+    <section className="max-w-6xl mx-auto px-4 pb-10 pt-20">
       <div className="grid md:grid-cols-3 gap-8">
         <ActorInfo actorId={actorId}/>
         <ActorMovies moviesId={actorId} />

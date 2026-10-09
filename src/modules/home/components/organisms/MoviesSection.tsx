@@ -1,14 +1,18 @@
 import TitleWithViewMore from "@/shared/components/common/TitleWithViewMore";
-import MoviesCard from "@/shared/components/molecules/MoviesCard";
 import { getMovieImage } from "@/lib/helpers/getMovieImage";
 import { getMovies } from "../../api/getMovies";
+import HoverPrefetchLink from "@/shared/components/hover-prefetch/HoverPrefetchLink";
+import Image from "next/image";
 
 type MoviesSectionPropes = {
   title: string;
   hiddinVote?: boolean;
 };
 
-const MoviesSection = async ({ title, hiddinVote }: MoviesSectionPropes) => {
+const MoviesSection = async ({
+  title,
+  hiddinVote = true,
+}: MoviesSectionPropes) => {
   const DataMovies = await getMovies();
 
   const MoviesNow = DataMovies.moviesNow;
@@ -17,29 +21,46 @@ const MoviesSection = async ({ title, hiddinVote }: MoviesSectionPropes) => {
   const movies = title === "Upcoming" ? MoviesUpcoming : MoviesNow;
 
   return (
-    <section className="my-10 mx-7">
+    <section className="w-full min-w-0">
       <TitleWithViewMore
         genreId={1}
         title={title}
         Url="actors"
         ViewMore={false}
-        margin={true}
+        margin={false}
       />
 
-      <div className="flex lg:justify-center gap-5 overflow-x-auto no-scrollbar pb-2">
-        {movies.results.map((movie) => {
-          const movieImage = getMovieImage(movie.poster_path);
-          return (
-            <MoviesCard
-              key={movie.id}
-              id={movie.id}
-              title={movie.title}
-              vote_average={movie.vote_average}
-              hiddinVote={hiddinVote}
-              image={movieImage}
-            />
-          );
-        })}
+      <div className="w-full min-w-0 overflow-x-auto pb-4 no-scrollbar">
+        <div className="flex w-max gap-4">
+          {movies.results.slice(0, 20).map((movie) => {
+            const movieImage = getMovieImage(movie.poster_path);
+
+            return (
+              <div
+                key={movie.id}
+                className="w-[145px] shrink-0 sm:w-[185px] lg:w-[205px]"
+              >
+                <HoverPrefetchLink href={`/movies/${movie.id}`}>
+                  <div className="relative h-[220px] w-full overflow-hidden rounded-lg sm:h-[280px] lg:h-[320px]">
+                    <Image
+                      src={movieImage}
+                      alt={movie.title || "Movie poster"}
+                      fill
+                      sizes="(max-width: 640px) 145px, (max-width: 1024px) 185px, 200px"
+                      className="object-cover transition-transform duration-300 hover:scale-105"
+                    />
+
+                    {hiddinVote && movie.vote_average > 0 && (
+                      <span className="absolute left-2 top-2 rounded-md bg-black/70 px-2 py-1 text-xs font-semibold text-yellow-400">
+                        ⭐ {movie.vote_average.toFixed(1)}
+                      </span>
+                    )}
+                  </div>
+                </HoverPrefetchLink>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

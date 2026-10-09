@@ -23,7 +23,7 @@ async function CompanyContent({
   const { companyId } = await params;
 
   return (
-    <div className="my-10 mx-7">
+    <div className="my-10 mx-7 pt-10">
       <CompanyPages id={companyId} />
       <CompanyMovies id={companyId} />
     </div>

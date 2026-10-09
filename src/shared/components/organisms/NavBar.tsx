@@ -5,24 +5,21 @@ import MenuPage from "../common/(NavBar)/MenuPage";
 import SearchTrigger from "../../../modules/search/components/SearchTrigger";
 import UserImage from "../common/(NavBar)/UserImage";
 import UserSkeleton from "../skeletons/UserSkeleton";
+import NavbarClient from "./NavbarClient";
 
 export default function Navbar() {
   return (
-    <div className="sticky top-0 z-50 ds-bg-primary px-6 md:px-10 lg:px-24 py-4 flex items-center justify-between text-white">
+    <NavbarClient>
       <div className="flex items-center">
         <Logo />
       </div>
 
-      <div className="hidden lg:flex gap-2">
-        <MenuPage />
-      </div>
-
       <div className="flex items-center gap-3 md:gap-5">
-        <div className="lg:hidden flex items-center justify-center">
+        <div className="flex items-center justify-center ">
           <MenuPage />
         </div>
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center border-l border-gray-50/40 pl-3">
           <SearchTrigger />
         </div>
 
@@ -30,6 +27,6 @@ export default function Navbar() {
           <UserImage />
         </Suspense>
       </div>
-    </div>
+    </NavbarClient>
   );
 }

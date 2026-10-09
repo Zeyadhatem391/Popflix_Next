@@ -27,7 +27,7 @@ export default function GenrePageContent() {
     );
   }
   return (
-    <div className="max-w-7xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto px-4 pt-17">
       <GenreHeader
         genreName={genreName}
         setSearchQuery={search.setSearchQuery}

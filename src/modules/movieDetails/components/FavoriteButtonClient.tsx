@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -46,7 +46,7 @@ export default function FavoriteButtonClient({
       removeFavorites(favorite.id);
 
       toast.error("Removed from favorites 💔", {
-        duration: 2000,
+        duration: 500,
         style: {
           background: "red",
           color: "#fff",
@@ -63,7 +63,7 @@ export default function FavoriteButtonClient({
     });
 
     toast.success("Added to favorites ❤️", {
-      duration: 2000,
+      duration: 500,
       style: {
         background: "green",
         color: "#fff",
@@ -76,7 +76,7 @@ return (
     {isAuthenticated ? (
       <button
         onClick={handleAddToFavorite}
-        className={`flex items-center gap-2 border-2 px-4 py-2 rounded-md transition ${
+        className={`flex items-center gap-2 border-2 px-4 py-2 rounded-md cursor-pointer transition text-sm ${
           isFavorite
             ? "border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
             : "border-white text-white hover:bg-white hover:text-black"
@@ -89,7 +89,7 @@ return (
     ) : (
       <button
         onClick={() => setOpen(true)}
-        className="border-2 border-gray-500 px-4 py-2 rounded-md bg-gray-800"
+        className="border-2 border-gray-500 px-4 py-2 rounded-md cursor-pointer bg-gray-800"
       >
         Add To Favorite
       </button>

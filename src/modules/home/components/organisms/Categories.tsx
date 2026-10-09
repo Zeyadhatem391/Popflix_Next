@@ -20,13 +20,13 @@ async function Categories() {
   }
 
   return (
-    <section className="mx-7 my-10">
+    <section>
       <TitleWithViewMore
         genreId={1}
         title="Categories"
         Url="category/Action"
         ViewMore={true}
-        margin={true}
+        margin={false}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:h-162.5">

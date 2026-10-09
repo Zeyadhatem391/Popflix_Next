@@ -44,7 +44,7 @@ const SectionDetailsMovies = async () => {
     movie.vote_average === 0 ? 3.2 : Number(movie.vote_average.toFixed(1));
 
   return (
-    <section className="my-10 mx-7">
+    <section>
       <div className="flex flex-col lg:flex-row gap-8 items-center">
         <div className="w-full lg:w-1/2">
           <HoverPrefetchLink href={`/movies/${movie.id}`}>

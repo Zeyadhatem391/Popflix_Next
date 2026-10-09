@@ -51,7 +51,7 @@ const ActorsClient = ({ page, query }: Props) => {
   }, [page, query, queryClient]);
 
   return (
-    <div className="max-w-6xl mx-auto px-4">
+    <div className="max-w-6xl mx-auto px-4 pt-17">
       <div className="flex items-center gap-3 w-full my-3">
         <Back />
 

@@ -44,7 +44,7 @@ export default async function ProfileContent() {
   const image = session?.user?.image || DefaultImage;
 
   return (
-    <div className="min-h-screen text-white flex justify-center items-start py-20 px-4">
+    <div className="min-h-screen text-white flex justify-center items-start pb-20 px-4 pt-27">
       <div className="w-full max-w-2xl ds-bg-form rounded-2xl shadow-2xl p-8 border border-[#222]">
         <div className="flex flex-col items-center gap-4 pb-8 border-b border-[#222]">
           <div className="relative">

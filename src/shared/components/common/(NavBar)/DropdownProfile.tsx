@@ -52,7 +52,6 @@ export default function DropdownProfile({
 
   return (
     <div ref={ref} className="relative">
-      {/* Trigger */}
       <button
         onClick={() => setOpen((prev) => !prev)}
         className="flex cursor-pointer items-center gap-2 rounded-xl p-1.5 transition-all duration-200 hover:bg-white/10"
@@ -65,10 +64,6 @@ export default function DropdownProfile({
           className="h-8 w-8 rounded-full border border-zinc-700 object-cover"
         />
 
-        <p className="hidden max-w-28 truncate text-sm font-medium text-white md:block">
-          {name}
-        </p>
-
         <ChevronDown
           size={18}
           className={`text-zinc-400 transition-transform duration-300 ${
@@ -77,7 +72,6 @@ export default function DropdownProfile({
         />
       </button>
 
-      {/* Dropdown */}
       <div
         className={`absolute right-0 top-full z-50 mt-3 w-56 overflow-hidden rounded-xl border border-zinc-800 bg-[#161616] shadow-2xl transition-all duration-200 ${
           open
@@ -85,7 +79,6 @@ export default function DropdownProfile({
             : "invisible -translate-y-2 opacity-0"
         }`}
       >
-        {/* Header */}
         <div className="flex items-center gap-3 border-b border-zinc-800 p-4">
           <Image
             src={image}
@@ -102,7 +95,6 @@ export default function DropdownProfile({
           </div>
         </div>
 
-        {/* Menu */}
         <div className="py-2">
           <Link
             href="/profile"
@@ -123,7 +115,6 @@ export default function DropdownProfile({
           </Link>
         </div>
 
-        {/* Logout */}
         <div className="border-t border-zinc-800">
           <LogoutButton className="flex w-full cursor-pointer gap-2 px-4 py-3 text-left text-red-500 transition-colors hover:bg-red-50 disabled:opacity-50 dark:hover:bg-red-900/30" />
         </div>

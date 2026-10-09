@@ -3,7 +3,7 @@ import HeroMovies from "@/modules/movies/components/HeroMovies";
 
 const MoviesPage = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 ">
+    <div className="max-w-7xl mx-auto px-4 pt-10">
       <HeroMovies />
       <CategoryMovies genreId={28} title="Action" />
       <CategoryMovies genreId={10752} title="War" />

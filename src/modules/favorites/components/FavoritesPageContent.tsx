@@ -14,7 +14,7 @@ export default async function FavoritesPageContent() {
   const userId = session?.user?.id ?? user?.id;
 
   return (
-    <section className="w-full min-h-screen flex justify-center px-4 py-5 ">
+    <section className="w-full min-h-screen flex justify-center px-4 pb-5 pt-27">
       {isAuthenticated ? (
         <FavoritesClient userId={userId}/>
       ) : (

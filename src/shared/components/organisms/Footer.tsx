@@ -5,7 +5,7 @@ import { Suspense } from "react";
 export default async function Footer() {
   return (
     <footer className="text-white border-t border-[#333] mt-10">
-      <div className="max-w-screen-xl mx-auto px-5 py-10">
+      <div className="max-w-6xl mx-auto px-5 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           <div>
             <h2 className="text-2xl font-bold mb-4">🎬 PopFlix</h2>
@@ -50,6 +50,12 @@ export default async function Footer() {
                   <div className="hover:text-white transition">Actors</div>
                 </HoverPrefetchLink>
               </li>
+                <li>
+                <HoverPrefetchLink href="/category/Action">
+                  <div className="hover:text-white transition">Category</div>
+                </HoverPrefetchLink>
+              </li>
+              
             </ul>
           </div>
 
@@ -82,10 +88,10 @@ export default async function Footer() {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="border-t border-[#333] mt-10 pt-6 text-center text-gray-500 text-sm">
-          © 2026 PopFlix. All Rights Reserved.
-        </div>
+      <div className="border-t border-[#333] py-10 text-center text-gray-500 text-sm">
+        © 2026 PopFlix. All Rights Reserved.
       </div>
     </footer>
   );
